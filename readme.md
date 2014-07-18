@@ -2,7 +2,7 @@
 
 > Detects installed versions of Chrome, Firefox and Internet Explorer. 
 
-**TOC** / [Install](#install) / [Command line](#command-line) / [API](#api) / [License](#license)
+[Install](#install) / [Command line](#command-line) / [API](#api) / [License](#license)
 
 ## About
 
