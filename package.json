@@ -1,6 +1,7 @@
 {
   "name": "win-detect-browsers",
   "version": "0.0.0",
+  "bin": "./bin/detect-browsers",
   "description": "Detect browsers on Windows",
   "main": "index.js",
   "dependencies": {

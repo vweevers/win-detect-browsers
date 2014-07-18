@@ -1,4 +1,6 @@
-var detect = require('./')
+#!/usr/bin/env node
+
+var detect = require('../')
 
 detect(function(browsers){
   var format = "\n%s %s\n  @ %s"

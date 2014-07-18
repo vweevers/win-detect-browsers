@@ -2,7 +2,7 @@
 
 > Detects installed versions of Chrome, Firefox and Internet Explorer. 
 
-[Install](#install) / [Command line](#command-line) / [API](#api) / [License](#license)
+[Command line](#command-line) / [API](#api) / [License](#license)
 
 ## About
 
@@ -18,15 +18,15 @@ After gathering paths, version numbers are read from the executable metadata usi
 
 `win-detect-browsers` is tested on Windows 7 x64 (with Chrome, Firefox, Internet Explorer) and Windows XP (with Chrome and IE). Using something else? Please open a issue to **report your results**, whether good or bad. I'd like to gather some more results before including this module in a PR to `browser-launcher`.
 
-## Install
-
-    npm i win-detect-browsers
-
 ## Command line
 
-To test this module, run:
+To test this module, install globally:
 
-    node cli
+    npm i win-detect-browsers -g
+
+Then run:
+
+    win-detect-browsers
 
 Example output on Windows XP:
 
@@ -37,10 +37,10 @@ Example output on Windows XP:
 
 ## API
 
-The source of `cli.js` says it all:
+The source of `bin/detect-browsers` says it all:
 
 ```js
-var detect = require('./')
+var detect = require('../')
 
 detect(function(browsers){
   var format = "\n%s %s\n  @ %s"
