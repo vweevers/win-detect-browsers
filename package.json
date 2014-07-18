@@ -1,0 +1,26 @@
+{
+  "name": "win-detect-browsers",
+  "version": "0.0.0",
+  "description": "Detect browsers on Windows",
+  "main": "index.js",
+  "dependencies": {
+    "which": "^1.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vweevers/win-detect-browsers"
+  },
+  "keywords": [
+    "browser",
+    "detect",
+    "windows"
+  ],
+  "author": "Vincent Weevers",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vweevers/win-detect-browsers/issues"
+  },
+  "homepage": "https://github.com/vweevers/win-detect-browsers"
+}
