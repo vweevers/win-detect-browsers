@@ -5,6 +5,8 @@ var which = require('which')
   , registry = require('./lib/registry')
   , browsers = require('./lib/browsers')
 
+var defaultBrowser = null;
+
 module.exports = function(complete) {
   // Will hold detected browsers
   var results = {}
@@ -27,18 +29,27 @@ module.exports = function(complete) {
   })
 
   // 
-  function toArray(browsers) {
+  function toArray(browsers, defaultBrowser) {
     var a = []
 
     for(var k in browsers)
       a.push(browsers[k])
 
-    complete(a)
+    complete(a, defaultBrowser)
   }
 
   // Callback to gather results. If no version
   // is given it will be retrieved later.
   function found(name, version, path) {
+    if (name == 'default') {
+      defaultBrowser = {
+          name: name,
+          version: null,
+          path: path
+      }
+      return
+    }
+
     if (results[path] != null) {
       var prev = results[path]
       if (!prev.version) prev.version = version
@@ -58,7 +69,7 @@ module.exports = function(complete) {
     // Common registry keys
     if (opts.registry) {
       acc.push(function(done){
-        registry(browser, opts.registry, found, done)
+        registry(browser, opts.registry, opts.hives, found, done)
       })
     }
 
@@ -103,7 +114,7 @@ function getVersionNumbers(browsers, done) {
       // WMIC creates a temporary file for some reason
       var tmpfile = npath.join(__dirname, 'TempWmicBatchFile.bat')
       return fs.unlink(tmpfile, function(){
-        done(browsers)
+        done(browsers, defaultBrowser)
       })
     }
 
@@ -124,7 +135,12 @@ function getVersionNumbers(browsers, done) {
       // "Version=xx"
       var version = !err && out.split('=')[1]
 
-      if (version) browser.version = version
+      if (version) {
+        browser.version = version
+        if (defaultBrowser && defaultBrowser.path == path) {
+          defaultBrowser.version = version
+        }
+      }
       else delete browsers[path]
 
       next()
