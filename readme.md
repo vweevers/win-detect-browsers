@@ -2,6 +2,8 @@
 
 > Detects installed versions of Chrome, Firefox, Phantomjs (local and global), Internet Explorer, Safari and Opera. Supports Windows XP and up.
 
+[![Build status](https://ci.appveyor.com/api/projects/status/uitmna2gfuapseyd?svg=true)](https://ci.appveyor.com/project/vweevers/win-detect-browsers)
+
 [Command line](#command-line) / [API](#api) / [License](#license)
 
 ## About
