@@ -1,46 +1,66 @@
 # win-detect-browsers
 
-> Detects installed versions of Chrome, Firefox and Internet Explorer. 
+> Detects installed versions of Chrome, Firefox, Phantomjs (local and global), Internet Explorer, Safari and Opera. Supports Windows XP and up.
 
 [Command line](#command-line) / [API](#api) / [License](#license)
 
 ## About
 
-`browser-launcher` by substack has [poor Windows support](https://github.com/substack/browser-launcher/issues/7), and it prompted me to create this module. Basically, browser detection can't be done right. This is the *try-everything-and-fail-silently* approach. For XP and up, it:
+Basically, browser detection on Windows can't be done right. This is the *try-everything-and-fail-silently* approach. It accounts for x64/86 differences, normalizes environment variables, tries default locations, searches the registry (in the HKLM and HKCU hives), checks [Start Menu Internet Applications](http://msdn.microsoft.com/en-us/library/windows/desktop/dd203067(v=vs.85).aspx) and looks in `PATH`. After gathering paths, version numbers are either read from the executable metadata using `wmic` or with `browser -v`.
 
-1. Tries default locations (in `Program Files`, `Program Files (x86)`, `AppData` and such)
-2. Searches the registry, using:
-  - A set of common keys per browser (accounting for x64/86 differences) and the ["Start Menu Internet Applications"](http://msdn.microsoft.com/en-us/library/windows/desktop/dd203067(v=vs.85).aspx) keys
-  - Both `LOCAL_MACHINE` and `CURRENT_USER`
-3. Looks in your `PATH` using [which](https://github.com/isaacs/node-which) (useful for custom locations, portable installs, and such)
-
-After gathering paths, version numbers are read from the executable metadata using `wmic`. The whole thing takes 1-3 seconds, but you only have to do it once.
-
-`win-detect-browsers` is tested on Windows 7 x64 (with Chrome, Firefox, Internet Explorer) and Windows XP (with Chrome and IE). Using something else? Please open a issue to **report your results**, whether good or bad. I'd like to gather some more results before including this module in a PR to `browser-launcher`.
+`browser-launcher` by substack has [poor Windows support](https://github.com/substack/browser-launcher/issues/7), and it prompted me to create this module. It is now used in [browser-launcher2](https://github.com/benderjs/browser-launcher2), an active fork of `browser-launcher`.
 
 ## Command line
 
-To test this module, install globally:
+Install globally and run:
 
     npm i win-detect-browsers -g
-
-Then run:
-
     win-detect-browsers
 
 Example output on Windows XP:
 
-    chrome 35.0.1916.153
+    chrome 39.0.2171.71
       @ C:\Program Files\Google\Chrome\Application\chrome.exe
-    ie 8.00.6001.18702 (longhorn_ie8_rtm(wmbla).090308-0339)
+    firefox 33.0.2
+      @ C:\Program Files\Mozilla Firefox\firefox.exe
+    ie 8.00.6001.18702
       @ C:\Program Files\Internet Explorer\iexplore.exe
+    opera 26.0.1656.24
+      @ C:\Program Files\Opera\Launcher.exe
+    opera 26.0.1656.20
+      @ C:\Program Files\Opera beta\Launcher.exe
+    opera 27.0.1689.2
+      @ C:\Program Files\Opera developer\Launcher.exe
+    phantomjs 1.9.8
+      @ C:\Documents and Settings\..\Application Data\npm\phantomjs.CMD
+
+Enable debug with `SET DEBUG=win-detect-browsers`.
+
+### examples
+
+Detect Internet Explorer and Phantomjs, without version numbers:
+
+    win-detect-browsers --no-version ie phantomjs
+
+Return first found version of FF:
+
+    win-detect-browsers --lucky firefox
 
 ## API
 
-The source of `bin/detect-browsers` says it all:
+`detect([names, opts,] cb)`
+
+Where `names` is an array of browser names you want to find. If omitted, it will detect all browsers. Available options are:
+
+- `boolean lucky` whether to end the search for a browser after the first result. Note that this result is not consistent, because search is asynchronous. Defaults to `false`, meaning: find all versions.
+- `boolean version` whether to get version numbers, defaults to `true`.
+
+## examples
+
+Detect *[everything](http://youtu.be/k1yvvNvlXtg)*:
 
 ```js
-var detect = require('../')
+var detect = require('win-detect-browsers')
 
 detect(function(browsers){
   var format = "\n%s %s\n  @ %s"
@@ -49,6 +69,12 @@ detect(function(browsers){
   })
 })
 
+```
+
+Detect only Chrome and IE, without version numbers:
+
+```js
+detect(['chrome', 'ie'], {version: false}, cb)
 ```
 
 ## License
