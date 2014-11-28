@@ -8,7 +8,7 @@
 
 Basically, browser detection on Windows can't be done right. This is the *try-everything-and-fail-silently* approach. It accounts for x64/86 differences, normalizes environment variables, tries default locations, searches the registry (in the HKLM and HKCU hives), checks [Start Menu Internet Applications](http://msdn.microsoft.com/en-us/library/windows/desktop/dd203067(v=vs.85).aspx) and looks in `PATH`. After gathering paths, version numbers are either read from the executable metadata using `wmic` or with `browser -v`.
 
-`browser-launcher` by substack has [poor Windows support](https://github.com/substack/browser-launcher/issues/7), and it prompted me to create this module. It is now used in [browser-launcher2](benderjs/browser-launcher2), an active fork of `browser-launcher`.
+`browser-launcher` by substack has [poor Windows support](https://github.com/substack/browser-launcher/issues/7), and it prompted me to create this module. It is now used in [browser-launcher2](https://github.com/benderjs/browser-launcher2), an active fork of `browser-launcher`.
 
 ## Command line
 
