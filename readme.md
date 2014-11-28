@@ -31,10 +31,20 @@ Install globally and run:
 
 Example output on Windows XP:
 
-    chrome 35.0.1916.153
+    chrome 39.0.2171.71
       @ C:\Program Files\Google\Chrome\Application\chrome.exe
-    ie 8.00.6001.18702 (longhorn_ie8_rtm(wmbla).090308-0339)
+    firefox 33.0.2
+      @ C:\Program Files\Mozilla Firefox\firefox.exe
+    ie 8.00.6001.18702
       @ C:\Program Files\Internet Explorer\iexplore.exe
+    opera 26.0.1656.24
+      @ C:\Program Files\Opera\Launcher.exe
+    opera 26.0.1656.20
+      @ C:\Program Files\Opera beta\Launcher.exe
+    opera 27.0.1689.2
+      @ C:\Program Files\Opera developer\Launcher.exe
+    phantomjs 1.9.8
+      @ C:\Documents and Settings\..\Application Data\npm\phantomjs.CMD
 
 Enable debug with `SET DEBUG=win-detect-browsers`.
 
@@ -46,7 +56,7 @@ Detect Internet Explorer and Phantomjs, without version numbers:
 
 Return first found version of FF:
 
-    win-detect-browsers --no-all firefox
+    win-detect-browsers --lucky firefox
 
 ## API
 
@@ -54,12 +64,12 @@ Return first found version of FF:
 
 Where `names` is an array of browser names you want to find. If omitted, it will detect all browsers. Available options are:
 
-- `boolean all` whether to find all versions of a browser, defaults to true. If false, will end search (*per browser*) after the first result.
-- `boolean version` whether to get version numbers, defaults to true.
+- `boolean lucky` whether to end the search for a browser after the first result. Note that this result is not consistent, because search is asynchronous. Defaults to `false`, meaning: find all versions.
+- `boolean version` whether to get version numbers, defaults to `true`.
 
 ## examples
 
-Detect everything:
+Detect *[everything](http://youtu.be/k1yvvNvlXtg)*:
 
 ```js
 var detect = require('win-detect-browsers')

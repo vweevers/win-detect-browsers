@@ -2,7 +2,7 @@ var browsers  = require('./lib/browsers')
   , after     = require('after')
   , Finder    = require('./lib/finder')
   , xtend     = require('xtend')
-  , defaults  = {all: true, version: true}
+  , defaults  = {lucky: false, version: true}
   , path      = require('path')
   , fs        = require('fs')
 

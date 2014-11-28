@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 var argv = require('yargs')
-  .boolean('all').alias('a', 'all')
+  .boolean('lucky').alias('l', 'lucky')
   .boolean('version').alias('v', 'version')
-  .default({ all : true, version : true })
+  .default({ lucky : false, version : true })
   .argv;
 
 var detect = require('../')
@@ -17,5 +17,5 @@ detect(argv._, argv, function(browsers){
 
 // detect(fn)
 // detect('chrome', fn)
-// detect('chrome', {all: false, version: false}, fn)
+// detect('chrome', {lucky: true, version: false}, fn)
 // detect(['ie', 'firefox'], fn)
