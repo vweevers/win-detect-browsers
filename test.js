@@ -3,23 +3,32 @@
 // - Chrome
 // - Firefox
 // - Opera Stable, Beta and Developer
+// 
+// If only Opera Stable is installed, run
+// test with `--no-operaversions`
 
 var test = require('tape')
   , detect = require('./')
 
+var argv = require('yargs')
+  .boolean('operaversions')
+  .default({ operaversions : true })
+  .argv;
+
 test.only('detect all', function(t){
-  t.plan(2)
+  t.plan(6)
 
   detect(function(results){
     var names = results.map(function(b){ return b.name })
 
-    t.deepEqual(names.sort(), [
-      'chrome', 'firefox', 'ie', 
-      'opera', 'opera', 'opera', 'phantomjs'
-    ])
+    t.ok(names.indexOf('chrome')>=0, 'found chrome')
+    t.ok(names.indexOf('firefox')>=0, 'found firefox')
+    t.ok(names.indexOf('ie')>=0, 'found ie')
+    t.ok(names.indexOf('opera')>=0, 'found opera')
+    t.ok(names.indexOf('phantomjs')>=0, 'found phantomjs')
 
     var len = results.filter(hasVersion).length
-    t.equal(len, 7, 'have version numbers')
+    t.equal(len, results.length, 'have version numbers')
   })
 })
 
@@ -51,7 +60,8 @@ test('detect chrome and firefox', function(t){
   })
 })
 
-test('detect all opera versions', function(t){
+var ot = argv.operaversions ? test : test.skip
+ot('detect all opera versions', function(t){
   t.plan(2)
 
   detect('opera', function(results){
@@ -68,7 +78,7 @@ test('detect all opera versions', function(t){
 
 test('detect first opera version', function(t){
   t.plan(1)
-  
+
   detect('opera', {lucky: true}, function(results){
     t.equal(results.length, 1)
   })
