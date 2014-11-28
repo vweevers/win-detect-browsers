@@ -5,6 +5,11 @@ var detect = require('../')
 detect(function(browsers){
   var format = "\n%s %s\n  @ %s"
   browsers.forEach(function(b){
-    console.log(format, b.name, b.version, b.path)
+    console.log(format, b.name, b.version || '', b.path)
   })
 })
+
+// detect(fn)
+// detect('chrome', fn)
+// detect('chrome', {all: false, version: false}, fn)
+// detect(['ie', 'firefox'], fn)
