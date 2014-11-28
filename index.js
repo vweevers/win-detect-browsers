@@ -10,7 +10,10 @@ module.exports = function (names, opts, complete) {
   if (typeof names == 'string')
     names = [names]
   else if (!Array.isArray(names))
-    complete = opts, opts = names, names = Object.keys(browsers)
+    complete = opts, opts = names, names = null
+
+  if (!names || !names.length)
+    names = Object.keys(browsers)
 
   if (typeof opts == 'function')
     complete = opts, opts = xtend(defaults)

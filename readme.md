@@ -24,12 +24,9 @@ After gathering paths, version numbers are either read from the executable metad
 
 ## Command line
 
-Install globally:
+Install globally and run:
 
     npm i win-detect-browsers -g
-
-Then run:
-
     win-detect-browsers
 
 Example output on Windows XP:
@@ -40,6 +37,16 @@ Example output on Windows XP:
       @ C:\Program Files\Internet Explorer\iexplore.exe
 
 Enable debug with `SET DEBUG=win-detect-browsers`.
+
+### examples
+
+Detect Internet Explorer and Phantomjs, without version numbers:
+
+    win-detect-browsers --no-version ie phantomjs
+
+Return first found version of FF:
+
+    win-detect-browsers --no-all firefox
 
 ## API
 
