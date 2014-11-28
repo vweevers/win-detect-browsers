@@ -15,7 +15,7 @@ var argv = require('yargs')
   .default({ operaversions : true })
   .argv;
 
-test.only('detect all', function(t){
+test('detect all', function(t){
   t.plan(6)
 
   detect(function(results){
