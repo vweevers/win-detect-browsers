@@ -1,26 +1,14 @@
 # win-detect-browsers
 
-> Detects installed versions of Chrome, Firefox, Phantomjs, Internet Explorer and Opera. 
+> Detects installed versions of Chrome, Firefox, Phantomjs (local and global), Internet Explorer, Safari and Opera. Supports Windows XP and up.
 
 [Command line](#command-line) / [API](#api) / [License](#license)
 
 ## About
 
-`browser-launcher` by substack has [poor Windows support](https://github.com/substack/browser-launcher/issues/7), and it prompted me to create this module. Basically, browser detection can't be done right. This is the *try-everything-and-fail-silently* approach. For XP and up, it:
+Basically, browser detection on Windows can't be done right. This is the *try-everything-and-fail-silently* approach. It accounts for x64/86 differences, normalizes environment variables, tries default locations, searches the registry (in the HKLM and HKCU hives), checks [Start Menu Internet Applications](http://msdn.microsoft.com/en-us/library/windows/desktop/dd203067(v=vs.85).aspx) and looks in `PATH`. After gathering paths, version numbers are either read from the executable metadata using `wmic` or with `browser -v`.
 
-1. Tries default locations (in `Program Files`, `Program Files (x86)`, `AppData` and such)
-2. Searches the registry, using:
-  - A set of common keys per browser (accounting for x64/86 differences) and the ["Start Menu Internet Applications"](http://msdn.microsoft.com/en-us/library/windows/desktop/dd203067(v=vs.85).aspx) keys
-  - Both `LOCAL_MACHINE` and `CURRENT_USER`
-3. Looks in your `PATH` using [which](https://github.com/isaacs/node-which) (useful for custom locations, portable installs, and such)
-
-After gathering paths, version numbers are either read from the executable metadata using `wmic` or with `browser -v`.
-
-`win-detect-browsers` has been tested on:
-
-- Win7 x64 with Chrome, FF, IE, phantomjs
-- Win7 x86 with Chrome, Canary, FF, FF nightly, IE, Opera, Safari
-- WinXP with Chrome, FF, IE, Opera, phantomjs
+`browser-launcher` by substack has [poor Windows support](https://github.com/substack/browser-launcher/issues/7), and it prompted me to create this module. It is now used in [browser-launcher2](benderjs/browser-launcher2), an active fork of `browser-launcher`.
 
 ## Command line
 
