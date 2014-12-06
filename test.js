@@ -50,13 +50,16 @@ test('detect chrome without version', function(t){
 })
 
 test('detect chrome and firefox', function(t){
-  t.plan(2)
+  t.plan(3)
 
   detect(['chrome', 'firefox'], function(results){
     var names = results.map(function(b){ return b.name })
-    t.deepEqual(names.sort(), ['chrome', 'firefox'])
+
+    t.ok(names.indexOf('chrome')>=0, 'found chrome')
+    t.ok(names.indexOf('firefox')>=0, 'found firefox')
+
     var len = results.filter(hasVersion).length
-    t.equal(len, 2, 'have version numbers')
+    t.ok(len>=2, 'have version numbers')
   })
 })
 
@@ -85,10 +88,9 @@ test('detect first opera version', function(t){
 })
 
 test('detect local phantomjs', function(t){
-  t.plan(3)
+  t.plan(2)
 
   detect('phantomjs', function(results){
-    t.equal(results.length, 1)
     t.equal(results[0].name, 'phantomjs')
     t.ok(hasVersion(results[0]), 'has version')
   })
