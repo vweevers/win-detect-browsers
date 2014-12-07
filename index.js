@@ -23,11 +23,7 @@ module.exports = function (names, opts, complete) {
   var found = []
 
   var end = after(names.length, function(){
-    // WMIC creates a temporary file for some reason
-    var tmpfile = path.join(__dirname, 'TempWmicBatchFile.bat')
-    return fs.unlink(tmpfile, function(){
-      complete(found)
-    })
+    complete(found)
   })
 
   names.forEach(function(name){
