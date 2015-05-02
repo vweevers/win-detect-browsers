@@ -16,8 +16,8 @@ Basically, browser detection on Windows can't be done right. This is the *try-ev
 
 **2.0 is a faster, streaming version of `win-detect-browsers`. It has no breaking changes in the public API but the internal rewrites might break functionality on some systems (most notably XP and 64-bit Windows). If you have 30 seconds to spare, please try it out (with debug enabled) and send me a report. Thank you!**
 
-    npm i win-detect-browsers#2.0 -g
-    SET DEBUG=win-detect-browsers
+    npm i vweevers/win-detect-browsers#2.0 -g
+    set debug=win-detect-browsers
     win-detect-browsers
 
 Notable changes:
