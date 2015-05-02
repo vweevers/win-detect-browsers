@@ -11,7 +11,6 @@
     "duplexify": "~3.3.0",
     "json-stream": "~1.0.0",
     "merge-stream": "~0.1.7",
-    "retry": "~0.6.1",
     "through2": "~0.6.5",
     "unique-stream": "~2.0.2",
     "which": "^1.0.7",
