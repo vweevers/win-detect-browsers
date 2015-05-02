@@ -2,6 +2,7 @@
 // 
 // - Chrome
 // - Firefox
+// - IE
 // - Opera Stable, Beta and Developer
 // 
 // If only Opera Stable is installed, run
@@ -9,6 +10,12 @@
 
 var test = require('tape')
   , detect = require('./')
+  , cp = require('cp')
+  , fs = require('fs')
+  , path = require('path')
+  , tmpdir = require('os').tmpdir()
+  , mkdirp = require('mkdirp')
+  , compareVersion = require('compare-version')
 
 var argv = require('yargs')
   .boolean('operaversions')
@@ -63,8 +70,20 @@ test('detect chrome and firefox', function(t){
   })
 })
 
-var ot = argv.operaversions ? test : test.skip
-ot('detect all opera versions', function(t){
+test('detect first chrome and firefox', function(t){
+  t.plan(2)
+
+  detect(['chrome', 'firefox'], {lucky: true}, function(results){
+    var names = results.map(function(b){ return b.name })
+    
+    names.sort()
+
+    t.deepEqual(names, ['chrome', 'firefox'], 'found chrome and firefox')
+    t.equal(results.filter(hasVersion).length, 2, 'have version numbers')
+  })
+})
+
+;(argv.operaversions ? test : test.skip)('detect all opera versions', function(t){
   t.plan(2)
 
   detect('opera', function(results){
@@ -83,11 +102,12 @@ test('detect first opera version', function(t){
   t.plan(1)
 
   detect('opera', {lucky: true}, function(results){
-    t.equal(results.length, 1)
+    var names = results.map(function(b){ return b.name })
+    t.deepEqual(names, ['opera'])
   })
 })
 
-test('detect local phantomjs', function(t){
+test('detect phantomjs', function(t){
   t.plan(2)
 
   detect('phantomjs', function(results){
@@ -95,6 +115,105 @@ test('detect local phantomjs', function(t){
     t.ok(hasVersion(results[0]), 'has version')
   })
 })
+
+test('concurrency', function(t){
+  var n = 5
+
+  t.plan(n*2)
+  for(var i=n; i>0; i--) chrome()
+
+  function chrome() {
+    detect('chrome', {lucky: true}, function(results){
+      t.equal(results.length, 1)
+      t.equal(results.filter(hasVersion).length, 1)
+    })
+  }
+})
+
+test('no result', function(t){
+  var browsers = {
+    beep: {
+      bin: 'beep.exe',
+      find: function() {
+        this.file('does\\not\\exist')
+      }
+    }
+  }
+
+  t.plan(1)
+  detect({browsers: browsers}, function(results){
+    t.equal(results.length, 0)
+  })
+})
+
+test('no result asynchronicity', function(t){
+  var browsers = {
+    beep: {
+      bin: 'beep.exe',
+      find: function() {
+        this.file()
+      }
+    }
+  }
+
+  t.plan(2)
+
+  var async = false
+  detect({browsers: browsers}, function(results){
+    t.equal(results.length, 0)
+    t.equal(async, true)
+  })
+
+  async = true;
+})
+
+test('local phantomjs tripping wmic', function(t){
+  t.plan(4)
+  preparePhantom(function(browsers, fixture, ver){
+    detect('phantomjs', {browsers: browsers}, function(results){
+      t.equal(results.length, 1)
+      t.equal(results[0].name, 'phantomjs', 'has name')
+      t.equal(path.normalize(results[0].path), fixture, 'has path')
+      t.equal(compareVersion(results[0].version, ver), 0, results[0].version+' == '+ver)
+    })
+  });
+})
+
+function preparePhantom(done) {
+  var dir = path.resolve(tmpdir, "win-detect-browsers/&@,#$%!~`;'.-_=+[]{}()^");
+
+  mkdirp(dir, function(err){
+    if (err) throw err;
+
+    var fixture = path.join(dir, "phantomjs.exe")
+    var phantomjs = require('phantomjs')
+
+    require('./lib/browsers').phantomjs.transform(phantomjs.path, function(resolved){
+      if (!resolved || resolved.slice(-4).toLowerCase()!=='.exe') {
+        throw new Error('Not an executable: '+resolved);
+      }
+
+      var browsers = {
+        phantomjs: {
+          bin: 'phantomjs',
+          find: function() {
+            this.file(null, fixture, 'fixture')
+          }
+        }
+      }
+
+      var end = function(err) {
+        if (err) throw err;
+        done(browsers, path.normalize(fixture), phantomjs.version);
+      }
+
+      fs.exists(fixture, function(exists){
+        if (exists) end()
+        else cp(resolved, fixture, end)
+      })
+    })
+  });
+}
 
 function hasVersion(b){ 
   return b.version && b.version.match(/[\d\.]+/)

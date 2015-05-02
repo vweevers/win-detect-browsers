@@ -1,42 +1,36 @@
-var browsers  = require('./lib/browsers')
-  , after     = require('after')
-  , Finder    = require('./lib/finder')
+var Finder    = require('./lib/finder')
   , xtend     = require('xtend')
-  , defaults  = {lucky: false, version: true}
+  , defaults  = {lucky: false, version: true, browsers: require('./lib/browsers')}
+  , debug     = require('debug')('win-detect-browsers')
   , path      = require('path')
-  , fs        = require('fs')
+  , regStream = require('./lib/reg-stream')
+  , verStream = require('./lib/version-reader')
+  , merge     = require('merge-stream')
+  , concat    = require('concat-stream')
+  , unique    = require('unique-stream')
 
-module.exports = function (names, opts, complete) {
-  if (typeof names == 'string')
-    names = [names]
-  else if (!Array.isArray(names))
-    complete = opts, opts = names, names = null
+module.exports = function (names, opts, cb) {
+  if (typeof names == 'string') names = [names]
+  else if (!Array.isArray(names)) cb = opts, opts = names, names = null
+
+  if (typeof opts == 'function') cb = opts, opts = xtend(defaults)
+  else opts = xtend(defaults, opts)
+
+  var browsers = opts.browsers
+    , reg = regStream()
 
   if (!names || !names.length)
     names = Object.keys(browsers)
 
-  if (typeof opts == 'function')
-    complete = opts, opts = xtend(defaults)
-  else
-    opts = xtend(defaults, opts)
+  var stream = merge(names.map(function(name){
+    return new Finder(name, browsers[name], reg, opts)
+  })).pipe(unique(function(b){
+    return b.path.toLowerCase()
+  }))
 
-  var found = []
+  if (opts.version) stream = stream.pipe(verStream())
+  stream.on('end', reg.end.bind(reg))
+  if (cb) stream.pipe(concat(cb))
 
-  var end = after(names.length, function(){
-    complete(found)
-  })
-
-  names.forEach(function(name){
-    var finder = new Finder(name, browsers[name])
-
-    finder.find(opts, function(err, result){
-      var step = after(result.length, end)
-
-      result.forEach(function(browser){
-        found.push(browser)
-        if (opts.version) browser.getVersion(step)
-        else step()
-      })
-    })
-  })
+  return stream;
 }
