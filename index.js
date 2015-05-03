@@ -23,6 +23,9 @@ module.exports = function (names, opts, complete) {
   var found = []
 
   var end = after(names.length, function(){
+    if (opts.version) found = found.filter(function(b){
+      return b.version
+    })
     complete(found)
   })
 
