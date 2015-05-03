@@ -1,0 +1,28 @@
+version: 1.0.{build}
+skip_tags: true
+shallow_clone: true
+
+environment:
+  matrix:
+    - nodejs_version: "0.11"
+    - nodejs_version: "1"
+
+platform:
+  - x86
+  - x64
+
+install:
+  - ps: Install-Product node $env:nodejs_version $env:platform
+  - cinst Firefox -y
+  - cinst GoogleChrome -y
+  - cinst Opera -y
+  - npm i tape -g
+
+build_script:
+  - npm install
+
+test_script:
+  - set DEBUG=win-detect-browsers
+  - tape test.js --no-operaversions
+
+deploy: off
