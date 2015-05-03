@@ -7,19 +7,14 @@ var argv = require('yargs')
   .argv;
 
 var detect = require('../')
-  , start  = time()
+  , start  = Date.now()
 
 detect(argv._, argv, function(browsers){
-  var duration = (time()-start).toFixed(3)
-  console.log('Found %d browsers in %d ms', browsers.length, duration)
+  var duration = Date.now()-start
+  console.log('Found %d browsers in %dms', browsers.length, duration)
 
   var format = "\n%s %s\n  @ %s"
   browsers.forEach(function(b){
     console.log(format, b.name, b.version || '', b.path)
   })
 })
-
-function time() {
-  var a = process.hrtime()
-  return (1000 * a[0]) + (a[1] / 1000000)
-}
