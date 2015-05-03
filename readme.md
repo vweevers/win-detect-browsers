@@ -1,31 +1,16 @@
 # win-detect-browsers
 
-> Detects installed versions of Chrome, Chromium, Firefox, Phantomjs (local and global), Internet Explorer, Safari and Opera (Stable, Beta and Developer). Supports Windows XP and up.
+> Detects installed versions of Chrome, Chromium, Firefox, PhantomJS (local and global), Internet Explorer, Safari and Opera (Stable, Beta and Developer). Supports Windows XP and up.
 
-[![Build status](https://img.shields.io/appveyor/ci/vweevers/win-detect-browsers.svg?style=flat-square)](https://ci.appveyor.com/project/vweevers/win-detect-browsers) [![Dependency Status](https://img.shields.io/david/vweevers/win-detect-browsers.svg?style=flat-square)](https://david-dm.org/vweevers/win-detect-browsers)
+[![npm status](http://img.shields.io/npm/v/win-detect-browsers.svg?style=flat-square)](https://www.npmjs.org/package/win-detect-browsers) [![Build status](https://img.shields.io/appveyor/ci/vweevers/win-detect-browsers.svg?style=flat-square)](https://ci.appveyor.com/project/vweevers/win-detect-browsers) [![Dependency Status](https://img.shields.io/david/vweevers/win-detect-browsers.svg?style=flat-square)](https://david-dm.org/vweevers/win-detect-browsers)
 
-[Command line](#command-line) / [API](#api) / [License](#license)
+[Command line](#command-line) / [API](#api) / [Changelog](#changelog) / [License](#license-and-credits)
 
 ## About
 
-Basically, browser detection on Windows can't be done right. This is the *try-everything-and-fail-silently* approach. It accounts for architecture differences, normalizes environment variables, tries default locations, searches the registry (in the HKLM and HKCU hives), checks [Start Menu Internet Applications](http://msdn.microsoft.com/en-us/library/windows/desktop/dd203067(v=vs.85).aspx) and looks in `PATH`. Version numbers are read from the executable metadata.
+Basically, browser detection on Windows can't be done right. This is the *try-everything-and-fail-silently* approach. It accounts for architecture differences, normalizes environment variables, tries default locations, searches the registry (in the HKLM and HKCU hives), checks [Start Menu Internet Applications](http://msdn.microsoft.com/en-us/library/windows/desktop/dd203067(v=vs.85).aspx) and looks in `PATH`. Version numbers are then read from the executable metadata.
 
 `browser-launcher` by substack has [poor Windows support](https://github.com/substack/browser-launcher/issues/7), and it prompted me to create this module. It is now used in [browser-launcher2](https://github.com/benderjs/browser-launcher2), an active fork of `browser-launcher`.
-
-## Upcoming changes
-
-**2.0 is a faster, streaming version of `win-detect-browsers`. It has no breaking changes in the public API but the internal rewrites might break functionality on some systems (most notably XP and 64-bit Windows). If you have 30 seconds to spare, please try it out (with debug enabled) and send me a report. Thank you!**
-
-    npm i vweevers/win-detect-browsers#2.0 -g
-    set debug=win-detect-browsers
-    win-detect-browsers
-
-Notable changes:
-
-- Speed improvement (2-4x), because it uses a single `cscript` process to query the registry (replaces `reg` queries) and a single `cscript` process to get the version numbers (replaces `wmic` queries).
-- Exports a readable object stream, but 1.x callback style is still supported (at least until 3.0)
-- Only emits executables (`*.exe`)
-- No longer uses command-line version flags or version numbers found in the registry or elsewhere. This simplifies the process and makes the version numbers consistent and more detailed.
 
 ## Command line
 
@@ -73,8 +58,8 @@ Return first found version of FF:
 
 ## API
 
-- Legacy callback mode: `detect([names, options,] cb)` calls `cb` with an array of results.
 - Streaming mode: `detect([names, options])` returns a readable stream.
+- Legacy callback mode: `detect([names, options,] cb)` calls `cb` with an array of results.
 
 Where `names` is an array of browser names you want to find. If omitted, it will detect all browsers. Available `options` are:
 
@@ -97,26 +82,21 @@ detect().pipe(through2.obj(function(b, _, next){
 
 ```
 
-In callback mode:
-
-```js
-var detect = require('win-detect-browsers')
-
-detect(function(browsers){
-  var format = "\n%s %s\n  @ %s"
-  browsers.forEach(function(b){
-    console.log(format, b.name, b.version, b.path)
-  })
-})
-
-```
-
 Detect only Chrome and IE, without version numbers:
 
 ```js
 detect(['chrome', 'ie'], {version: false})
 ```
 
+## Changelog
+
+### 2.0.0
+
+- Speed improvement (2-4x), because it uses a single `cscript` process to query the registry (replaces `reg` queries) and a single `cscript` process to get the version numbers (replaces `wmic` queries).
+- Exports a readable object stream, but 1.x callback style is still supported (at least until 3.0)
+- Only emits executables (`*.exe`)
+- No longer uses command-line version flags or version numbers found in the registry or elsewhere. This simplifies the process and makes the version numbers consistent and more detailed.
+
 ## License and credits
 
-[MIT](http://opensource.org/licenses/MIT) © [Vincent Weevers](http://vincentweevers.nl). Registry stream adapted from [regedit](https://www.npmjs.com/package/regedit) ([MIT](http://opensource.org/licenses/MIT)) © [ironSource](http://www.ironsrc.com/).
+[MIT](http://opensource.org/licenses/MIT) © [Vincent Weevers](http://vincentweevers.nl). Registry stream adapted from [regedit](https://www.npmjs.com/package/regedit) © [ironSource](http://www.ironsrc.com/).
