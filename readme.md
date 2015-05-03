@@ -1,6 +1,6 @@
 # win-detect-browsers
 
-> Detects installed versions of Chrome, Chromium, Firefox, PhantomJS (local and global), Internet Explorer, Safari and Opera (Stable, Beta and Developer). Supports Windows XP and up.
+> Detects installed versions of Chrome, Chromium, Firefox, PhantomJS (local and global), Internet Explorer, Safari and Opera (Stable, Beta and Developer). Supports [Windows XP and up](https://github.com/vweevers/win-detect-browsers/wiki).
 
 [![npm status](http://img.shields.io/npm/v/win-detect-browsers.svg?style=flat-square)](https://www.npmjs.org/package/win-detect-browsers) [![Build status](https://img.shields.io/appveyor/ci/vweevers/win-detect-browsers.svg?style=flat-square)](https://ci.appveyor.com/project/vweevers/win-detect-browsers) [![Dependency Status](https://img.shields.io/david/vweevers/win-detect-browsers.svg?style=flat-square)](https://david-dm.org/vweevers/win-detect-browsers)
 
