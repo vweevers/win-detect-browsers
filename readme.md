@@ -36,8 +36,10 @@ Install globally and run:
 
 Example output on 32-bits Windows 7:
 
-    Found 9 browsers in 355.518 ms
+    Found 10 browsers in 396.128 ms
     
+    chrome 44.0.2390.0
+      @ C:\Users\vweevers\AppData\Local\Google\Chrome SxS\Application\chrome.exe
     chrome 44.0.2383.0
       @ C:\Program Files\Google\Chrome\Application\chrome.exe
     chromium 44.0.2390.0
