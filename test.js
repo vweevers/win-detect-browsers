@@ -8,8 +8,8 @@
 // If only Opera Stable is installed, run
 // test with `--no-operaversions`
 //
-// If both Chrome 32-bit and 64-bit are
-// installed, run test with `--chrome64`
+// If both Chrome stable and Chrome Canary
+// are installed, run test with `--canary`
 
 var test = require('tape')
   , detect = require('./')
@@ -22,8 +22,8 @@ var test = require('tape')
 
 var argv = require('yargs')
   .boolean('operaversions')
-  .boolean('chrome64')
-  .default({ operaversions : true, chrome64: false })
+  .boolean('canary')
+  .default({ operaversions : true, canary: false })
   .argv;
 
 test('detect all', function(t){
@@ -43,7 +43,7 @@ test('detect all', function(t){
   })
 })
 
-test('detect chrome', function(t){
+test.only('detect chrome', function(t){
   detect('chrome', function(results){
     var names = results.filter(function(b){ return b.name === 'chrome' })
     t.equal(names.length, results.length, 'have names')
@@ -51,7 +51,7 @@ test('detect chrome', function(t){
     var versions = results.filter(hasVersion)
     t.equal(versions.length, results.length, 'have version numbers')
 
-    if (argv.chrome64) {
+    if (argv.canary) {
       var msg = 'found ' + results.length + ' chrome versions'
       t.ok(results.length >= 2, msg)
     }
