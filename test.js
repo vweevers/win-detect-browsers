@@ -11,7 +11,7 @@
 var test = require('tape')
   , detect = require('./')
   , cp = require('cp')
-  , fs = require('fs')
+  , pathExists = require('path-exists')
   , path = require('path')
   , tmpdir = require('os').tmpdir()
   , mkdirp = require('mkdirp')
@@ -207,7 +207,7 @@ function preparePhantom(done) {
         done(browsers, path.normalize(fixture), phantomjs.version);
       }
 
-      fs.exists(fixture, function(exists){
+      pathExists(fixture, function(err, exists){
         if (exists) end()
         else cp(resolved, fixture, end)
       })
