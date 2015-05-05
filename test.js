@@ -26,6 +26,31 @@ var argv = require('yargs')
   .default({ operaversions : true, canary: false })
   .argv;
 
+test('find cscript', function(t){
+  t.plan(6)
+
+  var cscript = require('./lib/cscript'), async = false
+
+  cscript(function(err, path){
+    t.ok(path, 'cb 1 has path')
+    t.ok(async, 'cb 1 is async')
+  })
+
+  cscript(function(err, path){
+    t.ok(path, 'cb 2 has path')
+    t.ok(async, 'cb 2 is async')
+
+    var async2 = false
+    cscript(function(err, path){
+      t.ok(path, 'cb 3 has path')
+      t.ok(async2, 'cb 3 is async')
+    })
+    async2 = true
+  })
+
+  async = true
+})
+
 test('detect all', function(t){
   t.plan(6)
 
@@ -43,7 +68,7 @@ test('detect all', function(t){
   })
 })
 
-test.only('detect chrome', function(t){
+test('detect chrome', function(t){
   detect('chrome', function(results){
     var names = results.filter(function(b){ return b.name === 'chrome' })
     t.equal(names.length, results.length, 'have names')
