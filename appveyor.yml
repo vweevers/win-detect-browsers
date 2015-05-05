@@ -2,6 +2,10 @@ version: 1.0.{build}
 skip_tags: true
 shallow_clone: true
 
+skip_commits:
+  # Skip stable release commits
+  message: /^ *v? *\d+\.\d+\.\d+ *$/
+
 environment:
   matrix:
     - nodejs_version: "0.11"
