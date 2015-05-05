@@ -15,6 +15,7 @@ install:
   - ps: Install-Product node $env:nodejs_version $env:platform
   - cinst Firefox -y
   - cinst GoogleChrome -y
+  - cinst google-chrome-x64 -y
   - cinst Opera -y
   - npm i tape -g
 
@@ -23,6 +24,6 @@ build_script:
 
 test_script:
   - set DEBUG=win-detect-browsers
-  - tape test.js --no-operaversions
+  - tape test.js --no-operaversions --chrome64
 
 deploy: off
