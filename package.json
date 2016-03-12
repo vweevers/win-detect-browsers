@@ -6,25 +6,25 @@
   "main": "index.js",
   "dependencies": {
     "after": "^0.8.1",
-    "concat-stream": "~1.4.8",
+    "concat-stream": "~1.5.1",
     "debug": "^2.1.0",
-    "duplexify": "~3.3.0",
+    "duplexify": "~3.4.3",
+    "existent": "~1.0.1",
     "json-stream": "~1.0.0",
-    "merge-stream": "~0.1.7",
-    "path-exists": "~1.0.0",
-    "through2": "~0.6.5",
-    "unique-stream": "~2.0.2",
+    "merge-stream": "~1.0.0",
+    "through2": "~2.0.1",
+    "unique-stream": "~2.2.1",
     "which": "^1.0.7",
     "windows-env": "~1.0.0",
     "xtend": "^4.0.0",
-    "yargs": "~3.8.0"
+    "yargs": "~4.2.0"
   },
   "devDependencies": {
     "compare-version": "~0.1.2",
     "cp": "~0.2.0",
     "mkdirp": "~0.5.0",
     "phantomjs": "^1.9.12",
-    "tape": "~4.0.0"
+    "tape": "~4.5.1"
   },
   "scripts": {
     "test": "tape test.js"

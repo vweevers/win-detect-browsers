@@ -1,10 +1,10 @@
-// Requirements to run tests: 
-// 
+// Requirements to run tests:
+//
 // - Chrome
 // - Firefox
 // - IE
 // - Opera Stable, Beta and Developer
-// 
+//
 // If only Opera Stable is installed, run
 // test with `--no-operaversions`
 //
@@ -14,7 +14,7 @@
 var test = require('tape')
   , detect = require('./')
   , cp = require('cp')
-  , pathExists = require('path-exists')
+  , existent = require('existent')
   , path = require('path')
   , tmpdir = require('os').tmpdir()
   , mkdirp = require('mkdirp')
@@ -113,7 +113,7 @@ test('detect first chrome and firefox', function(t){
 
   detect(['chrome', 'firefox'], {lucky: true}, function(results){
     var names = results.map(function(b){ return b.name })
-    
+
     names.sort()
 
     t.deepEqual(names, ['chrome', 'firefox'], 'found chrome and firefox')
@@ -245,14 +245,14 @@ function preparePhantom(done) {
         done(browsers, path.normalize(fixture), phantomjs.version);
       }
 
-      pathExists(fixture, function(err, exists){
-        if (exists) end()
+      existent(fixture, function(err){
+        if (!err) end()
         else cp(resolved, fixture, end)
       })
     })
   });
 }
 
-function hasVersion(b){ 
+function hasVersion(b){
   return b.version && b.version.match(/[\d\.]+/)
 }
