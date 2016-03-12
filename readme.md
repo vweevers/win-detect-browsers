@@ -19,30 +19,48 @@ Install globally and run:
     npm i win-detect-browsers -g
     win-detect-browsers
 
-Example output on 32-bits Windows 7:
+Example output on Windows 8.1:
 
-    Found 10 browsers in 382ms
+    Found 13 browsers in 197ms
 
-    chrome 44.0.2390.0
+    chrome 51.0.2675.0
       @ C:\Users\vweevers\AppData\Local\Google\Chrome SxS\Application\chrome.exe
-    chrome 44.0.2383.0
-      @ C:\Program Files\Google\Chrome\Application\chrome.exe
-    chromium 44.0.2390.0
+
+    chrome 48.0.2564.116
+      @ C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+
+    chromium 51.0.2676.0
       @ C:\Users\vweevers\AppData\Local\Chromium\Application\chrome.exe
-    firefox 34.0.5.5443
-      @ C:\Program Files\Mozilla Firefox\firefox.exe
-    ie 11.0.9600.17728
+
+    firefox 44.0.2.5884
+      @ C:\Program Files (x86)\Mozilla Firefox\firefox.exe
+
+    ie 11.0.9600.18124
+      @ C:\Program Files (x86)\Internet Explorer\iexplore.exe
+
+    ie 11.0.9600.18123
       @ C:\Program Files\Internet Explorer\iexplore.exe
-    opera 29.0.1795.47
-      @ C:\Program Files\Opera\Launcher.exe
-    opera 29.0.1795.41
-      @ C:\Program Files\Opera beta\Launcher.exe
-    opera 30.0.1835.5
-      @ C:\Program Files\Opera developer\Launcher.exe
+
+    maxthon 4.9.1.1000
+      @ C:\Program Files (x86)\Maxthon\Bin\Maxthon.exe
+
+    yandex 47.0.2526.6796
+      @ C:\Users\vweevers\AppData\Local\Yandex\YandexBrowser\Application\browser.exe
+
     phantomjs 1.9.8.0
-      @ C:\Program Files\nodejs\node_modules\phantomjs\lib\phantom\phantomjs.exe
-    safari 5.34.54.16
-      @ C:\Program Files\Safari\Safari.exe
+      @ D:\Projecten\GitHub\win-detect-browsers\node_modules\phantomjs\lib\phantom\phantomjs.exe
+
+    firefox 46.0.0.5903
+      @ C:\Program Files (x86)\Firefox Developer Edition\firefox.exe
+
+    opera 35.0.2066.92
+      @ D:\bin\Opera\Stable\Launcher.exe
+
+    opera 36.0.2130.29
+      @ D:\bin\Opera\Beta\Launcher.exe
+
+    opera 37.0.2163.0
+      @ D:\bin\Opera\Developer\Launcher.exe
 
 Enable debug with `SET DEBUG=win-detect-browsers`.
 
