@@ -15,6 +15,7 @@
     "through2": "~2.0.1",
     "unique-stream": "~2.2.1",
     "which": "^1.0.7",
+    "windows-bin": "~1.0.0",
     "windows-env": "~1.0.0",
     "xtend": "^4.0.0",
     "yargs": "~4.2.0"

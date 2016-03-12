@@ -29,19 +29,19 @@ var argv = require('yargs')
 test('find cscript', function(t){
   t.plan(6)
 
-  var cscript = require('./lib/cscript'), async = false
+  var wbin = require('windows-bin'), async = false
 
-  cscript(function(err, path){
+  wbin('cscript', function(err, path){
     t.ok(path, 'cb 1 has path')
     t.ok(async, 'cb 1 is async')
   })
 
-  cscript(function(err, path){
+  wbin('cscript', function(err, path){
     t.ok(path, 'cb 2 has path')
     t.ok(async, 'cb 2 is async')
 
     var async2 = false
-    cscript(function(err, path){
+    wbin('cscript', function(err, path){
       t.ok(path, 'cb 3 has path')
       t.ok(async2, 'cb 3 is async')
     })
