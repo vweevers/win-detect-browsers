@@ -8,6 +8,7 @@ var Finder    = require('./lib/finder')
   , merge     = require('merge-stream')
   , concat    = require('concat-stream')
   , unique    = require('unique-stream')
+  , through2   = require('through2')
 
 module.exports = function (names, opts, cb) {
   if (typeof names == 'string') names = [names]
@@ -28,9 +29,20 @@ module.exports = function (names, opts, cb) {
     return b.path.toLowerCase()
   }))
 
-  if (opts.version) stream = stream.pipe(verStream())
+  if (opts.version) {
+    stream = stream.pipe(verStream()).pipe(withVersion())
+  }
+
   stream.on('end', reg.end.bind(reg))
   if (cb) stream.pipe(concat(cb))
 
   return stream;
+}
+
+function withVersion() {
+  return through2.obj(function(b, _, next){
+    if (b.version) this.push(b)
+    else debug('%s: no version for %s', b.name, b.path)
+    next()
+  })
 }
