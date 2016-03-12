@@ -1,14 +1,19 @@
-var Finder    = require('./lib/finder')
-  , xtend     = require('xtend')
-  , defaults  = {lucky: false, version: true, browsers: require('./lib/browsers')}
-  , debug     = require('debug')('win-detect-browsers')
-  , path      = require('path')
+var Finder = require('./lib/finder')
+  , xtend = require('xtend')
+  , debug = require('debug')('win-detect-browsers')
+  , path = require('path')
   , regStream = require('./lib/reg-stream')
-  , verStream = require('./lib/version-reader')
-  , merge     = require('merge-stream')
-  , concat    = require('concat-stream')
-  , unique    = require('unique-stream')
-  , through2   = require('through2')
+  , getVersion = require('./lib/version-reader')
+  , merge = require('merge-stream')
+  , concat = require('concat-stream')
+  , unique = require('unique-stream')
+  , through2 = require('through2')
+
+var defaults = {
+  lucky: false,
+  version: true,
+  browsers: require('./lib/browsers')
+}
 
 module.exports = function (names, opts, cb) {
   if (typeof names == 'string') names = [names]
@@ -23,14 +28,14 @@ module.exports = function (names, opts, cb) {
   if (!names || !names.length)
     names = Object.keys(browsers)
 
-  var stream = merge(names.map(function(name){
+  var stream = merge(names.map(function (name) {
     return new Finder(name, browsers[name], reg, opts)
-  })).pipe(unique(function(b){
+  })).pipe(unique(function (b) {
     return b.path.toLowerCase()
   }))
 
   if (opts.version) {
-    stream = stream.pipe(verStream()).pipe(withVersion())
+    stream = stream.pipe(getVersion()).pipe(withVersion())
   }
 
   stream.on('end', reg.end.bind(reg))
@@ -40,7 +45,7 @@ module.exports = function (names, opts, cb) {
 }
 
 function withVersion() {
-  return through2.obj(function(b, _, next){
+  return through2.obj(function (b, enc, next) {
     if (b.version) this.push(b)
     else debug('%s: no version for %s', b.name, b.path)
     next()
