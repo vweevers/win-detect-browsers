@@ -30,8 +30,10 @@
     "tape": "~4.5.1"
   },
   "scripts": {
-    "test": "npm run build && tape test.js",
-    "build": "browserify --bare lib/version-reader/main.js > lib/version-reader/main-dist.js"
+    "test": "tape test.js",
+    "bundle": "browserify --bare lib/version-reader/main.js",
+    "uglify": "uglifyjs --preamble this.global=this.window=this;",
+    "build": "npm run -s bundle | npm run -s uglify > lib/version-reader/main-dist.js"
   },
   "repository": {
     "type": "git",

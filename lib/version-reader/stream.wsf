@@ -1,6 +1,0 @@
-<job id="listStream">
-  <script language="JScript">
-    this.global = this.window = this
-  </script>
-  <script language="JScript" src="main-dist.js" />
-</job>
