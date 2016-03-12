@@ -5,6 +5,7 @@
   "description": "Detect browsers on Windows",
   "main": "index.js",
   "dependencies": {
+    "JSONStream": "~1.1.1",
     "after": "^0.8.1",
     "concat-stream": "~1.5.1",
     "debug": "^2.1.0",
