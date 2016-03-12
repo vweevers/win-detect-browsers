@@ -15,6 +15,7 @@
     "through2": "~0.6.5",
     "unique-stream": "~2.0.2",
     "which": "^1.0.7",
+    "windows-env": "~1.0.0",
     "xtend": "^4.0.0",
     "yargs": "~3.8.0"
   },
