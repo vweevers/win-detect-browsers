@@ -12,6 +12,7 @@
     "existent": "~1.0.1",
     "flush-write-stream": "~1.0.0",
     "json-stream": "~1.0.0",
+    "json3": "~3.3.2",
     "merge-stream": "~1.0.0",
     "through2": "~2.0.1",
     "unique-stream": "~2.2.1",
@@ -29,7 +30,8 @@
     "tape": "~4.5.1"
   },
   "scripts": {
-    "test": "tape test.js"
+    "test": "npm run build && tape test.js",
+    "build": "browserify --bare lib/version-reader/main.js > lib/version-reader/main-dist.js"
   },
   "repository": {
     "type": "git",

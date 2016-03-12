@@ -1,9 +1,6 @@
 <job id="listStream">
-  ' todo: maybe `browserify --bare` the script, then just require
-  <script language="JScript" src="..\json.js" />
-  <script language="JScript" src="..\util.js" />
-  <script language="JScript" src="main.js" />
   <script language="JScript">
-    main()
+    this.global = this.window = this
   </script>
+  <script language="JScript" src="main-dist.js" />
 </job>
