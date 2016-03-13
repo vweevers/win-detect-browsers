@@ -5,13 +5,11 @@
   "description": "Detect browsers on Windows",
   "main": "index.js",
   "dependencies": {
-    "JSONStream": "~1.1.1",
     "after": "^0.8.1",
     "concat-stream": "~1.5.1",
     "debug": "^2.1.0",
     "duplexify": "~3.4.3",
     "existent": "~1.0.1",
-    "flush-write-stream": "~1.0.0",
     "json-stream": "~1.0.0",
     "json3": "~3.3.2",
     "merge-stream": "~1.0.0",
@@ -20,6 +18,7 @@
     "which": "^1.0.7",
     "windows-bin": "~1.0.0",
     "windows-env": "~1.0.0",
+    "wmi-errors": "~1.0.1",
     "xtend": "^4.0.0",
     "yargs": "~4.2.0"
   },
@@ -32,9 +31,12 @@
   },
   "scripts": {
     "test": "tape test.js",
-    "bundle": "browserify --bare lib/version-reader/main.js",
-    "uglify": "uglifyjs --preamble this.global=this.window=this;",
-    "build": "npm run -s bundle | npm run -s uglify > lib/version-reader/main-dist.js"
+    "bundle1": "browserify --bare lib/version-reader/main.js",
+    "bundle2": "browserify --bare lib/reg-stream/main.js",
+    "uglify": "uglifyjs --preamble this.global=this;",
+    "build1": "npm run -s bundle1 | npm run -s uglify > lib/version-reader/main-dist.js",
+    "build2": "npm run -s bundle2 | npm run -s uglify > lib/reg-stream/main-dist.js",
+    "build": "npm run build1 && npm run build2"
   },
   "repository": {
     "type": "git",

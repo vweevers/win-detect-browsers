@@ -11,6 +11,8 @@
 // If both Chrome stable and Chrome Canary
 // are installed, run test with `--canary`
 
+process.stderr.setMaxListeners(100)
+
 var test = require('tape')
   , detect = require('./')
   , cp = require('cp')
