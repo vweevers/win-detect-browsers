@@ -25,18 +25,16 @@
   "devDependencies": {
     "compare-version": "~0.1.2",
     "cp": "~0.2.0",
+    "jscriptify": "~1.0.1",
     "mkdirp": "~0.5.0",
     "phantomjs": "^1.9.12",
     "tape": "~4.5.1"
   },
   "scripts": {
     "test": "tape test.js",
-    "bundle1": "browserify --bare lib/version-reader/main.js",
-    "bundle2": "browserify --bare lib/reg-stream/main.js",
-    "uglify": "uglifyjs --preamble this.global=this;",
-    "build1": "npm run -s bundle1 | npm run -s uglify > lib/version-reader/main-dist.js",
-    "build2": "npm run -s bundle2 | npm run -s uglify > lib/reg-stream/main-dist.js",
-    "build": "npm run build1 && npm run build2"
+    "bundle-ver": "jscriptify -c lib/version-reader main.js -o main-dist.js",
+    "bundle-reg": "jscriptify -c lib/reg-stream main.js -o main-dist.js",
+    "build": "npm run bundle-ver && npm run bundle-reg"
   },
   "repository": {
     "type": "git",
