@@ -22,7 +22,7 @@ Install globally and run:
 Example output on 32-bits Windows 7:
 
     Found 10 browsers in 382ms
-    
+
     chrome 44.0.2390.0
       @ C:\Users\vweevers\AppData\Local\Google\Chrome SxS\Application\chrome.exe
     chrome 44.0.2383.0
@@ -78,8 +78,7 @@ detect().pipe(through2.obj(function(b, _, next){
   var format = "\n%s %s\n  @ %s"
   console.log(format, b.name, b.version, b.path)
   next()
-})
-
+}))
 ```
 
 Detect only Chrome and IE, without version numbers:
