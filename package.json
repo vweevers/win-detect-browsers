@@ -29,9 +29,6 @@
     "phantomjs": "^1.9.12",
     "tape": "~4.5.1"
   },
-  "optionalDependencies": {
-    "jscriptify": "~1.0.1"
-  },
   "scripts": {
     "test": "tape test.js",
     "bundle-ver": "jscriptify -c lib/version-reader main.js -o main-dist.js",
