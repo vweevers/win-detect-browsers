@@ -10,6 +10,7 @@
     "debug": "^2.1.0",
     "duplexify": "~3.4.3",
     "existent": "~1.0.1",
+    "jscript": "~1.0.0",
     "json-stream": "~1.0.0",
     "json3": "~3.3.2",
     "merge-stream": "~1.0.0",
@@ -30,7 +31,7 @@
     "tape": "~4.5.1"
   },
   "scripts": {
-    "test": "tape test.js",
+    "test": "node test.js",
     "bundle-ver": "jscriptify -c lib/version-reader main.js -o main-dist.js",
     "bundle-reg": "jscriptify -c lib/reg-stream main.js -o main-dist.js",
     "build": "npm run bundle-ver && npm run bundle-reg"
