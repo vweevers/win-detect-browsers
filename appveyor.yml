@@ -1,6 +1,8 @@
 version: 1.0.{build}
 skip_tags: true
 shallow_clone: true
+build: off
+deploy: off
 
 skip_commits:
   # Skip stable release commits
@@ -21,13 +23,8 @@ install:
   - cinst Firefox -y
   - cinst GoogleChrome -y
   - cinst Opera -y
-  - npm i tape -g
-
-build_script:
-  - npm install
+  - npm i
 
 test_script:
   - set DEBUG=win-detect-browsers
-  - tape test.js --no-operaversions
-
-deploy: off
+  - node test.js --no-operaversions
