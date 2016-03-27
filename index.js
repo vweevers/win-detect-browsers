@@ -36,7 +36,7 @@ module.exports = function (names, opts, cb) {
 
   if (cb) {
     var finished = 0
-    var wrapped = function(err, browsers) {
+    var wrapped = function (err, browsers) {
       if (finished++) return
       cb(err, browsers)
     }
