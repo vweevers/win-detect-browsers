@@ -129,8 +129,11 @@ detect(['chrome', 'ie'], function (err, browsers) {
 
 ### 3.0.0
 
-- Error-first callbacks: please use `cb(err, browsers)` instead of `cb(browsers)`
-- Removed the `version` option.
+- Added a `channel` property for Firefox and Opera
+- Additional version info (like `ProductName`) for each browser
+- Error-first callbacks: use `cb(err, browsers)` instead of `cb(browsers)`
+- Removed the `version` option;
+- Performance improvement: the native [win-version-info](https://www.npmjs.org/package/win-version-info) addon replaces the `cscript` child process.
 
 ### 2.0.0
 
