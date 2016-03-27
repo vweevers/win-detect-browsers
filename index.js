@@ -35,19 +35,11 @@ module.exports = function (names, opts, cb) {
   }))
 
   if (opts.version) {
-    stream = stream.pipe(getVersion()).pipe(withVersion())
+    stream = stream.pipe(getVersion())
   }
 
   stream.on('end', reg.end.bind(reg))
   if (cb) stream.pipe(concat(cb))
 
   return stream;
-}
-
-function withVersion() {
-  return through2.obj(function (b, enc, next) {
-    if (b.version) this.push(b)
-    else debug('%s: no version for %s', b.name, b.path)
-    next()
-  })
 }

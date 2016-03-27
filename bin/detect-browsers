@@ -2,8 +2,9 @@
 
 var argv = require('yargs')
   .boolean('lucky').alias('l', 'lucky')
+  .boolean('verbose')
   .boolean('version').alias('v', 'version')
-  .default({ lucky : false, version : true })
+  .default({ lucky : false, version : true, verbose: false })
   .argv;
 
 var detect = require('../')
@@ -15,6 +16,7 @@ detect(argv._, argv, function(browsers){
 
   var format = "\n%s %s\n  @ %s"
   browsers.forEach(function(b){
-    console.log(format, b.name, b.version || '', b.path)
+    if (argv.verbose) console.log(b)
+    else console.log(format, b.name, b.version || '', b.path)
   })
 })

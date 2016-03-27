@@ -32,9 +32,8 @@
   },
   "scripts": {
     "test": "node test.js",
-    "bundle-ver": "jscriptify -c lib/version-reader main.js -o main-dist.js",
     "bundle-reg": "jscriptify -c lib/reg-stream main.js -o main-dist.js",
-    "build": "npm run bundle-ver && npm run bundle-reg"
+    "build": "npm run bundle-reg"
   },
   "repository": {
     "type": "git",
@@ -50,5 +49,8 @@
   "bugs": {
     "url": "https://github.com/vweevers/win-detect-browsers/issues"
   },
-  "homepage": "https://github.com/vweevers/win-detect-browsers"
+  "homepage": "https://github.com/vweevers/win-detect-browsers",
+  "optionalDependencies": {
+    "win-version-info": "~1.0.1"
+  }
 }

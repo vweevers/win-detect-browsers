@@ -66,13 +66,34 @@ Enable debug with `SET DEBUG=win-detect-browsers`.
 
 ### examples
 
+Show all available info on Chrome:
+
+```
+> win-detect-browsers --verbose --lucky chrome
+Found 1 browsers in 25ms
+{ name: 'chrome',
+  path: 'C:\\Users\\vweevers\\AppData\\Local\\Google\\Chrome SxS\\Application\\chrome.exe',
+  version: '51.0.2692.0',
+  info:
+   { FileVersion: '51.0.2692.0',
+     CompanyName: 'Google Inc.',
+     FileDescription: 'Google Chrome',
+     InternalName: 'chrome_exe',
+     LegalCopyright: 'Copyright 2015 Google Inc. All rights reserved.',
+     OriginalFilename: 'chrome.exe',
+     ProductName: 'Google Chrome',
+     ProductVersion: '51.0.2692.0',
+     CompanyShortName: 'Google',
+     ProductShortName: 'Chrome',
+     LastChange: '21ad7445a7f1b2dfa2e8ee6475594b9037b3c7c8-refs/heads/master@{#383454}',
+     'Official Build': '1' } }
+```
+
 Detect Internet Explorer and Phantomjs, without version numbers:
 
-    win-detect-browsers --no-version ie phantomjs
-
-Return first found version of FF:
-
-    win-detect-browsers --lucky firefox
+```
+> win-detect-browsers --no-version ie phantomjs
+```
 
 ## API
 
