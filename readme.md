@@ -11,7 +11,7 @@ Returns the following information per browser:
 - **name**: lowercase name
 - **path**: absolute path to executable
 - **version**: version number (`major.minor.patch.revision`)
-- **channel**: channel name (Firefox only atm)
+- **channel**: channel name (Firefox and Opera only atm)
 - **info**: additional version info (see `--verbose` example below)
 
 ## about
