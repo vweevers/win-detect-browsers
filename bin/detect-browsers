@@ -13,11 +13,14 @@ detect(argv._, argv, function(err, browsers){
   if (err) throw err
 
   var duration = Date.now()-start
-  console.log('Found %d browsers in %dms', browsers.length, duration)
+  console.log('Found %d browsers in %dms\n', browsers.length, duration)
 
-  var format = "\n%s %s\n  @ %s"
+  var format = "%s %s%s\n  @ %s"
   browsers.forEach(function(b){
     if (argv.verbose) console.log(b)
-    else console.log(format, b.name, b.version || '', b.path)
+    else {
+      var channel = b.channel ? ' (' + b.channel + ')' : ''
+      console.log(format, b.name, b.version || '', channel, b.path)
+    }
   })
 })

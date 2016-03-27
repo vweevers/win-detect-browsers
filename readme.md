@@ -4,15 +4,23 @@
 
 [![npm status](http://img.shields.io/npm/v/win-detect-browsers.svg?style=flat-square)](https://www.npmjs.org/package/win-detect-browsers) [![Build status](https://img.shields.io/appveyor/ci/vweevers/win-detect-browsers.svg?style=flat-square)](https://ci.appveyor.com/project/vweevers/win-detect-browsers) [![Dependency Status](https://img.shields.io/david/vweevers/win-detect-browsers.svg?style=flat-square)](https://david-dm.org/vweevers/win-detect-browsers)
 
-[Command line](#command-line) / [API](#api) / [Changelog](#changelog) / [License](#license-and-credits)
+## info
 
-## About
+Returns the following information per browser:
+
+- **name**: lowercase name
+- **path**: absolute path to executable
+- **version**: version number (`major.minor.patch.revision`)
+- **channel**: channel name (Firefox only atm)
+- **info**: additional version info (see `--verbose` example below)
+
+## about
 
 Basically, browser detection on Windows can't be done right. This is the *try-everything-and-fail-silently* approach. It accounts for architecture differences, normalizes environment variables, tries default locations, searches the registry (in the HKLM and HKCU hives), checks [Start Menu Internet Applications](http://msdn.microsoft.com/en-us/library/windows/desktop/dd203067(v=vs.85).aspx) and looks in `PATH`. Version numbers are then read from the executable metadata.
 
 `browser-launcher` by substack has [poor Windows support](https://github.com/substack/browser-launcher/issues/7), and it prompted me to create this module. It is now used in [browser-launcher2](https://github.com/benderjs/browser-launcher2), an active fork of `browser-launcher`.
 
-## Command line
+## cli
 
 Install globally and run:
 
@@ -21,46 +29,36 @@ Install globally and run:
 
 Example output on Windows 8.1:
 
-    Found 13 browsers in 197ms
+```
+Found 13 browsers in 189ms
 
-    chrome 51.0.2675.0
-      @ C:\Users\vweevers\AppData\Local\Google\Chrome SxS\Application\chrome.exe
-
-    chrome 48.0.2564.116
-      @ C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
-
-    chromium 51.0.2676.0
-      @ C:\Users\vweevers\AppData\Local\Chromium\Application\chrome.exe
-
-    firefox 44.0.2.5884
-      @ C:\Program Files (x86)\Mozilla Firefox\firefox.exe
-
-    ie 11.0.9600.18124
-      @ C:\Program Files (x86)\Internet Explorer\iexplore.exe
-
-    ie 11.0.9600.18123
-      @ C:\Program Files\Internet Explorer\iexplore.exe
-
-    maxthon 4.9.1.1000
-      @ C:\Program Files (x86)\Maxthon\Bin\Maxthon.exe
-
-    yandex 47.0.2526.6796
-      @ C:\Users\vweevers\AppData\Local\Yandex\YandexBrowser\Application\browser.exe
-
-    phantomjs 1.9.8.0
-      @ D:\Projecten\GitHub\win-detect-browsers\node_modules\phantomjs\lib\phantom\phantomjs.exe
-
-    firefox 46.0.0.5903
-      @ C:\Program Files (x86)\Firefox Developer Edition\firefox.exe
-
-    opera 35.0.2066.92
-      @ D:\bin\Opera\Stable\Launcher.exe
-
-    opera 36.0.2130.29
-      @ D:\bin\Opera\Beta\Launcher.exe
-
-    opera 37.0.2163.0
-      @ D:\bin\Opera\Developer\Launcher.exe
+chrome 51.0.2692.0
+  @ C:\Users\vweevers\AppData\Local\Google\Chrome SxS\Application\chrome.exe
+chrome 49.0.2623.87
+  @ C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+chromium 51.0.2676.0
+  @ C:\Users\vweevers\AppData\Local\Chromium\Application\chrome.exe
+firefox 44.0.2.5884 (release)
+  @ C:\Program Files (x86)\Mozilla Firefox\firefox.exe
+firefox 46.0.0.5903 (developer)
+  @ C:\Program Files (x86)\Firefox Developer Edition\firefox.exe
+ie 11.0.9600.18124
+  @ C:\Program Files (x86)\Internet Explorer\iexplore.exe
+ie 11.0.9600.18123
+  @ C:\Program Files\Internet Explorer\iexplore.exe
+maxthon 4.9.1.1000
+  @ C:\Program Files (x86)\Maxthon\Bin\Maxthon.exe
+yandex 47.0.2526.6796
+  @ C:\Users\vweevers\AppData\Local\Yandex\YandexBrowser\Application\browser.exe
+phantomjs 1.9.8.0
+  @ D:\Projecten\GitHub\win-detect-browsers\node_modules\phantomjs\lib\phantom\phantomjs.exe
+opera 36.0.2130.32
+  @ D:\bin\Opera\Stable\Launcher.exe
+opera 36.0.2130.29
+  @ D:\bin\Opera\Beta\Launcher.exe
+opera 37.0.2171.0
+  @ D:\bin\Opera\Developer\Launcher.exe
+```
 
 Enable debug with `SET DEBUG=win-detect-browsers`.
 
