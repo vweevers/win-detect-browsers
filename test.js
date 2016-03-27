@@ -54,9 +54,11 @@ test('find cscript', function(t){
 })
 
 test('detect all', function(t){
-  t.plan(6)
+  t.plan(7)
 
-  detect(function(results){
+  detect(function(err, results){
+    t.ifError(err, 'no error')
+
     var names = results.map(function(b){ return b.name })
 
     t.ok(names.indexOf('chrome')>=0, 'found chrome')
@@ -71,7 +73,9 @@ test('detect all', function(t){
 })
 
 test('detect chrome', function(t){
-  detect('chrome', function(results){
+  detect('chrome', function(err, results){
+    t.ifError(err, 'no error')
+
     var names = results.filter(function(b){ return b.name === 'chrome' })
     t.equal(names.length, results.length, 'have names')
 
@@ -87,19 +91,12 @@ test('detect chrome', function(t){
   })
 })
 
-test('detect chrome without version', function(t){
-  t.plan(2)
-
-  detect('chrome', {version: false}, function(results){
-    t.equal(results[0].name, 'chrome', 'has name')
-    t.notOk(results[0].version, 'has no version')
-  })
-})
-
 test('detect chrome and firefox', function(t){
-  t.plan(3)
+  t.plan(4)
 
-  detect(['chrome', 'firefox'], function(results){
+  detect(['chrome', 'firefox'], function(err, results){
+    t.ifError(err, 'no error')
+
     var names = results.map(function(b){ return b.name })
 
     t.ok(names.indexOf('chrome')>=0, 'found chrome')
@@ -111,9 +108,11 @@ test('detect chrome and firefox', function(t){
 })
 
 test('detect first chrome and firefox', function(t){
-  t.plan(2)
+  t.plan(3)
 
-  detect(['chrome', 'firefox'], {lucky: true}, function(results){
+  detect(['chrome', 'firefox'], {lucky: true}, function(err, results){
+    t.ifError(err, 'no error')
+
     var names = results.map(function(b){ return b.name })
 
     names.sort()
@@ -124,9 +123,10 @@ test('detect first chrome and firefox', function(t){
 })
 
 ;(argv.operaversions ? test : test.skip)('detect all opera versions', function(t){
-  t.plan(2)
+  t.plan(3)
 
-  detect('opera', function(results){
+  detect('opera', function(err, results){
+    t.ifError(err, 'no error')
     t.equal(results.length, 3)
 
     var versions = results.map(function(b){ return b.version })
@@ -139,18 +139,20 @@ test('detect first chrome and firefox', function(t){
 })
 
 test('detect first opera version', function(t){
-  t.plan(1)
+  t.plan(2)
 
-  detect('opera', {lucky: true}, function(results){
+  detect('opera', {lucky: true}, function(err, results){
+    t.ifError(err, 'no error')
     var names = results.map(function(b){ return b.name })
     t.deepEqual(names, ['opera'])
   })
 })
 
 test('detect phantomjs', function(t){
-  t.plan(2)
+  t.plan(3)
 
-  detect('phantomjs', function(results){
+  detect('phantomjs', function(err, results){
+    t.ifError(err, 'no error')
     t.equal(results[0].name, 'phantomjs')
     t.ok(hasVersion(results[0]), 'has version')
   })
@@ -159,11 +161,12 @@ test('detect phantomjs', function(t){
 test('concurrency', function(t){
   var n = 5
 
-  t.plan(n*2)
+  t.plan(n*3)
   for(var i=n; i>0; i--) chrome()
 
   function chrome() {
-    detect('chrome', {lucky: true}, function(results){
+    detect('chrome', {lucky: true}, function(err, results){
+      t.ifError(err, 'no error')
       t.equal(results.length, 1)
       t.equal(results.filter(hasVersion).length, 1)
     })
@@ -180,8 +183,9 @@ test('no result', function(t){
     }
   }
 
-  t.plan(1)
-  detect({browsers: browsers}, function(results){
+  t.plan(2)
+  detect({browsers: browsers}, function(err, results){
+    t.ifError(err, 'no error')
     t.equal(results.length, 0)
   })
 })
@@ -196,10 +200,11 @@ test('no result asynchronicity', function(t){
     }
   }
 
-  t.plan(2)
+  t.plan(3)
 
   var async = false
-  detect({browsers: browsers}, function(results){
+  detect({browsers: browsers}, function(err, results){
+    t.ifError(err, 'no error')
     t.equal(results.length, 0)
     t.equal(async, true)
   })
@@ -208,9 +213,10 @@ test('no result asynchronicity', function(t){
 })
 
 test('local phantomjs tripping wmic', function(t){
-  t.plan(4)
+  t.plan(5)
   preparePhantom(function(browsers, fixture, ver){
-    detect('phantomjs', {browsers: browsers}, function(results){
+    detect('phantomjs', {browsers: browsers}, function(err, results){
+      t.ifError(err, 'no error')
       t.equal(results.length, 1)
       t.equal(results[0].name, 'phantomjs', 'has name')
       t.equal(path.normalize(results[0].path), fixture, 'has path')
@@ -228,7 +234,7 @@ function preparePhantom(done) {
     var fixture = path.join(dir, "phantomjs.exe")
     var phantomjs = require('phantomjs')
 
-    require('./lib/browsers').phantomjs.transform(phantomjs.path, function(resolved){
+    require('./lib/browsers').phantomjs.pre(phantomjs.path, function(resolved){
       if (!resolved || resolved.slice(-4).toLowerCase()!=='.exe') {
         throw new Error('Not an executable: '+resolved);
       }
