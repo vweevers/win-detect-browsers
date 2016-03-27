@@ -3,7 +3,6 @@ var Finder = require('./lib/finder')
   , debug = require('debug')('win-detect-browsers')
   , path = require('path')
   , regStream = require('./lib/reg-stream')
-  , getVersion = require('./lib/version-reader')
   , merge = require('merge-stream')
   , concat = require('concat-stream')
   , unique = require('unique-stream')
@@ -33,10 +32,6 @@ module.exports = function (names, opts, cb) {
   })).pipe(unique(function (b) {
     return b.path.toLowerCase()
   }))
-
-  if (opts.version) {
-    stream = stream.pipe(getVersion())
-  }
 
   stream.on('end', reg.end.bind(reg))
   if (cb) stream.pipe(concat(cb))
