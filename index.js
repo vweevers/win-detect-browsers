@@ -10,7 +10,6 @@ var Finder = require('./lib/finder')
 
 var defaults = {
   lucky: false,
-  version: true,
   browsers: require('./lib/browsers')
 }
 

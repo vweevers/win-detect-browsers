@@ -66,7 +66,7 @@ Enable debug with `SET DEBUG=win-detect-browsers`.
 
 ### examples
 
-Show all available info on Chrome:
+Show all available info on the first-found Chrome:
 
 ```
 > win-detect-browsers --verbose --lucky chrome
@@ -89,10 +89,10 @@ Found 1 browsers in 25ms
      'Official Build': '1' } }
 ```
 
-Detect Internet Explorer and Phantomjs, without version numbers:
+Detect Internet Explorer and Phantomjs:
 
 ```
-> win-detect-browsers --no-version ie phantomjs
+> win-detect-browsers ie phantomjs
 ```
 
 ## API
@@ -103,7 +103,6 @@ Detect Internet Explorer and Phantomjs, without version numbers:
 Where `names` is an array of browser names you want to find. If omitted, it will detect all browsers. Available `options` are:
 
 - `boolean lucky` whether to end the search for a browser after the first result. Note that this result is not consistent, because search is asynchronous. Defaults to `false`, meaning: find all versions.
-- `boolean version` whether to get version numbers, defaults to `true`.
 
 ## examples
 
@@ -120,13 +119,19 @@ detect().pipe(through2.obj(function(b, _, next){
 }))
 ```
 
-Detect only Chrome and IE, without version numbers:
+Detect only Chrome and IE, with a callback:
 
 ```js
-detect(['chrome', 'ie'], {version: false})
+detect(['chrome', 'ie'], function (browsers) {
+  // ..
+})
 ```
 
 ## Changelog
+
+### 3.0.0
+
+- Removed the `version` option.
 
 ### 2.0.0
 

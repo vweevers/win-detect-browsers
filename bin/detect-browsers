@@ -3,8 +3,7 @@
 var argv = require('yargs')
   .boolean('lucky').alias('l', 'lucky')
   .boolean('verbose')
-  .boolean('version').alias('v', 'version')
-  .default({ lucky : false, version : true, verbose: false })
+  .default({ lucky: false, verbose: false })
   .argv;
 
 var detect = require('../')
