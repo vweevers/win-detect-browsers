@@ -98,7 +98,7 @@ Detect Internet Explorer and Phantomjs:
 ## API
 
 - Streaming mode: `detect([names, options])` returns a readable stream.
-- Legacy callback mode: `detect([names, options,] cb)` calls `cb` with an array of results.
+- Error-first callback mode: `detect([names, options,] cb)` calls `cb` with an array of results.
 
 Where `names` is an array of browser names you want to find. If omitted, it will detect all browsers. Available `options` are:
 
@@ -119,11 +119,11 @@ detect().pipe(through2.obj(function(b, _, next){
 }))
 ```
 
-Detect only Chrome and IE, with a callback:
+Detect only Chrome and IE, using a callback:
 
 ```js
-detect(['chrome', 'ie'], function (browsers) {
-  // ..
+detect(['chrome', 'ie'], function (err, browsers) {
+  console.log(browsers)
 })
 ```
 
@@ -131,6 +131,7 @@ detect(['chrome', 'ie'], function (browsers) {
 
 ### 3.0.0
 
+- Error-first callbacks: please use `cb(err, browsers)` instead of `cb(browsers)`
 - Removed the `version` option.
 
 ### 2.0.0

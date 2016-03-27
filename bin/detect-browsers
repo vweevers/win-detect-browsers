@@ -9,7 +9,9 @@ var argv = require('yargs')
 var detect = require('../')
   , start  = Date.now()
 
-detect(argv._, argv, function(browsers){
+detect(argv._, argv, function(err, browsers){
+  if (err) throw err
+
   var duration = Date.now()-start
   console.log('Found %d browsers in %dms', browsers.length, duration)
 

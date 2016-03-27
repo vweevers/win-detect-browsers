@@ -33,7 +33,17 @@ module.exports = function (names, opts, cb) {
   }))
 
   stream.on('end', reg.end.bind(reg))
-  if (cb) stream.pipe(concat(cb))
+
+  if (cb) {
+    var finished = 0
+    var wrapped = function(err, browsers) {
+      if (finished++) return
+      cb(err, browsers)
+    }
+
+    stream.once('error', wrapped)
+    stream.pipe(concat(wrapped.bind(null, null)))
+  }
 
   return stream;
 }
