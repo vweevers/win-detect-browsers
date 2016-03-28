@@ -20,9 +20,10 @@ platform:
 
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
-  - cinst Firefox -y
-  - cinst GoogleChrome -y
+  # - cinst Firefox -y
+  # - cinst GoogleChrome -y
   - cinst Opera -y
+  - npm -g i npm@latest
   - npm i
 
 test_script:

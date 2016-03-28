@@ -15,11 +15,7 @@ process.stderr.setMaxListeners(100)
 
 var test = require('tape')
   , detect = require('./')
-  , cp = require('cp')
-  , existent = require('existent')
   , path = require('path')
-  , tmpdir = require('os').tmpdir()
-  , mkdirp = require('mkdirp')
   , compareVersion = require('compare-version')
 
 var argv = require('yargs')
@@ -211,55 +207,6 @@ test('no result asynchronicity', function(t){
 
   async = true;
 })
-
-test('local phantomjs tripping wmic', function(t){
-  t.plan(5)
-  preparePhantom(function(browsers, fixture, ver){
-    detect('phantomjs', {browsers: browsers}, function(err, results){
-      t.ifError(err, 'no error')
-      t.equal(results.length, 1)
-      t.equal(results[0].name, 'phantomjs', 'has name')
-      t.equal(path.normalize(results[0].path), fixture, 'has path')
-      t.equal(compareVersion(results[0].version, ver), 0, results[0].version+' == '+ver)
-    })
-  });
-})
-
-function preparePhantom(done) {
-  var dir = path.resolve(tmpdir, "win-detect-browsers/&@,#$%!~`;'.-_=+[]{}()^");
-
-  mkdirp(dir, function(err){
-    if (err) throw err;
-
-    var fixture = path.join(dir, "phantomjs.exe")
-    var phantomjs = require('phantomjs')
-
-    require('./lib/browsers').phantomjs.pre(phantomjs.path, function(resolved){
-      if (!resolved || resolved.slice(-4).toLowerCase()!=='.exe') {
-        throw new Error('Not an executable: '+resolved);
-      }
-
-      var browsers = {
-        phantomjs: {
-          bin: 'phantomjs',
-          find: function() {
-            this.file(null, fixture, 'fixture')
-          }
-        }
-      }
-
-      var end = function(err) {
-        if (err) throw err;
-        done(browsers, path.normalize(fixture), phantomjs.version);
-      }
-
-      existent(fixture, function(err){
-        if (!err) end()
-        else cp(resolved, fixture, end)
-      })
-    })
-  });
-}
 
 function hasVersion(b){
   return b.version && b.version.match(/[\d\.]+/)

@@ -25,9 +25,7 @@
   },
   "devDependencies": {
     "compare-version": "~0.1.2",
-    "cp": "~0.2.0",
-    "mkdirp": "~0.5.0",
-    "phantomjs": "^1.9.12",
+    "phantomjs-prebuilt": "~2.1.7",
     "tape": "~4.5.1"
   },
   "scripts": {
