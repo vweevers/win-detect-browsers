@@ -10,9 +10,10 @@ skip_commits:
 
 environment:
   matrix:
-    - nodejs_version: "0.10"
     - nodejs_version: "4"
     - nodejs_version: "5"
+    - nodejs_version: "6"
+    - nodejs_version: "7"
 
 platform:
   - x86
@@ -20,8 +21,6 @@ platform:
 
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
-  # - cinst Firefox -y
-  # - cinst GoogleChrome -y
   - cinst Opera -y
   - npm -g i npm@latest
   - npm i
