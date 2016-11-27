@@ -27,7 +27,6 @@
   },
   "devDependencies": {
     "compare-version": "~0.1.2",
-    "phantomjs-prebuilt": "~2.1.13",
     "tape": "~4.6.3"
   },
   "scripts": {

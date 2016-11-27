@@ -52,7 +52,7 @@ test('find cscript', function(t){
 })
 
 test('detect all', function(t){
-  t.plan(7)
+  t.plan(6)
 
   detect(function(err, results){
     t.ifError(err, 'no error')
@@ -63,7 +63,6 @@ test('detect all', function(t){
     t.ok(names.indexOf('firefox')>=0, 'found firefox')
     t.ok(names.indexOf('ie')>=0, 'found ie')
     t.ok(names.indexOf('opera')>=0, 'found opera')
-    t.ok(names.indexOf('phantomjs')>=0, 'found phantomjs')
 
     var len = results.filter(hasVersion).length
     t.equal(len, results.length, 'have version numbers')
@@ -146,7 +145,7 @@ test('detect first opera version', function(t){
   })
 })
 
-test('detect phantomjs', function(t){
+test.skip('detect phantomjs', function(t){
   t.plan(3)
 
   detect('phantomjs', function(err, results){
