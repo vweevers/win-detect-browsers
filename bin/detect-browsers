@@ -1,26 +1,73 @@
 #!/usr/bin/env node
 
 var argv = require('yargs')
+  .boolean('json').alias('j')
+  .boolean('summary')
   .boolean('lucky').alias('l', 'lucky')
-  .boolean('verbose')
-  .default({ lucky: false, verbose: false })
+  .boolean('color')
+  .default({
+    lucky: false,
+    json: false,
+    summary: false,
+    color: true
+  })
   .argv;
 
 var detect = require('../')
+  , inspect = require('util').inspect
   , start  = Date.now()
 
-detect(argv._, argv, function(err, browsers){
+detect(argv._, argv, function (err, browsers, methods) {
   if (err) throw err
 
-  var duration = Date.now()-start
-  console.log('Found %d browsers in %dms\n', browsers.length, duration)
+  if (argv.json) {
+    if (argv.summary) browsers = browsers.map(b => {
+      const { name, version, channel, bitness, path } = b
+      return { name, version, channel, bitness, path }
+    })
 
-  var format = "%s %s%s\n  @ %s"
-  browsers.forEach(function(b){
-    if (argv.verbose) console.log(b)
-    else {
-      var channel = b.channel ? ' (' + b.channel + ')' : ''
-      console.log(format, b.name, b.version || '', channel, b.path)
+    return console.log(JSON.stringify(browsers, null, 2))
+  }
+
+  var duration = Date.now() - start
+
+  browsers.forEach(function print (b) {
+    if (argv.summary) {
+      var version = b.version || '', extra = []
+
+      if (b.channel) extra.push(b.channel)
+      if (b.bitness === 64) extra.push('64-bit')
+      if (b.bitness === 32) extra.push('32-bit')
+      if (extra.length) version+= ' (' + extra.join(' ') + ')'
+
+      console.log('%s %s\n  @ %s', b.name, version, b.path)
+    } else {
+      console.log(inspect(ordered(b), { colors: !!argv.color, depth: null }))
     }
   })
+
+  if (browsers.length) console.log()
+  console.log('Found %d browsers in %d ways within %dms.', browsers.length, methods, duration)
 })
+
+function ordered (a) {
+  const b = {}, remaining = new Set(Object.keys(a)), objects = []
+
+  for(let k of ['name', 'version', 'path', 'channel', 'bitness']) {
+    if (k in a) {
+      b[k] = a[k]
+      remaining.delete(k)
+    }
+  }
+
+  for(let k of remaining) {
+    if (typeof a[k] === 'object') objects.push(k)
+    else b[k] = a[k]
+  }
+
+  for(let k of objects) {
+    b[k] = a[k]
+  }
+
+  return b
+}
