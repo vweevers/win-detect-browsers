@@ -1,11 +1,10 @@
 'use strict';
 
-var Finder = require('./lib/finder')
-  , xtend = require('xtend')
-  , debug = require('debug')('win-detect-browsers')
-  , path = require('path')
-  , registry = require('./lib/reg-stream')
-  , after = require('after')
+const Finder = require('./lib/finder')
+    , xtend = require('xtend')
+    , debug = require('debug')('win-detect-browsers')
+    , registry = require('./lib/reg-stream')
+    , after = require('after')
 
   // TODO: remove these deps after reg-stream is gone
   // , merge = require('merge-stream')
@@ -13,7 +12,7 @@ var Finder = require('./lib/finder')
   // , unique = require('unique-stream')
   // , through2 = require('through2')
 
-var defaults = {
+const DEFAULTS = {
   lucky: false,
   browsers: require('./lib/browsers')
 }
@@ -22,8 +21,8 @@ module.exports = function detect (names, opts, done) {
   if (typeof names == 'string') names = [names]
   else if (!Array.isArray(names)) done = opts, opts = names, names = null
 
-  if (typeof opts == 'function') done = opts, opts = xtend(defaults)
-  else opts = xtend(defaults, opts)
+  if (typeof opts == 'function') done = opts, opts = xtend(DEFAULTS)
+  else opts = xtend(DEFAULTS, opts)
 
   if (!names || !names.length) {
     names = Object.keys(opts.browsers)
