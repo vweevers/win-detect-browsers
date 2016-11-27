@@ -1,3 +1,5 @@
+'use strict';
+
 var Finder = require('./lib/finder')
   , xtend = require('xtend')
   , debug = require('debug')('win-detect-browsers')

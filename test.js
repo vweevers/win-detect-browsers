@@ -1,3 +1,5 @@
+'use strict';
+
 // Requirements to run tests:
 //
 // - Chrome
