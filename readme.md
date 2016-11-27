@@ -7,7 +7,7 @@ Returns the following information per browser:
 - **name**: `chrome`, `chromium`, `firefox`, `phantomjs`, `ie`, `safari`, `opera`, `maxthon` or `yandex`.
 - **path**: absolute path to executable
 - **version**: version number (`major.minor.patch.revision`)
-- **channel**:
+- **channel** (opt-in):
   - Chrome: `stable`, `canary`, `beta` or `dev`
   - Firefox: `release`, `developer` or `nightly`
   - Older versions of Firefox: `release`, `aurora`, `beta` or `rc`
@@ -20,7 +20,9 @@ Returns the following information per browser:
 
 > **Usage changed in 3.0.0. Please read [the changelog](#300).**
 
-`names` is an array of browser names you want to find. If omitted, it will detect all browsers. The `callback` receives an error (if any) and a result array.
+`names` is an array of browser names you want to find. If omitted, it will detect all browsers. The `callback` receives an error (if any) and a result array. Options:
+
+- **channels**: include the `channel` property (Chrome, Firefox and Opera).
 
 Detect *[everything](http://youtu.be/k1yvvNvlXtg)*:
 
