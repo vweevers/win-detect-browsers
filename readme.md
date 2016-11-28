@@ -1,47 +1,44 @@
 # win-detect-browsers
 
-**Fast browser detection on Windows. Detects installed versions of Chrome, Chromium, Firefox, PhantomJS (local and global), Internet Explorer, Safari, Opera, Maxthon and Yandex.**
+**Fast browser detection on Windows. Detects installed versions of Chrome, Chromium, Firefox, PhantomJS, Internet Explorer, Safari, Opera, Maxthon and Yandex.**
 
-Returns the following information per browser:
+[![npm status](http://img.shields.io/npm/v/win-detect-browsers.svg?style=flat-square)](https://www.npmjs.org/package/win-detect-browsers) [![Build status](https://img.shields.io/appveyor/ci/vweevers/win-detect-browsers.svg?style=flat-square)](https://ci.appveyor.com/project/vweevers/win-detect-browsers) [![Dependency Status](https://img.shields.io/david/vweevers/win-detect-browsers.svg?style=flat-square)](https://david-dm.org/vweevers/win-detect-browsers)
+
+## example
+
+```js
+const detect = require('win-detect-browsers')
+
+// All browsers
+detect(function (err, browsers) {
+  if (err) throw err
+  console.log(browsers)
+})
+
+// Chrome and Firefox with channel info
+detect(['chrome', 'firefox'], { channels: true }, function (err, browsers) {
+  for(let b of browsers) {
+    console.log(b.version) // '57.0.2931.0'
+    console.log(b.channel) // 'canary'
+  }
+})
+```
+
+## `detect([names, options],  callback)`
+
+> **Usage changed in 3.0.0. Please read [the changelog](#300).**
+
+`names` is an array of browser names you want to find. If omitted or empty, it will detect *[everything](http://youtu.be/k1yvvNvlXtg)*. You can differentiate release channels by setting `options.channels` to true. The `callback` receives an error (if any) and an array of `results`. Each `result` contains:
 
 - **name**: `chrome`, `chromium`, `firefox`, `phantomjs`, `ie`, `safari`, `opera`, `maxthon` or `yandex`.
 - **path**: absolute path to executable
-- **version**: version number (`major.minor.patch.revision`)
+- **version**
 - **channel** (opt-in):
   - Chrome: `stable`, `canary`, `beta` or `dev`
   - Firefox: `release`, `developer` or `nightly`
   - Older versions of Firefox: `release`, `aurora`, `beta` or `rc`
   - Opera: `stable`, `beta` or `developer`
-- **info**: additional version info (see [cli example](#cli)).
-
-[![npm status](http://img.shields.io/npm/v/win-detect-browsers.svg?style=flat-square)](https://www.npmjs.org/package/win-detect-browsers) [![Build status](https://img.shields.io/appveyor/ci/vweevers/win-detect-browsers.svg?style=flat-square)](https://ci.appveyor.com/project/vweevers/win-detect-browsers) [![Dependency Status](https://img.shields.io/david/vweevers/win-detect-browsers.svg?style=flat-square)](https://david-dm.org/vweevers/win-detect-browsers)
-
-## api: `detect([names, options],  callback)`
-
-> **Usage changed in 3.0.0. Please read [the changelog](#300).**
-
-`names` is an array of browser names you want to find. If omitted, it will detect all browsers. The `callback` receives an error (if any) and a result array. Options:
-
-- **channels**: include the `channel` property (Chrome, Firefox and Opera).
-
-Detect *[everything](http://youtu.be/k1yvvNvlXtg)*:
-
-```js
-const detect = require('win-detect-browsers')
-
-detect(function (err, browsers) {
-  if (err) throw err
-  console.log(browsers)
-})
-```
-
-Detect only Chrome and Internet Explorer:
-
-```js
-detect(['chrome', 'ie'], function (err, browsers) {
-  console.log(browsers)
-})
-```
+- **info**: additional version info (see [cli example](#cli) below).
 
 ## cli
 
@@ -103,4 +100,4 @@ Browser detection on Windows can't be done right. This is the *try-everything-an
 
 ## license
 
-[MIT](http://opensource.org/licenses/MIT) © [Vincent Weevers](http://vincentweevers.nl).
+[MIT](http://opensource.org/licenses/MIT) © Vincent Weevers.
