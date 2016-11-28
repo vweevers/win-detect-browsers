@@ -24,7 +24,7 @@ detect(['chrome', 'firefox'], { channels: true }, function (err, browsers) {
 })
 ```
 
-## `detect([names, options],  callback)`
+## `detect([names], [options], callback)`
 
 > **Usage changed in 3.0.0. Please read [the changelog](#300).**
 
