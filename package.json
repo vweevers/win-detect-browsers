@@ -1,9 +1,20 @@
 {
   "name": "win-detect-browsers",
   "version": "2.1.0",
-  "bin": "./bin/detect-browsers",
   "description": "Fast browser detection on Windows",
+  "author": "Vincent Weevers",
+  "license": "MIT",
   "main": "index.js",
+  "bin": "./bin/detect-browsers",
+  "files": [
+    "bin",
+    "lib",
+    "index.js"
+  ],
+  "scripts": {
+    "test": "node test.js",
+    "build": "jscriptify -c lib/reg-stream main.js -o main-dist.js"
+  },
   "dependencies": {
     "after": "~0.8.2",
     "concat-stream": "~1.5.2",
@@ -25,31 +36,35 @@
     "xtend": "^4.0.0",
     "yargs": "~4.2.0"
   },
+  "optionalDependencies": {
+    "win-version-info": "~1.0.1"
+  },
   "devDependencies": {
     "compare-version": "~0.1.2",
     "tape": "~4.6.3"
   },
-  "scripts": {
-    "test": "node test.js",
-    "bundle-reg": "jscriptify -c lib/reg-stream main.js -o main-dist.js",
-    "build": "npm run bundle-reg"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/vweevers/win-detect-browsers"
-  },
+  "repository": "vweevers/win-detect-browsers",
+  "bugs": "https://github.com/vweevers/win-detect-browsers/issues",
+  "homepage": "https://github.com/vweevers/win-detect-browsers",
   "keywords": [
     "browser",
+    "browsers",
     "detect",
-    "windows"
+    "windows",
+    "chrome",
+    "chromium",
+    "canary",
+    "firefox",
+    "phantomjs",
+    "ie",
+    "internet-explorer",
+    "safari",
+    "opera",
+    "maxthon",
+    "yandex"
   ],
-  "author": "Vincent Weevers",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vweevers/win-detect-browsers/issues"
-  },
-  "homepage": "https://github.com/vweevers/win-detect-browsers",
-  "optionalDependencies": {
-    "win-version-info": "~1.0.1"
+  "engines": {
+    "node": ">=4.0.0",
+    "npm": ">=2.0.0"
   }
 }
