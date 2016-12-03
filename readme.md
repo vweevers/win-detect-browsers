@@ -35,8 +35,8 @@ detect(['chrome', 'firefox'], { channel: true }, function (err, browsers) {
 - **version**
 - **channel** (opt-in):
   - Chrome: `stable`, `canary`, `beta` or `dev`
-  - Firefox: `release`, `developer` or `nightly`
-  - Older versions of Firefox: `release`, `aurora`, `beta` or `rc`
+  - Firefox: `release`, `developer`, `nightly` or [`esr`](https://www.mozilla.org/en-US/firefox/organizations/faq/)
+  - Older versions of Firefox: `aurora`, `beta` or `rc`
   - Opera: `stable`, `beta` or `developer`
 - **info**: additional version info (see [cli example](#cli) below).
 
