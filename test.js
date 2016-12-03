@@ -5,13 +5,12 @@
 // - Chrome
 // - Firefox
 // - IE
-// - Opera Stable, Beta and Developer
 //
-// If only Opera Stable is installed, run
-// test with `--no-operaversions`
+// Opt-in functional tests:
 //
-// If both Chrome stable and Chrome Canary
-// are installed, run test with `--canary`
+// --opera: Opera Stable, Beta and Developer
+// --phantomjs
+// --canary
 
 process.stderr.setMaxListeners(100)
 
@@ -21,9 +20,9 @@ var test = require('tape')
   , compareVersion = require('compare-version')
 
 var argv = require('yargs')
-  .boolean('operaversions')
+  .boolean('opera')
   .boolean('canary')
-  .default({ operaversions : true, canary: false })
+  .boolean('phantomjs')
   .argv;
 
 test('find cscript', function(t){
@@ -119,7 +118,7 @@ test('detect first chrome and firefox', function(t){
   })
 })
 
-;(argv.operaversions ? test : test.skip)('detect all opera versions', function(t){
+;(argv.opera ? test : test.skip)('detect all opera versions', function (t) {
   t.plan(3)
 
   detect('opera', function(err, results){
@@ -135,17 +134,7 @@ test('detect first chrome and firefox', function(t){
   })
 })
 
-test('detect first opera version', function(t){
-  t.plan(2)
-
-  detect('opera', {lucky: true}, function(err, results){
-    t.ifError(err, 'no error')
-    var names = results.map(function(b){ return b.name })
-    t.deepEqual(names, ['opera'])
-  })
-})
-
-test.skip('detect phantomjs', function(t){
+;(argv.phantomjs ? test : test.skip)('detect phantomjs', function (t) {
   t.plan(3)
 
   detect('phantomjs', function(err, results){

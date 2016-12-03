@@ -21,10 +21,9 @@ platform:
 
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
-  - cinst Opera -y
   - npm -g i npm@latest
   - npm i
 
 test_script:
   - set DEBUG=win-detect-browsers
-  - node test.js --no-operaversions
+  - npm t
