@@ -74,16 +74,17 @@ Detect Internet Explorer and Phantomjs, or output JSON:
 - Remove the `version` option;
 - Undocument the `lucky` option: it can have surprising results. Kept for development.
 
-**New features:**
+**User features:**
 
-- Add a `channel` property for Chrome, Firefox and Opera;
-- Additional version info (like `ProductName`) for all browsers.
-
-**Bugfixes and other improvements:**
-
+- Add a `channel` property for Chrome, Firefox and Opera
+- Additional version info (like `ProductName`) for all browsers
 - Support `phantomjs-prebuilt` (2.x) as well as `phantomjs` (1.x);
 - Performance win: the native [win-version-info](https://www.npmjs.org/package/win-version-info) addon replaces the `cscript` child process.
-- Rewrite the registry reader in JScript, with a JSON transport between Node.js and [Windows Script Host](https://en.wikipedia.org/wiki/Windows_Script_Host)
+
+**Developer features:**
+
+- Modularize ([#26](https://github.com/vweevers/win-detect-browsers/issues/26));
+- Rewrite the registry reader in JScript, with a JSON transport between Node.js and [Windows Script Host](https://en.wikipedia.org/wiki/Windows_Script_Host).
 
 ### 2.0.0
 
