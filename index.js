@@ -14,7 +14,7 @@ const Finder = require('./lib/finder')
 
 const DEFAULTS = {
   lucky: false,
-  channels: false,
+  channel: false,
   browsers: require('./lib/browsers')
 }
 

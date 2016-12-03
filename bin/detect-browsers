@@ -5,11 +5,11 @@ var argv = require('yargs')
   .boolean('json').alias('j')
   .boolean('summary')
   .boolean('lucky').alias('l', 'lucky')
-  .boolean('channels').alias('c')
+  .boolean('channel').alias('c')
   .boolean('color')
   .default({
     lucky: false,
-    channels: false,
+    channel: false,
     json: false,
     summary: false,
     color: true

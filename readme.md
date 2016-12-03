@@ -16,7 +16,7 @@ detect(function (err, browsers) {
 })
 
 // Chrome and Firefox with channel info
-detect(['chrome', 'firefox'], { channels: true }, function (err, browsers) {
+detect(['chrome', 'firefox'], { channel: true }, function (err, browsers) {
   for(let b of browsers) {
     console.log(b.version) // '57.0.2931.0'
     console.log(b.channel) // 'canary'
@@ -28,7 +28,7 @@ detect(['chrome', 'firefox'], { channels: true }, function (err, browsers) {
 
 > **Usage changed in 3.0.0. Please read [the changelog](#300).**
 
-`names` is an array of browser names you want to find. If omitted or empty, it will detect *[everything](http://youtu.be/k1yvvNvlXtg)*. You can differentiate release channels by setting `options.channels` to true. The `callback` receives an error (if any) and an array of `results`. Each `result` contains:
+`names` is an array of browser names you want to find. If omitted or empty, it will detect *[everything](http://youtu.be/k1yvvNvlXtg)*. You can differentiate release channels by setting `options.channel` to true. The `callback` receives an error (if any) and an array of `results`. Each `result` contains:
 
 - **name**: `chrome`, `chromium`, `firefox`, `phantomjs`, `ie`, `safari`, `opera`, `maxthon` or `yandex`.
 - **path**: absolute path to executable
