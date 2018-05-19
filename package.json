@@ -18,7 +18,6 @@
     "after": "~0.8.2",
     "debug": "~2.3.3",
     "existent": "~1.0.1",
-    "registry-js": "~1.0.7",
     "resolve": "~1.1.7",
     "which": "~1.2.12",
     "windows-env": "~1.0.1",
@@ -26,6 +25,7 @@
     "yargs": "~4.2.0"
   },
   "optionalDependencies": {
+    "registry-js": "~1.0.7",
     "win-version-info": "~1.0.1"
   },
   "devDependencies": {
