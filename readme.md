@@ -101,6 +101,15 @@ opera 53.0.2907.31 (beta)
 Found 8 browsers in 25 ways within 94ms.
 ```
 
+Detect Internet Explorer and Phantomjs, or print a JSON summary:
+
+```
+win-detect-browsers ie phantomjs
+win-detect-browsers -js
+```
+
+Debug output can be enabled with `SET DEBUG=win-detect-browsers`.
+
 Full output with `-j` or `--json`:
 
 <details><summary>Click to expand</summary>
@@ -267,15 +276,6 @@ Full output with `-j` or `--json`:
 ]
 </pre></code>
 </details>
-
-Detect Internet Explorer and Phantomjs, or print a JSON summary:
-
-```
-> win-detect-browsers ie phantomjs
-> win-detect-browsers -js
-```
-
-Debug output can be enabled with `SET DEBUG=win-detect-browsers`.
 
 ## Changelog
 
