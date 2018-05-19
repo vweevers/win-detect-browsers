@@ -283,13 +283,13 @@ Full output with `-j` or `--json`:
 
 ### 3.0.0
 
-### Changed
+#### Changed
 
 - Error-first callback: `cb(err, browsers)` instead of `cb(browsers)`
 - Remove streams: with new metadata being discovered via multiple avenues, results have to be merged before we can emit something;
 - More than 2x faster by using native modules: [registry-js](https://www.npmjs.com/package/registry-js) to read the Windows Registry and [win-version-info](https://www.npmjs.org/package/win-version-info) to read executable metadata. No longer spawns child processes.
 
-### Added
+#### Added
 
 - Add Node 6, 8, 9, 10
 - Add release channel info for Chrome, Firefox and Opera
@@ -299,7 +299,7 @@ Full output with `-j` or `--json`:
 - Add Firefox Developer Edition default location;
 - Add Firefox Nightly default location.
 
-### Removed
+#### Removed
 
 - Drop Node 0.10, 4, 5
 - Drop XP and Vista
