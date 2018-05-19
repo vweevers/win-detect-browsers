@@ -24,34 +24,34 @@ var detect = require('../')
 detect(argv._, argv, function (err, browsers, methods) {
   if (err) throw err
 
+  var duration = Date.now() - start
+
   if (argv.json) {
     if (argv.summary) browsers = browsers.map(b => {
       const { name, version, channel, bitness, path } = b
       return { name, version, channel, bitness, path }
     })
 
-    return console.log(JSON.stringify(browsers, null, 2))
+    console.log(JSON.stringify(browsers, null, 2))
+  } else {
+    browsers.forEach(function print (b) {
+      if (argv.summary) {
+        var version = b.version || '', extra = []
+
+        if (b.channel) extra.push(b.channel)
+        if (b.bitness === 64) extra.push('64-bit')
+        if (b.bitness === 32) extra.push('32-bit')
+        if (extra.length) version+= ' (' + extra.join(' ') + ')'
+
+        console.log('%s %s\n  @ %s', b.name, version, b.path)
+      } else {
+        console.log(inspect(ordered(b), { colors: !!argv.color, depth: null }))
+      }
+    })
   }
 
-  var duration = Date.now() - start
-
-  browsers.forEach(function print (b) {
-    if (argv.summary) {
-      var version = b.version || '', extra = []
-
-      if (b.channel) extra.push(b.channel)
-      if (b.bitness === 64) extra.push('64-bit')
-      if (b.bitness === 32) extra.push('32-bit')
-      if (extra.length) version+= ' (' + extra.join(' ') + ')'
-
-      console.log('%s %s\n  @ %s', b.name, version, b.path)
-    } else {
-      console.log(inspect(ordered(b), { colors: !!argv.color, depth: null }))
-    }
-  })
-
-  if (browsers.length) console.log()
-  console.log('Found %d browsers in %d ways within %dms.', browsers.length, methods, duration)
+  if (browsers.length) console.error()
+  console.error('Found %d browsers in %d ways within %dms.', browsers.length, methods, duration)
 })
 
 function ordered (a) {
