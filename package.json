@@ -12,27 +12,18 @@
     "index.js"
   ],
   "scripts": {
-    "test": "node test.js",
-    "build": "jscriptify -c lib/reg-stream main.js -o main-dist.js"
+    "test": "node test.js"
   },
   "dependencies": {
     "after": "~0.8.2",
-    "concat-stream": "~1.5.2",
     "debug": "~2.3.3",
-    "duplexify": "~3.5.0",
     "existent": "~1.0.1",
-    "jscript": "~1.0.0",
-    "json-stream": "~1.0.0",
-    "json3": "~3.3.2",
-    "merge-stream": "~1.0.1",
+    "registry-js": "~1.0.7",
     "resolve": "~1.1.7",
-    "through2": "~2.0.1",
-    "unique-stream": "~2.2.1",
     "which": "~1.2.12",
     "win-version-info": "~1.0.1",
     "windows-bin": "~1.0.0",
     "windows-env": "~1.0.1",
-    "wmi-errors": "~1.0.1",
     "xtend": "^4.0.0",
     "yargs": "~4.2.0"
   },

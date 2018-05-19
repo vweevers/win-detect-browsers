@@ -3,7 +3,6 @@
 const Finder = require('./lib/finder')
     , xtend = require('xtend')
     , debug = require('debug')('win-detect-browsers')
-    , registry = require('./lib/reg-stream')
     , after = require('after')
 
   // TODO: remove these deps after reg-stream is gone
@@ -29,8 +28,7 @@ module.exports = function detect (names, opts, done) {
     names = Object.keys(opts.browsers)
   }
 
-  const reg = registry()
-      , result = []
+  const result = []
       , next = after(names.length, finish)
 
   // For debugging: count the number
@@ -41,7 +39,7 @@ module.exports = function detect (names, opts, done) {
     const browser = opts.browsers[name]
     if (!browser) throw new Error('No such browser is defined: ' + name)
 
-    const f = new Finder(name, browser, reg, opts)
+    const f = new Finder(name, browser, opts)
 
     f.on('error', next).on('end', (res, methods) => {
       for(let b of res.values()) result.push(b)
@@ -51,8 +49,6 @@ module.exports = function detect (names, opts, done) {
   })
 
   function finish (err) {
-    reg.end()
-
     if (err) done(err)
     else done(err, result, totalMethods)
   }
