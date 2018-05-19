@@ -1,17 +1,10 @@
-version: 1.0.{build}
-skip_tags: true
-shallow_clone: true
+version: "{build}"
 build: off
-deploy: off
-
-skip_commits:
-  # Skip stable release commits
-  message: /^ *v? *\d+\.\d+\.\d+ *$/
+skip_tags: false
 
 environment:
   matrix:
     - nodejs_version: "6"
-    - nodejs_version: "7"
     - nodejs_version: "8"
     - nodejs_version: "9"
     - nodejs_version: "10"
@@ -22,7 +15,7 @@ platform:
 
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
-  - npm -g i npm@latest
+  - set PATH=%APPDATA%\npm;%APPVEYOR_BUILD_FOLDER%\node_modules\.bin;%PATH%
   - npm i
 
 test_script:
