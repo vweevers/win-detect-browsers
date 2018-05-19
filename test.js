@@ -104,7 +104,8 @@ test('detect chrome and firefox', function (t) {
   })
 })
 
-test('detect first chrome and firefox', function (t) {
+// TODO: lucky option is removed
+test.skip('detect first chrome and firefox', function (t) {
   t.plan(3)
 
   detect(['chrome', 'firefox'], { lucky: true }, function (err, results) {

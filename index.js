@@ -6,7 +6,6 @@ const Finder = require('./lib/finder')
     , after = require('after')
 
 const DEFAULTS = {
-  lucky: false,
   browsers: require('./lib/browsers')
 }
 
