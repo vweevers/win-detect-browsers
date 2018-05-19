@@ -1,16 +1,21 @@
 #!/usr/bin/env node
-'use strict';
+'use strict'
 
 var argv = require('yargs')
-  .boolean('json').alias('j')
+  .boolean('json')
   .boolean('summary')
   .boolean('color')
+  .alias({
+    json: 'j',
+    summary: 's',
+    color: 'c'
+  })
   .default({
     json: false,
     summary: false,
     color: true
   })
-  .argv;
+  .argv
 
 var detect = require('../')
   , inspect = require('util').inspect
