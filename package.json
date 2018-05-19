@@ -21,7 +21,6 @@
     "registry-js": "~1.0.7",
     "resolve": "~1.1.7",
     "which": "~1.2.12",
-    "windows-bin": "~1.0.0",
     "windows-env": "~1.0.1",
     "xtend": "^4.0.0",
     "yargs": "~4.2.0"

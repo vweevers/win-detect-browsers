@@ -5,15 +5,8 @@ const Finder = require('./lib/finder')
     , debug = require('debug')('win-detect-browsers')
     , after = require('after')
 
-  // TODO: remove these deps after reg-stream is gone
-  // , merge = require('merge-stream')
-  // , concat = require('concat-stream')
-  // , unique = require('unique-stream')
-  // , through2 = require('through2')
-
 const DEFAULTS = {
   lucky: false,
-  channel: false,
   browsers: require('./lib/browsers')
 }
 
