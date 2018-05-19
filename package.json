@@ -30,7 +30,8 @@
   },
   "devDependencies": {
     "compare-version": "~0.1.2",
-    "tape": "~4.6.3"
+    "tape": "~4.6.3",
+    "win-dummy-exe": "0.0.1"
   },
   "repository": "vweevers/win-detect-browsers",
   "bugs": "https://github.com/vweevers/win-detect-browsers/issues",
