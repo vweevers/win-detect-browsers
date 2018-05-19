@@ -113,7 +113,8 @@ Debug output can be enabled with `SET DEBUG=win-detect-browsers`.
 Full output with `-j` or `--json`:
 
 <details><summary>Click to expand</summary>
-<code><pre>
+
+```json
 [
   {
     "name": "chrome",
@@ -274,7 +275,8 @@ Full output with `-j` or `--json`:
     "channel": "nightly"
   }
 ]
-</pre></code>
+```
+
 </details>
 
 ## Changelog
