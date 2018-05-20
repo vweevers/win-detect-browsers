@@ -332,8 +332,8 @@ On Windows 10 with `--json`:
 With [npm](https://npmjs.org) do:
 
 ```bash
-npm install win-version-info     # For API
-npm install win-version-info -g  # For CLI
+npm install win-detect-browsers     # For API
+npm install win-detect-browsers -g  # For CLI
 ```
 
 ## Changelog
