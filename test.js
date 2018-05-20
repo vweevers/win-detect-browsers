@@ -138,6 +138,7 @@ test('find methods', function (t) {
           name: 'methods_test',
           path: exe,
           version: '1.0.0.0',
+          arch: 'i386',
           info: {
             FileVersion: '1.0.0.0',
             InternalName: 'dummy.exe',
@@ -193,6 +194,7 @@ test('prefers FileVersion over ProductVersion', function (t) {
             name: 'test',
             path: exe1,
             version: '1.2.3.4',
+            arch: 'i386',
             info: {
               FileVersion: '1.2.3.4',
               InternalName: 'dummy.exe',
@@ -204,6 +206,7 @@ test('prefers FileVersion over ProductVersion', function (t) {
             name: 'test',
             path: exe2,
             version: '1.0',
+            arch: 'i386',
             info: {
               InternalName: 'dummy.exe',
               OriginalFilename: 'dummy.exe',
@@ -284,6 +287,7 @@ test('firefox channel from ProductVersion', function (t) {
           name: 'firefox',
           path: exe,
           version: '53.0.0.6175',
+          arch: 'i386',
           info: {
             FileVersion: '53.0.0.6175',
             InternalName: 'dummy.exe',
@@ -320,6 +324,7 @@ test('firefox developer channel from ProductName', function (t) {
           name: 'firefox',
           path: exe,
           version: '1.0.0.0',
+          arch: 'i386',
           info: {
             FileVersion: '1.0.0.0',
             InternalName: 'dummy.exe',

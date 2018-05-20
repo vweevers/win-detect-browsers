@@ -47,9 +47,10 @@ detect(['chrome', 'firefox'], function (err, browsers) {
 
 Each `result` is an object with the following properties:
 
-- `name` (string): `chrome`, `chromium`, `firefox`, `phantomjs`, `ie`, `safari`, `opera`, `maxthon` or `yandex`.
+- `name` (string): `chrome`, `chromium`, `firefox`, `phantomjs`, `ie`, `safari`, `opera`, `maxthon` or `yandex`
 - `path` (string): absolute path to executable
 - `version` (string)
+- `arch` (string): CPU type the executable was built for: `amd64`, `i386` or [other](https://github.com/vweevers/pe-machine-type#types);
 - `info` (object): executable metadata (see [full output](#cli) below).
 
 Additional properties are usually available but not guaranteed:
@@ -57,10 +58,10 @@ Additional properties are usually available but not guaranteed:
 - `channel` (string):
   - Chrome: `stable`, `canary`, `beta` or `dev`
   - Firefox: `release`, `developer`, `nightly` or [`esr`](https://www.mozilla.org/en-US/firefox/organizations/faq/)
-  - Older versions of Firefox: `aurora`, `beta` or `rc`
-  - Opera: `stable`, `beta` or `developer`
+  - Older versions of Firefox: `aurora`, `beta` or `rc`;
+  - Opera: `stable`, `beta` or `developer`.
 - `uninstall` (object): Chrome only. Uninstaller info with:
-  - `path` (string): path to installer
+  - `path` (string): path to installer;
   - `arguments` (array): arguments to installer in order to uninstall.
 - `bitness` (number): Chrome only. 64 or 32.
 - `guid` (string): Chrome only.
@@ -292,8 +293,8 @@ Full output with `-j` or `--json`:
 #### Added
 
 - Add Node 6, 8, 9, 10
-- Add release channel info for Chrome, Firefox and Opera
-- Add executable metadata to all browsers
+- Add release channel for Chrome, Firefox and Opera
+- Add executable metadata and CPU type to all browsers
 - Support `phantomjs-prebuilt` (2.x) as well as `phantomjs` (1.x)
 - Detect Firefox ESR
 - Add Firefox Developer Edition default location;
