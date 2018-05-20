@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict'
 
-const names = Object.keys(require('../lib/browsers'))
+const names = Object.keys(require('./lib/browsers'))
 
 const argv = require('yargs')
   .usage([
@@ -29,7 +29,7 @@ if (argv.debug) {
   require('debug').enable('win-detect-browsers')
 }
 
-const detect = require('..')
+const detect = require('.')
 const start  = Date.now()
 
 detect(argv._, argv, function (err, browsers, methods) {

@@ -5,11 +5,11 @@
   "author": "Vincent Weevers",
   "license": "MIT",
   "main": "index.js",
-  "bin": "./bin/detect-browsers",
+  "bin": "cli.js",
   "files": [
-    "bin",
     "lib",
-    "index.js"
+    "index.js",
+    "cli.js"
   ],
   "scripts": {
     "test": "node test.js"
