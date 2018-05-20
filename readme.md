@@ -40,9 +40,9 @@ detect(['chrome', 'firefox'], function (err, browsers) {
 
 ## API
 
-### `detect([names, ][options, ]callback)`
+**If you are upgrading:** please see [the changelog](#changelog).
 
-> **Usage changed in 3.0.0. Please see [the changelog](#300).**
+### `detect([names, ]callback)`
 
 `names` is an array of browser names you want to find. If omitted or empty, it will detect *[everything](http://youtu.be/k1yvvNvlXtg)*. The `callback` receives an error if any and an array of `results`. A result is excluded if its path has no `.exe` extension or if its version could not be read.
 
@@ -52,7 +52,7 @@ Each `result` is an object with the following properties:
 - `path` (string): absolute path to executable
 - `version` (string)
 - `arch` (string): CPU type the executable was built for: `amd64`, `i386` or [other](https://github.com/vweevers/pe-machine-type#types);
-- `info` (object): executable metadata (see [full output](#cli) below).
+- `info` (object): executable metadata (see [full sample](#full-sample) below).
 
 Additional properties are usually available but not guaranteed:
 
@@ -67,162 +67,131 @@ Additional properties are usually available but not guaranteed:
 - `bitness` (number): Chrome only. 64 or 32.
 - `guid` (string): Chrome only.
 
-Options:
-
-- `browsers`: exposed for unit tests.
-
 ## CLI
 
 ```
-win-detect-browsers
+win-detect-browsers [options] [name, name..]
 ```
 
-Example output on Windows 10 (with `-s` or `--summary`):
+Options:
 
-```
-firefox 61.0.0.6711 (release)                                               
-  @ C:\Program Files\Mozilla Firefox\firefox.exe                            
-firefox 62.0.0.6712 (nightly)                                               
-  @ C:\Program Files\Firefox Nightly\firefox.exe                            
-firefox 61.0.0.6711 (developer)                                             
-  @ C:\Program Files\Firefox Developer Edition\firefox.exe                  
-chrome 68.0.3435.0 (canary 64-bit)                                          
-  @ C:\Users\vweevers\AppData\Local\Google\Chrome SxS\Application\chrome.exe
-chrome 66.0.3359.139 (stable 64-bit)                                        
-  @ C:\Program Files (x86)\Google\Chrome\Application\chrome.exe             
-ie 11.0.16299.371                                                           
-  @ C:\Program Files\Internet Explorer\iexplore.exe                         
-ie 11.0.16299.371                                                           
-  @ C:\Program Files (x86)\Internet Explorer\iexplore.exe                   
-opera 53.0.2907.31 (beta)                                                   
-  @ C:\Program Files\Opera beta\Launcher.exe                                
+- `--help` `-h`: Show help
+- `--version` `-v`: Show CLI version number
+- `--json` `-j`: Print results as JSON array
+- `--summary` `-s`: Less properties;
+- `--debug` `-d`: Enable [debug](https://github.com/visionmedia/debug) scope.
 
-Found 8 browsers in 25 ways within 94ms.
-```
+### Sample
 
-Detect Internet Explorer and Phantomjs, or print a JSON summary:
+On Windows 10 with `--summary`:
 
-```
-win-detect-browsers ie phantomjs
-win-detect-browsers -js
-```
+<details><summary>Click to expand</summary>
 
-Debug output can be enabled with `SET DEBUG=win-detect-browsers`.
+<code><pre>
+PHANTOMJS 2 32-bit
+├── Path:    C:\Users\vweevers\AppData\Roaming\nvm\v10.0.0\node_modules\phantomjs-prebuilt\lib\phantom\bin\phantomjs.exe
+└── Version: 2.1.1.0
 
-Full output with `-j` or `--json`:
+IE 11 64-bit
+├── Path:    C:\Program Files\Internet Explorer\iexplore.exe
+└── Version: 11.0.17134.1
+
+IE 11 32-bit
+├── Path:    C:\Program Files (x86)\Internet Explorer\iexplore.exe
+└── Version: 11.0.17134.1
+
+CHROME 68 CANARY 64-bit
+├── Path:    C:\Users\vweevers\AppData\Local\Google\Chrome SxS\Application\chrome.exe
+├── Version: 68.0.3436.0
+└── GUID:    4EA16AC7-FD5A-47C3-875B-DBF4A2008C20
+
+CHROME 66 STABLE 64-bit
+├── Path:    C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+├── Version: 66.0.3359.181
+└── GUID:    8A69D345-D564-463C-AFF1-A69D9E530F96
+
+FIREFOX 61 RELEASE 64-bit
+├── Path:    C:\Program Files\Mozilla Firefox\firefox.exe
+└── Version: 61.0.0.6711
+
+FIREFOX 62 NIGHTLY 64-bit
+├── Path:    C:\Program Files\Firefox Nightly\firefox.exe
+└── Version: 62.0.0.6712
+
+FIREFOX 61 DEVELOPER 64-bit
+├── Path:    C:\Program Files\Firefox Developer Edition\firefox.exe
+└── Version: 61.0.0.6711
+
+OPERA 53 BETA 64-bit
+├── Path:    C:\Program Files\Opera beta\Launcher.exe
+└── Version: 53.0.2907.31
+
+Found 9 browsers in 26 ways within 76ms.
+</pre></code>
+
+</details>
+
+### Full Sample
+
+On Windows 10 with `--json`:
 
 <details><summary>Click to expand</summary>
 
 ```json
 [
   {
-    "name": "chrome",
-    "path": "C:\\Users\\vweevers\\AppData\\Local\\Google\\Chrome SxS\\Application\\chrome.exe",
-    "version": "68.0.3435.0",
+    "name": "phantomjs",
+    "path": "C:\\Users\\vweevers\\AppData\\Roaming\\nvm\\v10.0.0\\node_modules\\phantomjs-prebuilt\\lib\\phantom\\bin\\phantomjs.exe",
+    "version": "2.1.1.0",
+    "arch": "i386",
     "info": {
-      "FileVersion": "68.0.3435.0",
-      "CompanyName": "Google Inc.",
-      "FileDescription": "Google Chrome",
-      "InternalName": "chrome_exe",
-      "LegalCopyright": "Copyright 2017 Google Inc. All rights reserved.",
-      "OriginalFilename": "chrome.exe",
-      "ProductName": "Google Chrome",
-      "ProductVersion": "68.0.3435.0",
-      "CompanyShortName": "Google",
-      "ProductShortName": "Chrome",
-      "LastChange": "5e764df0b11c03f2e885a35f112e05ac98b2b065-refs/branch-heads/3435@{#1}",
-      "Official Build": "1"
-    },
-    "channel": "canary",
-    "bitness": 64,
-    "guid": "4EA16AC7-FD5A-47C3-875B-DBF4A2008C20",
-    "uninstall": {
-      "path": "C:\\Users\\vweevers\\AppData\\Local\\Google\\Chrome SxS\\Application\\68.0.3435.0\\Installer\\setup.exe",
-      "arguments": [
-        "--uninstall",
-        "--chrome-sxs"
-      ]
-    }
-  },
-  {
-    "name": "chrome",
-    "path": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-    "version": "66.0.3359.139",
-    "info": {
-      "FileVersion": "66.0.3359.139",
-      "CompanyName": "Google Inc.",
-      "FileDescription": "Google Chrome",
-      "InternalName": "chrome_exe",
-      "LegalCopyright": "Copyright 2017 Google Inc. All rights reserved.",
-      "OriginalFilename": "chrome.exe",
-      "ProductName": "Google Chrome",
-      "ProductVersion": "66.0.3359.139",
-      "CompanyShortName": "Google",
-      "ProductShortName": "Chrome",
-      "LastChange": "a020eddf0d85fe84d4a6787b304f50aafb670969-refs/branch-heads/3359@{#767}",
-      "Official Build": "1"
-    },
-    "channel": "stable",
-    "bitness": 64,
-    "guid": "8A69D345-D564-463C-AFF1-A69D9E530F96",
-    "uninstall": {
-      "path": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\66.0.3359.181\\Installer\\setup.exe",
-      "arguments": [
-        "--uninstall",
-        "--system-level",
-        "--verbose-logging"
-      ]
+      "FileVersion": "2.1.1.0",
+      "FileDescription": "PhantomJS is a headless WebKit with JavaScript API",
+      "LegalCopyright": "Copyright (C) Ariya Hidayat 2012",
+      "OriginalFilename": "phantomjs.exe",
+      "ProductName": "PhantomJS",
+      "ProductVersion": "2.1.1",
+      "CompanyName": "PhantomJS"
     }
   },
   {
     "name": "ie",
     "path": "C:\\Program Files\\Internet Explorer\\iexplore.exe",
-    "version": "11.0.16299.371",
+    "version": "11.0.17134.1",
+    "arch": "amd64",
     "info": {
-      "FileVersion": "11.0.16299.371",
+      "FileVersion": "11.0.17134.1",
       "CompanyName": "Microsoft Corporation",
       "FileDescription": "Internet Explorer",
       "InternalName": "iexplore",
       "LegalCopyright": "© Microsoft Corporation. Alle rechten voorbehouden.",
       "OriginalFilename": "IEXPLORE.EXE.MUI",
       "ProductName": "Internet Explorer",
-      "ProductVersion": "11.00.16299.15"
+      "ProductVersion": "11.00.17134.1"
     }
   },
   {
     "name": "ie",
     "path": "C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe",
-    "version": "11.0.16299.371",
+    "version": "11.0.17134.1",
+    "arch": "i386",
     "info": {
-      "FileVersion": "11.0.16299.371",
+      "FileVersion": "11.0.17134.1",
       "CompanyName": "Microsoft Corporation",
       "FileDescription": "Internet Explorer",
       "InternalName": "iexplore",
       "LegalCopyright": "© Microsoft Corporation. Alle rechten voorbehouden.",
       "OriginalFilename": "IEXPLORE.EXE.MUI",
       "ProductName": "Internet Explorer",
-      "ProductVersion": "11.00.16299.15"
+      "ProductVersion": "11.00.17134.1"
     }
-  },
-  {
-    "name": "opera",
-    "path": "C:\\Program Files\\Opera beta\\Launcher.exe",
-    "version": "53.0.2907.31",
-    "info": {
-      "FileVersion": "53.0.2907.31",
-      "LegalCopyright": "Copyright Opera Software 2018",
-      "InternalName": "Opera",
-      "CompanyName": "Opera Software",
-      "ProductName": "Opera beta Internet Browser",
-      "ProductVersion": "53.0.2907.31",
-      "FileDescription": "Opera beta Internet Browser"
-    },
-    "channel": "beta"
   },
   {
     "name": "firefox",
     "path": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
     "version": "61.0.0.6711",
+    "channel": "release",
+    "arch": "amd64",
     "info": {
       "FileVersion": "61.0.0.6711",
       "LegalCopyright": "©Firefox and Mozilla Developers; available under the MPL 2 license.",
@@ -234,13 +203,14 @@ Full output with `-j` or `--json`:
       "OriginalFilename": "../../dist/bin/firefox.exe",
       "ProductName": "Firefox",
       "BuildID": "20180517141400"
-    },
-    "channel": "release"
+    }
   },
   {
     "name": "firefox",
     "path": "C:\\Program Files\\Firefox Developer Edition\\firefox.exe",
     "version": "61.0.0.6711",
+    "channel": "developer",
+    "arch": "amd64",
     "info": {
       "FileVersion": "61.0.0.6711",
       "LegalCopyright": "©Firefox and Mozilla Developers; available under the MPL 2 license.",
@@ -252,13 +222,14 @@ Full output with `-j` or `--json`:
       "OriginalFilename": "../../dist/bin/firefox.exe",
       "ProductName": "Firefox Developer Edition",
       "BuildID": "20180517141400"
-    },
-    "channel": "developer"
+    }
   },
   {
     "name": "firefox",
     "path": "C:\\Program Files\\Firefox Nightly\\firefox.exe",
     "version": "62.0.0.6712",
+    "channel": "nightly",
+    "arch": "amd64",
     "info": {
       "FileVersion": "62.0.0.6712",
       "LegalCopyright": "©Firefox and Mozilla Developers; available under the MPL 2 license.",
@@ -270,8 +241,84 @@ Full output with `-j` or `--json`:
       "OriginalFilename": "firefox.exe",
       "ProductName": "Firefox Nightly",
       "BuildID": "20180518222751"
+    }
+  },
+  {
+    "name": "chrome",
+    "path": "C:\\Users\\vweevers\\AppData\\Local\\Google\\Chrome SxS\\Application\\chrome.exe",
+    "version": "68.0.3436.0",
+    "channel": "canary",
+    "arch": "amd64",
+    "bitness": 64,
+    "guid": "4EA16AC7-FD5A-47C3-875B-DBF4A2008C20",
+    "info": {
+      "FileVersion": "68.0.3436.0",
+      "CompanyName": "Google Inc.",
+      "FileDescription": "Google Chrome",
+      "InternalName": "chrome_exe",
+      "LegalCopyright": "Copyright 2017 Google Inc. All rights reserved.",
+      "OriginalFilename": "chrome.exe",
+      "ProductName": "Google Chrome",
+      "ProductVersion": "68.0.3436.0",
+      "CompanyShortName": "Google",
+      "ProductShortName": "Chrome",
+      "LastChange": "e0f81fe637f233bf12e821915b72bc8d2194c3f2-refs/branch-heads/3436@{#1}",
+      "Official Build": "1"
     },
-    "channel": "nightly"
+    "uninstall": {
+      "path": "C:\\Users\\vweevers\\AppData\\Local\\Google\\Chrome SxS\\Application\\68.0.3436.0\\Installer\\setup.exe",
+      "arguments": [
+        "--uninstall",
+        "--chrome-sxs"
+      ]
+    }
+  },
+  {
+    "name": "chrome",
+    "path": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+    "version": "66.0.3359.181",
+    "channel": "stable",
+    "arch": "amd64",
+    "bitness": 64,
+    "guid": "8A69D345-D564-463C-AFF1-A69D9E530F96",
+    "info": {
+      "FileVersion": "66.0.3359.181",
+      "CompanyName": "Google Inc.",
+      "FileDescription": "Google Chrome",
+      "InternalName": "chrome_exe",
+      "LegalCopyright": "Copyright 2017 Google Inc. All rights reserved.",
+      "OriginalFilename": "chrome.exe",
+      "ProductName": "Google Chrome",
+      "ProductVersion": "66.0.3359.181",
+      "CompanyShortName": "Google",
+      "ProductShortName": "Chrome",
+      "LastChange": "a10b9cedb40738cb152f8148ddab4891df876959-refs/branch-heads/3359@{#828}",
+      "Official Build": "1"
+    },
+    "uninstall": {
+      "path": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\66.0.3359.181\\Installer\\setup.exe",
+      "arguments": [
+        "--uninstall",
+        "--system-level",
+        "--verbose-logging"
+      ]
+    }
+  },
+  {
+    "name": "opera",
+    "path": "C:\\Program Files\\Opera beta\\Launcher.exe",
+    "version": "53.0.2907.31",
+    "channel": "beta",
+    "arch": "amd64",
+    "info": {
+      "FileVersion": "53.0.2907.31",
+      "LegalCopyright": "Copyright Opera Software 2018",
+      "InternalName": "Opera",
+      "CompanyName": "Opera Software",
+      "ProductName": "Opera beta Internet Browser",
+      "ProductVersion": "53.0.2907.31",
+      "FileDescription": "Opera beta Internet Browser"
+    }
   }
 ]
 ```
