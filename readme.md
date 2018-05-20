@@ -338,7 +338,7 @@ npm install win-version-info -g  # For CLI
 
 ## Changelog
 
-### 3.0.0
+### 3.0.0-rc1
 
 #### Changed
 
