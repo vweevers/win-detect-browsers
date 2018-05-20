@@ -11,6 +11,7 @@
 - [Example](#example)
 - [API](#api)
 - [CLI](#cli)
+- [Install](#install)
 - [Changelog](#changelog)
 - [Background](#background)
 - [License](#license)
@@ -72,10 +73,7 @@ Options:
 
 ## CLI
 
-Install globally and run:
-
 ```
-npm i win-detect-browsers -g
 win-detect-browsers
 ```
 
@@ -279,6 +277,15 @@ Full output with `-j` or `--json`:
 ```
 
 </details>
+
+## Install
+
+With [npm](https://npmjs.org) do:
+
+```bash
+npm install win-version-info     # For API
+npm install win-version-info -g  # For CLI
+```
 
 ## Changelog
 
