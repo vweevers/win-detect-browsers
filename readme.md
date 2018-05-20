@@ -89,7 +89,7 @@ On Windows 10 with `--summary`:
 
 <details><summary>Click to expand</summary>
 
-<code><pre>
+```
 PHANTOMJS 2 32-bit
 ├── Path:    C:\Users\vweevers\AppData\Roaming\nvm\v10.0.0\node_modules\phantomjs-prebuilt\lib\phantom\bin\phantomjs.exe
 └── Version: 2.1.1.0
@@ -129,7 +129,7 @@ OPERA 53 BETA 64-bit
 └── Version: 53.0.2907.31
 
 Found 9 browsers in 26 ways within 76ms.
-</pre></code>
+```
 
 </details>
 
