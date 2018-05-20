@@ -31,6 +31,8 @@ detect(function (err, browsers) {
 
 // Chrome and Firefox
 detect(['chrome', 'firefox'], function (err, browsers) {
+  if (err) throw err
+
   for (let b of browsers) {
     console.log(b.version) // '57.0.2931.0'
     console.log(b.channel) // 'canary'
