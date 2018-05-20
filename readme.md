@@ -8,7 +8,7 @@
 
 <details><summary>Click to expand</summary>
 
-- [Example](#example)
+- [Usage](#usage)
 - [API](#api)
 - [CLI](#cli)
 - [Install](#install)
@@ -18,7 +18,9 @@
 
 </details>
 
-## Example
+## Usage
+
+**If you are upgrading:** please see [the changelog](#changelog).
 
 ```js
 const detect = require('win-detect-browsers')
@@ -41,8 +43,6 @@ detect(['chrome', 'firefox'], function (err, browsers) {
 ```
 
 ## API
-
-**If you are upgrading:** please see [the changelog](#changelog).
 
 ### `detect([names, ]callback)`
 
