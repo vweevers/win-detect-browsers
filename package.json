@@ -1,49 +1,63 @@
 {
   "name": "win-detect-browsers",
   "version": "2.1.0",
-  "bin": "./bin/detect-browsers",
-  "description": "Detect browsers on Windows",
+  "description": "Fast browser detection on Windows",
+  "author": "Vincent Weevers",
+  "license": "MIT",
   "main": "index.js",
+  "bin": "./bin/detect-browsers",
+  "files": [
+    "bin",
+    "lib",
+    "index.js"
+  ],
+  "scripts": {
+    "test": "node test.js"
+  },
   "dependencies": {
-    "after": "^0.8.1",
-    "concat-stream": "~1.5.1",
-    "debug": "^2.1.0",
-    "duplexify": "~3.4.3",
+    "after": "~0.8.2",
+    "chalk": "~2.4.1",
+    "debug": "~3.1.0",
     "existent": "~1.0.1",
-    "flush-write-stream": "~1.0.0",
-    "json-stream": "~1.0.0",
-    "merge-stream": "~1.0.0",
-    "through2": "~2.0.1",
-    "unique-stream": "~2.2.1",
-    "which": "^1.0.7",
-    "windows-bin": "~1.0.0",
-    "windows-env": "~1.0.0",
+    "pascal-case": "~2.0.1",
+    "pe-machine-type": "~1.0.0",
+    "pretty-tree": "~1.0.0",
+    "resolve": "~1.7.1",
+    "which": "~1.3.0",
+    "windows-env": "~1.0.1",
     "xtend": "^4.0.0",
-    "yargs": "~4.2.0"
+    "yargs": "~11.0.0"
+  },
+  "optionalDependencies": {
+    "registry-js": "~1.0.7",
+    "win-version-info": "~2.0.0"
   },
   "devDependencies": {
     "compare-version": "~0.1.2",
-    "cp": "~0.2.0",
-    "mkdirp": "~0.5.0",
-    "phantomjs": "^1.9.12",
-    "tape": "~4.5.1"
+    "tape": "~4.9.0",
+    "win-dummy-exe": "0.0.1"
   },
-  "scripts": {
-    "test": "tape test.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/vweevers/win-detect-browsers"
-  },
+  "repository": "vweevers/win-detect-browsers",
+  "bugs": "https://github.com/vweevers/win-detect-browsers/issues",
+  "homepage": "https://github.com/vweevers/win-detect-browsers",
   "keywords": [
     "browser",
+    "browsers",
     "detect",
-    "windows"
+    "windows",
+    "chrome",
+    "chromium",
+    "canary",
+    "firefox",
+    "phantomjs",
+    "ie",
+    "internet-explorer",
+    "safari",
+    "opera",
+    "maxthon",
+    "yandex"
   ],
-  "author": "Vincent Weevers",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vweevers/win-detect-browsers/issues"
-  },
-  "homepage": "https://github.com/vweevers/win-detect-browsers"
+  "engines": {
+    "node": ">=6"
+  }
 }

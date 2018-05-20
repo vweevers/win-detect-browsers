@@ -1,16 +1,13 @@
-version: 1.0.{build}
-skip_tags: true
-shallow_clone: true
-
-skip_commits:
-  # Skip stable release commits
-  message: /^ *v? *\d+\.\d+\.\d+ *$/
+version: "{build}"
+build: off
+skip_tags: false
 
 environment:
   matrix:
-    - nodejs_version: "0.10"
-    - nodejs_version: "4"
-    - nodejs_version: "5"
+    - nodejs_version: "6"
+    - nodejs_version: "8"
+    - nodejs_version: "9"
+    - nodejs_version: "10"
 
 platform:
   - x86
@@ -18,16 +15,9 @@ platform:
 
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
-  - cinst Firefox -y
-  - cinst GoogleChrome -y
-  - cinst Opera -y
-  - npm i tape -g
-
-build_script:
-  - npm install
+  - set PATH=%APPDATA%\npm;%APPVEYOR_BUILD_FOLDER%\node_modules\.bin;%PATH%
+  - npm i
 
 test_script:
   - set DEBUG=win-detect-browsers
-  - tape test.js --no-operaversions
-
-deploy: off
+  - npm t
