@@ -340,6 +340,14 @@ npm install win-detect-browsers -g  # For CLI
 
 ## Changelog
 
+### 3.0.0
+
+#### Changed
+
+- Move `registry-js` and `win-version-info` out of `optionalDependencies`. Both are safe to install on all platforms and export a noop on non-windows.
+- Update `debug`, `resolve` and `yargs`
+- Add `standard`
+
 ### 3.0.0-rc1
 
 #### Changed
