@@ -18,7 +18,6 @@ process.stderr.setMaxListeners(100)
 const test = require('tape')
 const detect = require('./')
 const path = require('path')
-// const compareVersion = require('compare-version') // TODO: still used?
 const gen = require('win-dummy-exe')
 const env = require('windows-env')
 const defaultBrowsers = require('./lib/browsers')
