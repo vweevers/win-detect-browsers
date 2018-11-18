@@ -30,7 +30,7 @@ if (argv.debug) {
 }
 
 const detect = require('.')
-const start  = Date.now()
+const start = Date.now()
 
 detect(argv._, argv, function (err, browsers, methods) {
   if (err) throw err
@@ -38,10 +38,12 @@ detect(argv._, argv, function (err, browsers, methods) {
   const duration = Date.now() - start
 
   if (argv.json) {
-    if (argv.summary) browsers = browsers.map(b => {
-      const { name, version, channel, arch, path } = b
-      return { name, path, version, channel, arch }
-    })
+    if (argv.summary) {
+      browsers = browsers.map(b => {
+        const { name, version, channel, arch, path } = b
+        return { name, path, version, channel, arch }
+      })
+    }
 
     console.log(JSON.stringify(browsers.map(ordered), null, 2))
     console.log()
@@ -106,19 +108,19 @@ function ordered (a) {
   const remaining = new Set(Object.keys(a))
   const objects = []
 
-  for(let k of ['name', 'path', 'version', 'channel', 'arch', 'bitness']) {
+  for (let k of ['name', 'path', 'version', 'channel', 'arch', 'bitness']) {
     if (k in a) {
       b[k] = a[k]
       remaining.delete(k)
     }
   }
 
-  for(let k of remaining) {
+  for (let k of remaining) {
     if (typeof a[k] === 'object') objects.push(k)
     else b[k] = a[k]
   }
 
-  for(let k of objects.sort()) {
+  for (let k of objects.sort()) {
     b[k] = a[k]
   }
 

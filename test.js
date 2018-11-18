@@ -16,26 +16,26 @@
 process.stderr.setMaxListeners(100)
 
 const test = require('tape')
-    , detect = require('./')
-    , path = require('path')
-    , compareVersion = require('compare-version')
-    , gen = require('win-dummy-exe')
-    , env = require('windows-env')
-    , defaultBrowsers = require('./lib/browsers')
-    , ffChannel = require('./lib/firefox-release-channel')
-    , registry = require('./lib/registry')
+const detect = require('./')
+const path = require('path')
+// const compareVersion = require('compare-version') // TODO: still used?
+const gen = require('win-dummy-exe')
+const env = require('windows-env')
+const defaultBrowsers = require('./lib/browsers')
+const ffChannel = require('./lib/firefox-release-channel')
+const registry = require('./lib/registry')
 
 const argv = require('yargs')
-    .boolean('opera')
-    .boolean('canary')
-    .boolean('phantomjs')
-    .argv
+  .boolean('opera')
+  .boolean('canary')
+  .boolean('phantomjs')
+  .argv
 
 test('find methods', function (t) {
   const methods = 8
-      , mockRegistries = 3
-      , wow = env.X64
-      , hives = wow ? 4 : 2
+  const mockRegistries = 3
+  const wow = env.X64
+  const hives = wow ? 4 : 2
 
   t.plan((methods * 2) + (mockRegistries * hives * 3))
 
@@ -123,7 +123,7 @@ test('find methods', function (t) {
       }
     }
 
-    function find(method, fn, done) {
+    function find (method, fn, done) {
       const browsers = {
         methods_test: {
           bin: 'dummy.exe',
@@ -156,7 +156,7 @@ test('ignores non-exe', function (t) {
   const browsers = {
     test: {
       bin: 'test.js',
-      find: function() {
+      find: function () {
         this.dir(__dirname)
       }
     }
@@ -180,7 +180,7 @@ test('prefers FileVersion over ProductVersion', function (t) {
       const browsers = {
         test: {
           bin: 'dummy.exe',
-          find: function() {
+          find: function () {
             this.dir(path.dirname(exe1))
             this.dir(path.dirname(exe2))
           }
@@ -228,7 +228,7 @@ test('ignores exe without version', function (t) {
     const browsers = {
       test: {
         bin: 'dummy.exe',
-        find: function() {
+        find: function () {
           this.dir(path.dirname(exe))
         }
       }
@@ -243,20 +243,20 @@ test('ignores exe without version', function (t) {
 
 test('firefox release channels', function (t) {
   const versions = {
-    '1.0'    : 'release',
-    '2.0a1'  : 'alpha',
-    '2.0b1'  : 'beta',
+    '1.0': 'release',
+    '2.0a1': 'alpha',
+    '2.0b1': 'beta',
     '2.0 RC1': 'rc',
-    '34.0a2' : 'aurora',
-    '34.0b2' : 'beta',
-    '35.0a2' : 'developer',
+    '34.0a2': 'aurora',
+    '34.0b2': 'beta',
+    '35.0a2': 'developer',
     '45.0esr': 'esr',
-    '52.0'   : 'release',
-    '53.0a1' : 'nightly',
-    '53.0a2' : 'developer'
+    '52.0': 'release',
+    '53.0a1': 'nightly',
+    '53.0a2': 'developer'
   }
 
-  for(let k in versions) {
+  for (let k in versions) {
     t.is(ffChannel(k), versions[k], `${k} == ${versions[k]}`)
   }
 
@@ -272,7 +272,7 @@ test('firefox channel from ProductVersion', function (t) {
     const browsers = {
       firefox: {
         bin: 'dummy.exe',
-        find: function() {
+        find: function () {
           this.dir(path.dirname(exe))
         },
         post: defaultBrowsers.firefox.post
@@ -309,7 +309,7 @@ test('firefox developer channel from ProductName', function (t) {
     const browsers = {
       firefox: {
         bin: 'dummy.exe',
-        find: function() {
+        find: function () {
           this.dir(path.dirname(exe))
         },
         post: defaultBrowsers.firefox.post
@@ -340,15 +340,15 @@ test('firefox developer channel from ProductName', function (t) {
 test('detect all', function (t) {
   t.plan(5)
 
-  detect(function(err, results){
+  detect(function (err, results) {
     t.ifError(err, 'no error')
 
     const names = results.map(b => b.name)
     const withVersions = results.filter(hasVersion).length
 
-    t.ok(names.indexOf('chrome')>=0, 'found chrome')
-    t.ok(names.indexOf('firefox')>=0, 'found firefox')
-    t.ok(names.indexOf('ie')>=0, 'found ie')
+    t.ok(names.indexOf('chrome') >= 0, 'found chrome')
+    t.ok(names.indexOf('firefox') >= 0, 'found firefox')
+    t.ok(names.indexOf('ie') >= 0, 'found ie')
 
     t.equal(withVersions, results.length, 'have version numbers')
   })
@@ -382,8 +382,8 @@ test('detect chrome and firefox', function (t) {
     const names = results.map(b => b.name)
     const withVersions = results.filter(hasVersion).length
 
-    t.ok(names.indexOf('chrome')>=0, 'found chrome')
-    t.ok(names.indexOf('firefox')>=0, 'found firefox')
+    t.ok(names.indexOf('chrome') >= 0, 'found chrome')
+    t.ok(names.indexOf('firefox') >= 0, 'found firefox')
     t.ok(withVersions >= 2, 'have version numbers')
   })
 })
@@ -415,8 +415,8 @@ maybe(argv.phantomjs)('detect phantomjs', function (t) {
 test('concurrency', function (t) {
   const n = 5
 
-  t.plan(n*2)
-  for(let i=n; i>0; i--) chrome()
+  t.plan(n * 2)
+  for (let i = n; i > 0; i--) chrome()
 
   function chrome () {
     detect('chrome', function (err, results) {
@@ -430,7 +430,7 @@ test('no result', function (t) {
   const browsers = {
     beep: {
       bin: 'beep.exe',
-      find: function() {
+      find: function () {
         this.file('does\\not\\exist')
       }
     }
@@ -448,7 +448,7 @@ test('no result asynchronicity', function (t) {
   const browsers = {
     beep: {
       bin: 'beep.exe',
-      find: function() {
+      find: function () {
         this.file()
       }
     }
@@ -458,7 +458,7 @@ test('no result asynchronicity', function (t) {
 
   let async = false
 
-  detect({browsers: browsers}, function (err, results) {
+  detect({ browsers: browsers }, function (err, results) {
     t.ifError(err, 'no error')
     t.equal(results.length, 0)
     t.equal(async, true)
@@ -468,7 +468,7 @@ test('no result asynchronicity', function (t) {
 })
 
 function hasVersion (b) {
-  return b.version && b.version.match(/[\d\.]+/)
+  return b.version && b.version.match(/[\d.]+/)
 }
 
 function maybe (enable) {

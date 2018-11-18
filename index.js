@@ -1,27 +1,35 @@
-'use strict';
+'use strict'
 
 const Finder = require('./lib/finder')
-    , xtend = require('xtend')
-    , debug = require('debug')('win-detect-browsers')
-    , after = require('after')
+const xtend = require('xtend')
+const after = require('after')
 
 const DEFAULTS = {
   browsers: require('./lib/browsers')
 }
 
 module.exports = function detect (names, opts, done) {
-  if (typeof names == 'string') names = [names]
-  else if (!Array.isArray(names)) done = opts, opts = names, names = null
+  if (typeof names === 'string') {
+    names = [names]
+  } else if (!Array.isArray(names)) {
+    done = opts
+    opts = names
+    names = null
+  }
 
-  if (typeof opts == 'function') done = opts, opts = xtend(DEFAULTS)
-  else opts = xtend(DEFAULTS, opts)
+  if (typeof opts === 'function') {
+    done = opts
+    opts = xtend(DEFAULTS)
+  } else {
+    opts = xtend(DEFAULTS, opts)
+  }
 
   if (!names || !names.length) {
     names = Object.keys(opts.browsers)
   }
 
   const result = []
-      , next = after(names.length, finish)
+  const next = after(names.length, finish)
 
   // For debugging: count the number
   // of ways we found the browsers.
@@ -34,8 +42,8 @@ module.exports = function detect (names, opts, done) {
     const f = new Finder(name, browser, opts)
 
     f.on('error', next).on('end', (res, methods) => {
-      for(let b of res.values()) result.push(b)
-      totalMethods+= methods
+      for (let b of res.values()) result.push(b)
+      totalMethods += methods
       next()
     })
   })
