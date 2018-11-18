@@ -388,4 +388,4 @@ Browser detection on Windows can't be done right. This is the *try-everything-an
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT) © Vincent Weevers.
+[MIT](./LICENSE) © 2014-present Vincent Weevers.
