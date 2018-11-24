@@ -12,7 +12,8 @@
     "cli.js"
   ],
   "scripts": {
-    "test": "standard && node test.js"
+    "test": "standard && hallmark && node test.js",
+    "hallmark": "hallmark --fix"
   },
   "dependencies": {
     "after": "~0.8.2",
@@ -31,6 +32,7 @@
     "yargs": "~12.0.4"
   },
   "devDependencies": {
+    "hallmark": "~0.1.0",
     "standard": "~12.0.1",
     "tape": "~4.9.0",
     "win-dummy-exe": "0.0.1"

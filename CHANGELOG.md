@@ -10,6 +10,7 @@
 
 - Detect [Beaker](https://beakerbrowser.com/)
 - Detect [Brave](https://brave.com/)
+- Add [`hallmark`](https://github.com/vweevers/hallmark) devDependency
 
 ### Fixed
 
@@ -58,5 +59,7 @@
 - No longer uses command-line version flags or version numbers found in the registry or elsewhere. This simplifies the process and makes the version numbers consistent and more detailed.
 
 [3.1.0]: https://github.com/vweevers/win-detect-browsers/compare/v3.0.0...v3.1.0
+
 [3.0.0]: https://github.com/vweevers/win-detect-browsers/compare/v3.0.0-rc1...v3.0.0
+
 [3.0.0-rc1]: https://github.com/vweevers/win-detect-browsers/compare/v2.1.0...v3.0.0-rc1

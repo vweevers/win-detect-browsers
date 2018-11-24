@@ -14,7 +14,6 @@
 - [API](#api)
 - [CLI](#cli)
 - [Install](#install)
-- [Changelog](#changelog)
 - [Background](#background)
 - [License](#license)
 
@@ -22,7 +21,7 @@
 
 ## Usage
 
-**If you are upgrading:** please see [the changelog](#changelog).
+**If you are upgrading:** please see [the changelog](CHANGELOG.md).
 
 ```js
 const detect = require('win-detect-browsers')
@@ -48,7 +47,7 @@ detect(['chrome', 'firefox'], function (err, browsers) {
 
 ### `detect([names, ]callback)`
 
-`names` is an array of browser names you want to find. If omitted or empty, it will detect *[everything](http://youtu.be/k1yvvNvlXtg)*. The `callback` receives an error if any and an array of `results`. A result is excluded if its path has no `.exe` extension or if its version could not be read.
+`names` is an array of browser names you want to find. If omitted or empty, it will detect _[everything](http://youtu.be/k1yvvNvlXtg)_. The `callback` receives an error if any and an array of `results`. A result is excluded if its path has no `.exe` extension or if its version could not be read.
 
 Each `result` is an object with the following properties:
 
@@ -338,13 +337,9 @@ npm install win-detect-browsers     # For API
 npm install win-detect-browsers -g  # For CLI
 ```
 
-## Changelog
-
-*The changelog has moved to [CHANGELOG.md](CHANGELOG.md).*
-
 ## Background
 
-Browser detection on Windows can't be done right. This is the *try-everything-and-fail-silently* approach. It accounts for architecture differences, normalizes environment variables, tries default locations, searches the registry (in the HKLM and HKCU hives as well as WoW counterparts) (including [Start Menu Internet Applications](http://msdn.microsoft.com/en-us/library/windows/desktop/dd203067(v=vs.85).aspx), Google Updater and more), and looks in `PATH`. Version numbers are then read from the executable metadata.
+Browser detection on Windows can't be done right. This is the _try-everything-and-fail-silently_ approach. It accounts for architecture differences, normalizes environment variables, tries default locations, searches the registry (in the HKLM and HKCU hives as well as WoW counterparts) (including [Start Menu Internet Applications](http://msdn.microsoft.com/en-us/library/windows/desktop/dd203067(v=vs.85).aspx), Google Updater and more), and looks in `PATH`. Version numbers are then read from the executable metadata.
 
 `browser-launcher` by substack has [poor Windows support](https://github.com/substack/browser-launcher/issues/7), and it prompted me to create this module. It is now used in [browser-launcher2](https://github.com/benderjs/browser-launcher2), ~~an active~~ a once active fork of `browser-launcher`.
 
