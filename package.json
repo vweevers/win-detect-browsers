@@ -1,7 +1,7 @@
 {
   "name": "win-detect-browsers",
   "version": "3.0.0",
-  "description": "Fast browser detection on Windows",
+  "description": "Fast and native browser detection on Windows",
   "author": "Vincent Weevers",
   "license": "MIT",
   "main": "index.js",
