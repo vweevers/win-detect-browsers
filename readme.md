@@ -1,6 +1,6 @@
 # win-detect-browsers
 
-**Fast and native browser detection on Windows. Detects installed versions of [Beaker](https://beakerbrowser.com/), [Brave](https://brave.com/), [Chrome](https://www.google.com/chrome/), [Chromium](https://www.chromium.org/), [Firefox](https://www.mozilla.org/en-US/firefox/), [Internet Explorer](https://en.wikipedia.org/wiki/Internet_Explorer), [Maxthon](http://www.maxthon.com/), [Opera](https://www.opera.com/), [PhantomJS](http://phantomjs.org/), [Safari](https://www.apple.com/safari/) and [Yandex](https://browser.yandex.com/).**
+**Fast and native browser detection on Windows. Detects installed versions of [Beaker](https://beakerbrowser.com/), [Brave](https://brave.com/), [Chrome](https://www.google.com/chrome/), [Chromium](https://www.chromium.org/), [Firefox](https://www.mozilla.org/en-US/firefox/), [Internet Explorer](https://en.wikipedia.org/wiki/Internet_Explorer), [Maxthon](http://www.maxthon.com/), [Opera](https://www.opera.com/), [Safari](https://www.apple.com/safari/) and [Yandex](https://browser.yandex.com/).**
 
 [![npm status](http://img.shields.io/npm/v/win-detect-browsers.svg)](https://www.npmjs.org/package/win-detect-browsers)
 [![Build status](https://img.shields.io/appveyor/ci/vweevers/win-detect-browsers.svg)](https://ci.appveyor.com/project/vweevers/win-detect-browsers)
@@ -52,7 +52,7 @@ detect(['chrome', 'firefox'], function (err, browsers) {
 
 Each `result` is an object with the following properties:
 
-- `name` (string): `chrome`, `chromium`, `firefox`, `phantomjs`, `ie`, `safari`, `opera`, `maxthon` or `yandex`
+- `name` (string): `chrome`, `chromium`, `firefox`, `ie`, `safari`, `opera`, `maxthon` or `yandex`
 - `path` (string): absolute path to executable
 - `version` (string)
 - `arch` (string): CPU type the executable was built for: `amd64`, `i386` or [other](https://github.com/vweevers/pe-machine-type#types);
@@ -92,10 +92,6 @@ On Windows 10 with `--summary`:
 <details><summary>Click to expand</summary>
 
 ```
-PHANTOMJS 2 32-bit
-├── Path:    C:\Users\vweevers\AppData\Roaming\nvm\v10.0.0\node_modules\phantomjs-prebuilt\lib\phantom\bin\phantomjs.exe
-└── Version: 2.1.1.0
-
 IE 11 64-bit
 ├── Path:    C:\Program Files\Internet Explorer\iexplore.exe
 └── Version: 11.0.17134.1
@@ -143,21 +139,6 @@ On Windows 10 with `--json`:
 
 ```json
 [
-  {
-    "name": "phantomjs",
-    "path": "C:\\Users\\vweevers\\AppData\\Roaming\\nvm\\v10.0.0\\node_modules\\phantomjs-prebuilt\\lib\\phantom\\bin\\phantomjs.exe",
-    "version": "2.1.1.0",
-    "arch": "i386",
-    "info": {
-      "FileVersion": "2.1.1.0",
-      "FileDescription": "PhantomJS is a headless WebKit with JavaScript API",
-      "LegalCopyright": "Copyright (C) Ariya Hidayat 2012",
-      "OriginalFilename": "phantomjs.exe",
-      "ProductName": "PhantomJS",
-      "ProductVersion": "2.1.1",
-      "CompanyName": "PhantomJS"
-    }
-  },
   {
     "name": "ie",
     "path": "C:\\Program Files\\Internet Explorer\\iexplore.exe",

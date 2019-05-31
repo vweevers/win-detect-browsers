@@ -10,7 +10,6 @@
 // Opt-in functional tests:
 //
 // --opera: requires Opera Stable, Beta and Developer
-// --phantomjs: requires `npm i phantomjs -g`
 // --canary: requires Chrome Canary
 
 process.stderr.setMaxListeners(100)
@@ -27,7 +26,6 @@ const registry = require('./lib/registry')
 const argv = require('yargs')
   .boolean('opera')
   .boolean('canary')
-  .boolean('phantomjs')
   .argv
 
 test('find methods', function (t) {
@@ -398,16 +396,6 @@ maybe(argv.opera)('detect all opera versions', function (t) {
     const uniq = versions.filter((v, i) => versions.lastIndexOf(v) === i)
 
     t.equal(uniq.length, 3, 'unique versions')
-  })
-})
-
-maybe(argv.phantomjs)('detect phantomjs', function (t) {
-  t.plan(3)
-
-  detect('phantomjs', function (err, results) {
-    t.ifError(err, 'no error')
-    t.equal(results[0].name, 'phantomjs')
-    t.ok(hasVersion(results[0]), 'has version')
   })
 })
 
