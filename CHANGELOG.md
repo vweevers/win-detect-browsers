@@ -1,5 +1,26 @@
 # Changelog
 
+## [4.0.0] - 2019-06-01
+
+### Changed
+
+- Upgrade `win-version-info` from `~2.1.0` to `~3.0.0` ([#46](https://github.com/vweevers/win-detect-browsers/issues/46)) ([`d92aee4`](https://github.com/vweevers/win-detect-browsers/commit/d92aee4))
+- Upgrade `resolve` from `~1.8.1` to `~1.11.0` ([`0fda232`](https://github.com/vweevers/win-detect-browsers/commit/0fda232), [`1e0502a`](https://github.com/vweevers/win-detect-browsers/commit/1e0502a))
+- Upgrade `registry-js` from `~1.0.7` to `~1.4.0` ([`0fda232`](https://github.com/vweevers/win-detect-browsers/commit/0fda232), [`f1269fe`](https://github.com/vweevers/win-detect-browsers/commit/f1269fe))
+- Upgrade `yargs` from `~12.0.4` to `~13.2.2` ([`0fda232`](https://github.com/vweevers/win-detect-browsers/commit/0fda232))
+- Upgrade `tape` devDependency from `~4.9.0` to `~4.10.1` ([`0fda232`](https://github.com/vweevers/win-detect-browsers/commit/0fda232))
+- Use standard badge style in `README.md` ([`fe624eb`](https://github.com/vweevers/win-detect-browsers/commit/fe624eb))
+
+### Added
+
+- Add node 12 to AppVeyor ([`f3e8f2e`](https://github.com/vweevers/win-detect-browsers/commit/f3e8f2e))
+
+### Removed
+
+- Drop support for PhantomJS ([#44](https://github.com/vweevers/win-detect-browsers/issues/44)) ([`ca6448d`](https://github.com/vweevers/win-detect-browsers/commit/ca6448d)) ([**@pimterry**](https://github.com/pimterry))
+- Remove node 9 from AppVeyor ([`f3e8f2e`](https://github.com/vweevers/win-detect-browsers/commit/f3e8f2e))
+- Drop node 6 ([#38](https://github.com/vweevers/win-detect-browsers/issues/38)) ([`0fda232`](https://github.com/vweevers/win-detect-browsers/commit/0fda232))
+
 ## [3.1.0] - 2018-11-24
 
 ### Changed
@@ -57,6 +78,8 @@
 - Exports a readable object stream, but 1.x callback style is still supported
 - Only emits executables (`*.exe`)
 - No longer uses command-line version flags or version numbers found in the registry or elsewhere. This simplifies the process and makes the version numbers consistent and more detailed.
+
+[4.0.0]: https://github.com/vweevers/win-detect-browsers/compare/v3.1.0...v4.0.0
 
 [3.1.0]: https://github.com/vweevers/win-detect-browsers/compare/v3.0.0...v3.1.0
 
