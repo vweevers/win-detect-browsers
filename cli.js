@@ -53,7 +53,7 @@ detect(argv._, argv, function (err, browsers, methods) {
     const pascal = require('pascal-case')
 
     browsers.forEach(function print (b) {
-      let labels = [b.name.toUpperCase(), major(b.version)]
+      const labels = [b.name.toUpperCase(), major(b.version)]
 
       if (b.channel) {
         labels.push(b.channel.toUpperCase())
@@ -83,7 +83,7 @@ detect(argv._, argv, function (err, browsers, methods) {
       })
 
       if (!argv.summary) {
-        for (let key of nonAtomic) {
+        for (const key of nonAtomic) {
           nodes.push({ label: pascal(key), leaf: b[key] })
         }
       }
@@ -108,19 +108,19 @@ function ordered (a) {
   const remaining = new Set(Object.keys(a))
   const objects = []
 
-  for (let k of ['name', 'path', 'version', 'channel', 'arch', 'bitness']) {
+  for (const k of ['name', 'path', 'version', 'channel', 'arch', 'bitness']) {
     if (k in a) {
       b[k] = a[k]
       remaining.delete(k)
     }
   }
 
-  for (let k of remaining) {
+  for (const k of remaining) {
     if (typeof a[k] === 'object') objects.push(k)
     else b[k] = a[k]
   }
 
-  for (let k of objects.sort()) {
+  for (const k of objects.sort()) {
     b[k] = a[k]
   }
 

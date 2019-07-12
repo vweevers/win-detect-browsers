@@ -42,7 +42,7 @@ module.exports = function detect (names, opts, done) {
     const f = new Finder(name, browser, opts)
 
     f.on('error', next).on('end', (res, methods) => {
-      for (let b of res.values()) result.push(b)
+      for (const b of res.values()) result.push(b)
       totalMethods += methods
       next()
     })

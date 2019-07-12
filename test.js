@@ -253,7 +253,7 @@ test('firefox release channels', function (t) {
     '53.0a2': 'developer'
   }
 
-  for (let k in versions) {
+  for (const k in versions) {
     t.is(ffChannel(k), versions[k], `${k} == ${versions[k]}`)
   }
 
