@@ -32,7 +32,7 @@
     "yargs": "~13.2.2"
   },
   "devDependencies": {
-    "hallmark": "^0.1.0",
+    "hallmark": "^1.0.0",
     "standard": "^13.0.1",
     "tape": "^4.10.1",
     "win-dummy-exe": "0.0.1"
