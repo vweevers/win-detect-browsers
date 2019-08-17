@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.0.1] - 2019-08-17
+
+### Changed
+
+- Upgrade `registry-js` from `~1.4.0` to `~1.8.0` ([#51](https://github.com/vweevers/win-detect-browsers/issues/51)) ([**@vweevers**](https://github.com/vweevers))
+- Upgrade `yargs` from `~13.2.2` to `~13.3.0` ([#50](https://github.com/vweevers/win-detect-browsers/issues/50)) ([**@vweevers**](https://github.com/vweevers))
+- Upgrade `hallmark` devDependency from `^0.1.0` to `^1.0.0` ([#49](https://github.com/vweevers/win-detect-browsers/issues/49)) ([**@vweevers**](https://github.com/vweevers))
+- Upgrade `standard` devDependency from `^12.0.1` to `^13.0.1` ([#48](https://github.com/vweevers/win-detect-browsers/issues/48)) ([**@vweevers**](https://github.com/vweevers))
+- Unlock devDependencies ([`e90ff25`](https://github.com/vweevers/win-detect-browsers/commit/e90ff25)) ([**@vweevers**](https://github.com/vweevers))
+
 ## [4.0.0] - 2019-06-01
 
 ### Changed
@@ -78,6 +88,8 @@
 - Exports a readable object stream, but 1.x callback style is still supported
 - Only emits executables (`*.exe`)
 - No longer uses command-line version flags or version numbers found in the registry or elsewhere. This simplifies the process and makes the version numbers consistent and more detailed.
+
+[4.0.1]: https://github.com/vweevers/win-detect-browsers/compare/v4.0.0...v4.0.1
 
 [4.0.0]: https://github.com/vweevers/win-detect-browsers/compare/v3.1.0...v4.0.0
 
