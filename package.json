@@ -1,6 +1,6 @@
 {
   "name": "win-detect-browsers",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Fast and native browser detection on Windows",
   "author": "Vincent Weevers",
   "license": "MIT",
