@@ -29,7 +29,7 @@
     "win-version-info": "~3.0.0",
     "windows-env": "~1.0.1",
     "xtend": "^4.0.0",
-    "yargs": "~13.3.0"
+    "yargs": "~14.0.0"
   },
   "devDependencies": {
     "hallmark": "^1.0.0",
