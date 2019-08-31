@@ -80,7 +80,18 @@
 - Remove `version` option;
 - Remove `lucky` option.
 
-## 2.0.0 - 2018-05-03
+## [2.1.0] - 2015-05-05
+
+### Changed
+
+- Replace `fs.exists()` with `path-exists` ([`7ec303c`](https://github.com/vweevers/win-detect-browsers/commit/7ec303c))
+- Prefer native cscript ([`8676bfb`](https://github.com/vweevers/win-detect-browsers/commit/8676bfb)) ([#18](https://github.com/vweevers/win-detect-browsers/issues/18))
+
+### Fixed
+
+- Uppercase environment variables ([`a2395b8`](https://github.com/vweevers/win-detect-browsers/commit/a2395b8))
+
+## 2.0.0 - 2015-05-03
 
 ### Changed
 
@@ -98,3 +109,5 @@
 [3.0.0]: https://github.com/vweevers/win-detect-browsers/compare/v3.0.0-rc1...v3.0.0
 
 [3.0.0-rc1]: https://github.com/vweevers/win-detect-browsers/compare/v2.1.0...v3.0.0-rc1
+
+[2.1.0]: https://github.com/vweevers/win-detect-browsers/compare/v2.0.0...v2.1.0
