@@ -59,9 +59,9 @@ detect(argv._, argv, function (err, browsers, methods) {
         labels.push(b.channel.toUpperCase())
       }
 
-      if (b.arch === 'amd64' || b.bitness === 64) {
+      if (b.arch === 'amd64') {
         labels.push('64-bit')
-      } else if (b.arch === 'i386' || b.bitness === 32) {
+      } else if (b.arch === 'i386') {
         labels.push('32-bit')
       }
 
@@ -108,7 +108,7 @@ function ordered (a) {
   const remaining = new Set(Object.keys(a))
   const objects = []
 
-  for (const k of ['name', 'path', 'version', 'channel', 'arch', 'bitness']) {
+  for (const k of ['name', 'path', 'version', 'channel', 'arch']) {
     if (k in a) {
       b[k] = a[k]
       remaining.delete(k)
