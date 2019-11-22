@@ -68,7 +68,6 @@ Additional properties are usually available but not guaranteed:
 - `uninstall` (object): Chrome only. Uninstaller info with:
   - `path` (string): path to installer;
   - `arguments` (array): arguments to installer in order to uninstall.
-- `bitness` (number): Chrome only. 64 or 32.
 - `guid` (string): Chrome only.
 
 ## CLI
@@ -234,7 +233,6 @@ On Windows 10 with `--json`:
     "version": "68.0.3436.0",
     "channel": "canary",
     "arch": "amd64",
-    "bitness": 64,
     "guid": "4EA16AC7-FD5A-47C3-875B-DBF4A2008C20",
     "info": {
       "FileVersion": "68.0.3436.0",
@@ -264,7 +262,6 @@ On Windows 10 with `--json`:
     "version": "66.0.3359.181",
     "channel": "stable",
     "arch": "amd64",
-    "bitness": 64,
     "guid": "8A69D345-D564-463C-AFF1-A69D9E530F96",
     "info": {
       "FileVersion": "66.0.3359.181",
