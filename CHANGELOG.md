@@ -1,5 +1,27 @@
 # Changelog
 
+## [5.0.0] - 2019-11-22
+
+### Changed
+
+- Upgrade `chalk` from `~2.4.1` to `~3.0.0` ([`8c8849d`](https://github.com/vweevers/win-detect-browsers/commit/8c8849d)) ([**@vweevers**](https://github.com/vweevers))
+- Upgrade `which` from `~1.3.0` to `~2.0.1` ([`fdc033f`](https://github.com/vweevers/win-detect-browsers/commit/fdc033f)) ([**@vweevers**](https://github.com/vweevers))
+- Upgrade `registry-js` from `~1.8.0` to `~1.9.0` ([#58](https://github.com/vweevers/win-detect-browsers/issues/58)) ([**@vweevers**](https://github.com/vweevers))
+- Upgrade `yargs` from `~13.3.0` to `~15.0.1` ([`d45d938`](https://github.com/vweevers/win-detect-browsers/commit/d45d938), [`a63e8bf`](https://github.com/vweevers/win-detect-browsers/commit/a63e8bf), [`8d73bdc`](https://github.com/vweevers/win-detect-browsers/commit/8d73bdc)) ([**@vweevers**](https://github.com/vweevers))
+
+### Added
+
+- Detect the new chromium-based MS Edge ([#60](https://github.com/vweevers/win-detect-browsers/issues/60)) ([**@pimterry**](https://github.com/pimterry))
+
+### Removed
+
+- **Breaking:** remove `bitness` from chrome metadata ([#61](https://github.com/vweevers/win-detect-browsers/issues/61)) ([**@vweevers**](https://github.com/vweevers))
+
+### Fixed
+
+- Improve detection of Chrome channel variants ([#61](https://github.com/vweevers/win-detect-browsers/issues/61)) ([**@pimterry**](https://github.com/pimterry))
+- Avoid errors if the registry is not readable ([#65](https://github.com/vweevers/win-detect-browsers/issues/65)) ([**@pimterry**](https://github.com/pimterry)). Previously this could happen if the user did not have access to the given hive or key.
+
 ## [4.0.1] - 2019-08-17
 
 ### Changed
@@ -99,6 +121,8 @@
 - Exports a readable object stream, but 1.x callback style is still supported
 - Only emits executables (`*.exe`)
 - No longer uses command-line version flags or version numbers found in the registry or elsewhere. This simplifies the process and makes the version numbers consistent and more detailed.
+
+[5.0.0]: https://github.com/vweevers/win-detect-browsers/compare/v4.0.1...v5.0.0
 
 [4.0.1]: https://github.com/vweevers/win-detect-browsers/compare/v4.0.0...v4.0.1
 
