@@ -65,10 +65,6 @@ Additional properties are usually available but not guaranteed:
   - Firefox: `release`, `developer`, `nightly` or [`esr`](https://www.mozilla.org/en-US/firefox/organizations/faq/)
   - Older versions of Firefox: `aurora`, `beta` or `rc`;
   - Opera: `stable`, `beta` or `developer`.
-- `uninstall` (object): Chrome only. Uninstaller info with:
-  - `path` (string): path to installer;
-  - `arguments` (array): arguments to installer in order to uninstall.
-- `guid` (string): Chrome only.
 
 ## CLI
 
@@ -233,7 +229,6 @@ On Windows 10 with `--json`:
     "version": "68.0.3436.0",
     "channel": "canary",
     "arch": "amd64",
-    "guid": "4EA16AC7-FD5A-47C3-875B-DBF4A2008C20",
     "info": {
       "FileVersion": "68.0.3436.0",
       "CompanyName": "Google Inc.",
@@ -247,13 +242,6 @@ On Windows 10 with `--json`:
       "ProductShortName": "Chrome",
       "LastChange": "e0f81fe637f233bf12e821915b72bc8d2194c3f2-refs/branch-heads/3436@{#1}",
       "Official Build": "1"
-    },
-    "uninstall": {
-      "path": "C:\\Users\\vweevers\\AppData\\Local\\Google\\Chrome SxS\\Application\\68.0.3436.0\\Installer\\setup.exe",
-      "arguments": [
-        "--uninstall",
-        "--chrome-sxs"
-      ]
     }
   },
   {
@@ -262,7 +250,6 @@ On Windows 10 with `--json`:
     "version": "66.0.3359.181",
     "channel": "stable",
     "arch": "amd64",
-    "guid": "8A69D345-D564-463C-AFF1-A69D9E530F96",
     "info": {
       "FileVersion": "66.0.3359.181",
       "CompanyName": "Google Inc.",
@@ -276,14 +263,6 @@ On Windows 10 with `--json`:
       "ProductShortName": "Chrome",
       "LastChange": "a10b9cedb40738cb152f8148ddab4891df876959-refs/branch-heads/3359@{#828}",
       "Official Build": "1"
-    },
-    "uninstall": {
-      "path": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\66.0.3359.181\\Installer\\setup.exe",
-      "arguments": [
-        "--uninstall",
-        "--system-level",
-        "--verbose-logging"
-      ]
     }
   },
   {
