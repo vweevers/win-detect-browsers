@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.0.0] - 2020-03-04
+
+### Changed
+
+- **Breaking:** Stop detecting the Chrome-only guid & uninstall properties ([#68](https://github.com/vweevers/win-detect-browsers/issues/68)) ([**@pimterry**](https://github.com/pimterry))
+- Upgrade `pascal-case` from `~2.0.1` to `~3.1.1` ([`addbdab`](https://github.com/vweevers/win-detect-browsers/commit/addbdab)) ([**@vweevers**](https://github.com/vweevers))
+- Unlock dependencies ([`5e370a1`](https://github.com/vweevers/win-detect-browsers/commit/5e370a1)) ([**@vweevers**](https://github.com/vweevers))
+
 ## [5.0.0] - 2019-11-22
 
 ### Changed
@@ -121,6 +129,8 @@
 - Exports a readable object stream, but 1.x callback style is still supported
 - Only emits executables (`*.exe`)
 - No longer uses command-line version flags or version numbers found in the registry or elsewhere. This simplifies the process and makes the version numbers consistent and more detailed.
+
+[6.0.0]: https://github.com/vweevers/win-detect-browsers/compare/v5.0.0...v6.0.0
 
 [5.0.0]: https://github.com/vweevers/win-detect-browsers/compare/v4.0.1...v5.0.0
 
