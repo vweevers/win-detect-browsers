@@ -50,7 +50,7 @@ detect(argv._, argv, function (err, browsers, methods) {
   } else {
     const tree = require('pretty-tree')
     const chalk = require('chalk')
-    const pascal = require('pascal-case')
+    const pascal = require('pascal-case').pascalCase
 
     browsers.forEach(function print (b) {
       const labels = [b.name.toUpperCase(), major(b.version)]
