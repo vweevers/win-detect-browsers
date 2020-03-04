@@ -66,7 +66,7 @@ detect(argv._, argv, function (err, browsers, methods) {
       }
 
       const label = chalk.white(labels.join(' '))
-      const atomic = ['path', 'version', 'guid'].filter(key => b[key] != null)
+      const atomic = ['path', 'version'].filter(key => b[key] != null)
       const nonAtomic = Object.keys(b).filter(key => isObject(b[key]))
 
       const pad = atomic.reduce(function (max, key) {
@@ -76,7 +76,7 @@ detect(argv._, argv, function (err, browsers, methods) {
       const nodes = atomic.map(key => {
         const value = b[key]
 
-        key = key === 'guid' ? 'GUID' : pascal(key)
+        key = pascal(key)
         key = key + ':' + pad.slice(key.length - pad.length - 1)
 
         return chalk.cyan(key) + value
