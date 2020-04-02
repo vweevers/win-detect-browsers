@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "after": "^0.8.2",
-    "chalk": "^3.0.0",
+    "chalk": "^4.0.0",
     "debug": "^4.1.0",
     "existent": "^1.0.1",
     "pascal-case": "^3.1.1",
