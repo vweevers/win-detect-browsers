@@ -13,7 +13,10 @@
 
 - [Usage](#usage)
 - [API](#api)
+  - [`detect([names, ]callback)`](#detectnames-callback)
 - [CLI](#cli)
+  - [Sample](#sample)
+  - [Full Sample](#full-sample)
 - [Install](#install)
 - [Background](#background)
 - [License](#license)
