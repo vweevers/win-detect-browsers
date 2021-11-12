@@ -14,10 +14,9 @@
 
 - [Usage](#usage)
 - [API](#api)
-  - [`detect([names, ]callback)`](#detectnames-callback)
+  - [`detect([names][, callback])`](#detectnames-callback)
 - [CLI](#cli)
   - [Sample](#sample)
-  - [Full Sample](#full-sample)
 - [Install](#install)
 - [Background](#background)
 - [License](#license)
@@ -63,7 +62,7 @@ Each `result` is an object with the following properties:
 - `path` (string): absolute path to executable
 - `version` (string)
 - `arch` (string): CPU type the executable was built for: `amd64`, `i386` or [other](https://github.com/vweevers/pe-machine-type#types);
-- `info` (object): executable metadata (see [full sample](#full-sample) below).
+- `info` (object): executable metadata (see [sample](#sample) below).
 
 Additional properties are usually available but not guaranteed:
 
@@ -79,63 +78,18 @@ Additional properties are usually available but not guaranteed:
 win-detect-browsers [options] [name, name..]
 ```
 
+Write browsers to stdout as a JSON array. Includes all browsers unless one or more names are given.
+
 Options:
 
 - `--help` `-h`: Show help
 - `--version` `-v`: Show CLI version number
-- `--json` `-j`: Print results as JSON array
 - `--summary` `-s`: Less properties;
-- `--debug` `-d`: Enable [debug](https://github.com/visionmedia/debug) scope.
+- `--debug` `-d`: Enable debug output.
 
 ### Sample
 
-On Windows 10 with `--summary`:
-
-<details><summary>Click to expand</summary>
-
-```
-IE 11 64-bit
-├── Path:    C:\Program Files\Internet Explorer\iexplore.exe
-└── Version: 11.0.17134.1
-
-IE 11 32-bit
-├── Path:    C:\Program Files (x86)\Internet Explorer\iexplore.exe
-└── Version: 11.0.17134.1
-
-CHROME 68 CANARY 64-bit
-├── Path:    C:\Users\vweevers\AppData\Local\Google\Chrome SxS\Application\chrome.exe
-├── Version: 68.0.3436.0
-└── GUID:    4EA16AC7-FD5A-47C3-875B-DBF4A2008C20
-
-CHROME 66 STABLE 64-bit
-├── Path:    C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
-├── Version: 66.0.3359.181
-└── GUID:    8A69D345-D564-463C-AFF1-A69D9E530F96
-
-FIREFOX 61 RELEASE 64-bit
-├── Path:    C:\Program Files\Mozilla Firefox\firefox.exe
-└── Version: 61.0.0.6711
-
-FIREFOX 62 NIGHTLY 64-bit
-├── Path:    C:\Program Files\Firefox Nightly\firefox.exe
-└── Version: 62.0.0.6712
-
-FIREFOX 61 DEVELOPER 64-bit
-├── Path:    C:\Program Files\Firefox Developer Edition\firefox.exe
-└── Version: 61.0.0.6711
-
-OPERA 53 BETA 64-bit
-├── Path:    C:\Program Files\Opera beta\Launcher.exe
-└── Version: 53.0.2907.31
-
-Found 9 browsers in 26 ways within 76ms.
-```
-
-</details>
-
-### Full Sample
-
-On Windows 10 with `--json`:
+On Windows 10:
 
 <details><summary>Click to expand</summary>
 

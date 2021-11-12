@@ -6,20 +6,18 @@ const names = Object.keys(require('./lib/browsers'))
 const argv = require('yargs')
   .usage([
     'win-detect-browsers [options] [name, name..]\n',
-    'Names:',
+    'Write browsers to stdout as a JSON array.\n',
+    'Includes all browsers unless one or more names are given:',
     names.map(name => '  ' + name).join('\n')
   ].join('\n'))
-  .boolean('json')
   .boolean('summary')
   .boolean('debug')
-  .describe('json', 'Print results as JSON array')
   .describe('summary', 'Less properties')
-  .describe('debug', 'Enable debug scope')
+  .describe('debug', 'Enable debug output')
   .describe('version', 'Show CLI version number')
   .alias({
     version: 'v',
     help: 'h',
-    json: 'j',
     summary: 's',
     debug: 'd'
   })
@@ -32,76 +30,21 @@ if (argv.debug) {
 const detect = require('.')
 const start = Date.now()
 
-detect(argv._, argv, function (err, browsers, methods) {
+detect(argv._, function (err, browsers, methods) {
   if (err) throw err
 
   const duration = Date.now() - start
 
-  if (argv.json) {
-    if (argv.summary) {
-      browsers = browsers.map(b => {
-        const { name, version, channel, arch, path } = b
-        return { name, path, version, channel, arch }
-      })
-    }
-
-    console.log(JSON.stringify(browsers.map(ordered), null, 2))
-    console.log()
-  } else {
-    const tree = require('pretty-tree')
-    const chalk = require('chalk')
-    const pascal = require('pascal-case').pascalCase
-
-    browsers.forEach(function print (b) {
-      const labels = [b.name.toUpperCase(), major(b.version)]
-
-      if (b.channel) {
-        labels.push(b.channel.toUpperCase())
-      }
-
-      if (b.arch === 'amd64') {
-        labels.push('64-bit')
-      } else if (b.arch === 'i386') {
-        labels.push('32-bit')
-      }
-
-      const label = chalk.white(labels.join(' '))
-      const atomic = ['path', 'version'].filter(key => b[key] != null)
-      const nonAtomic = Object.keys(b).filter(key => isObject(b[key]))
-
-      const pad = atomic.reduce(function (max, key) {
-        return max.length >= key.length ? max : key.replace(/./g, ' ')
-      }, ' ')
-
-      const nodes = atomic.map(key => {
-        const value = b[key]
-
-        key = pascal(key)
-        key = key + ':' + pad.slice(key.length - pad.length - 1)
-
-        return chalk.cyan(key) + value
-      })
-
-      if (!argv.summary) {
-        for (const key of nonAtomic) {
-          nodes.push({ label: pascal(key), leaf: b[key] })
-        }
-      }
-
-      console.log(tree({ label, nodes }))
+  if (argv.summary) {
+    browsers = browsers.map(b => {
+      const { name, version, channel, arch, path } = b
+      return { name, path, version, channel, arch }
     })
   }
 
-  console.error('Found %d browsers in %d ways within %dms.', browsers.length, methods, duration)
+  console.log(JSON.stringify(browsers.map(ordered), null, 2))
+  console.error('\nFound %d browsers in %d ways within %dms.', browsers.length, methods, duration)
 })
-
-function isObject (value) {
-  return typeof value === 'object' && value !== null
-}
-
-function major (version) {
-  return version.split(/[^\d]+/)[0]
-}
 
 function ordered (a) {
   const b = {}
