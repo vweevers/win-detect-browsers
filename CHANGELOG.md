@@ -121,7 +121,7 @@
 
 - Uppercase environment variables ([`a2395b8`](https://github.com/vweevers/win-detect-browsers/commit/a2395b8))
 
-## 2.0.0 - 2015-05-03
+## [2.0.0] - 2015-05-03
 
 ### Changed
 
@@ -130,18 +130,20 @@
 - Only emits executables (`*.exe`)
 - No longer uses command-line version flags or version numbers found in the registry or elsewhere. This simplifies the process and makes the version numbers consistent and more detailed.
 
-[6.0.0]: https://github.com/vweevers/win-detect-browsers/compare/v5.0.0...v6.0.0
+[6.0.0]: https://github.com/vweevers/win-detect-browsers/releases/tag/v6.0.0
 
-[5.0.0]: https://github.com/vweevers/win-detect-browsers/compare/v4.0.1...v5.0.0
+[5.0.0]: https://github.com/vweevers/win-detect-browsers/releases/tag/v5.0.0
 
-[4.0.1]: https://github.com/vweevers/win-detect-browsers/compare/v4.0.0...v4.0.1
+[4.0.1]: https://github.com/vweevers/win-detect-browsers/releases/tag/v4.0.1
 
-[4.0.0]: https://github.com/vweevers/win-detect-browsers/compare/v3.1.0...v4.0.0
+[4.0.0]: https://github.com/vweevers/win-detect-browsers/releases/tag/v4.0.0
 
-[3.1.0]: https://github.com/vweevers/win-detect-browsers/compare/v3.0.0...v3.1.0
+[3.1.0]: https://github.com/vweevers/win-detect-browsers/releases/tag/v3.1.0
 
-[3.0.0]: https://github.com/vweevers/win-detect-browsers/compare/v3.0.0-rc1...v3.0.0
+[3.0.0]: https://github.com/vweevers/win-detect-browsers/releases/tag/v3.0.0
 
-[3.0.0-rc1]: https://github.com/vweevers/win-detect-browsers/compare/v2.1.0...v3.0.0-rc1
+[3.0.0-rc1]: https://github.com/vweevers/win-detect-browsers/releases/tag/v3.0.0-rc1
 
-[2.1.0]: https://github.com/vweevers/win-detect-browsers/compare/v2.0.0...v2.1.0
+[2.1.0]: https://github.com/vweevers/win-detect-browsers/releases/tag/v2.1.0
+
+[2.0.0]: https://github.com/vweevers/win-detect-browsers/releases/tag/v2.0.0

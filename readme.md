@@ -26,7 +26,7 @@
 
 ## Usage
 
-**If you are upgrading:** please see [the changelog](CHANGELOG.md).
+_If you are upgrading: please see the [changelog](CHANGELOG.md)._
 
 ```js
 const detect = require('win-detect-browsers')
@@ -307,4 +307,4 @@ Browser detection on Windows can't be done right. This is the _try-everything-an
 
 ## License
 
-[MIT](./LICENSE) © 2014-present Vincent Weevers.
+[MIT](./LICENSE)
