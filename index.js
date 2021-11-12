@@ -41,9 +41,7 @@ module.exports = function detect (names, opts, done) {
     const browser = opts.browsers[name]
     if (!browser) throw new Error('No such browser is defined: ' + name)
 
-    const f = new Finder(name, browser, opts)
-
-    f.on('error', next).on('end', (res, methods) => {
+    new Finder(name, browser).run((res, methods) => {
       for (const b of res.values()) result.push(b)
       totalMethods += methods
       next()

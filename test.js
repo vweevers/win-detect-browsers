@@ -120,7 +120,7 @@ test('find methods', function (t) {
       }
     }
 
-    function find (method, fn, done) {
+    function find (method, fn) {
       const browsers = {
         methods_test: {
           bin: 'dummy.exe',
@@ -276,7 +276,7 @@ test('firefox channel from ProductVersion', function (t) {
       }
     }
 
-    detect({ browsers, channel: true }, function (err, results) {
+    detect({ browsers }, function (err, results) {
       t.ifError(err, 'no error')
       t.same(results, [
         {
@@ -313,7 +313,7 @@ test('firefox developer channel from ProductName', function (t) {
       }
     }
 
-    detect({ browsers, channel: true }, function (err, results) {
+    detect({ browsers }, function (err, results) {
       t.ifError(err, 'no error')
       t.same(results, [
         {
