@@ -1,11 +1,11 @@
 'use strict'
 
-const Finder = require('./lib/finder')
+const { fromCallback } = require('catering')
 const after = require('after')
+const Finder = require('./lib/finder')
 
-const DEFAULTS = {
-  browsers: require('./lib/browsers')
-}
+const DEFAULTS = { browsers: require('./lib/browsers') }
+const kPromise = Symbol('promise')
 
 module.exports = function detect (names, opts, done) {
   if (typeof names === 'string') {
@@ -23,11 +23,14 @@ module.exports = function detect (names, opts, done) {
     opts = Object.assign({}, DEFAULTS, opts)
   }
 
+  done = fromCallback(done, kPromise)
+
   if (!names || !names.length) {
     names = Object.keys(opts.browsers)
   }
 
   const result = []
+  const finish = (err) => err ? done(err) : done(null, result, totalMethods)
   const next = after(names.length, finish)
 
   // For debugging: count the number
@@ -47,8 +50,5 @@ module.exports = function detect (names, opts, done) {
     })
   })
 
-  function finish (err) {
-    if (err) done(err)
-    else done(err, result, totalMethods)
-  }
+  return done[kPromise]
 }

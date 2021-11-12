@@ -37,7 +37,10 @@ detect(function (err, browsers) {
   console.log(browsers)
 })
 
-// Chrome and Firefox
+// All browsers with promise
+const browsers = await detect()
+
+// Search only for Chrome and Firefox
 detect(['chrome', 'firefox'], function (err, browsers) {
   if (err) throw err
 
@@ -50,9 +53,9 @@ detect(['chrome', 'firefox'], function (err, browsers) {
 
 ## API
 
-### `detect([names, ]callback)`
+### `detect([names][, callback])`
 
-`names` is an array of browser names you want to find. If omitted or empty, it will detect _[everything](http://youtu.be/k1yvvNvlXtg)_. The `callback` receives an error if any and an array of `results`. A result is excluded if its path has no `.exe` extension or if its version could not be read.
+`names` is an array of browser names you want to find. If omitted or empty, it will detect _[everything](http://youtu.be/k1yvvNvlXtg)_. The `callback` receives an error if any and an array of `results`. A result is excluded if its path has no `.exe` extension or if its version could not be read. If no callback is provided, a promise is returned.
 
 Each `result` is an object with the following properties:
 

@@ -351,6 +351,18 @@ test('detect all', function (t) {
   })
 })
 
+test('detect all with promise', async function (t) {
+  const results = await detect()
+  const names = results.map(b => b.name)
+  const withVersions = results.filter(hasVersion).length
+
+  t.ok(names.indexOf('chrome') >= 0, 'found chrome')
+  t.ok(names.indexOf('firefox') >= 0, 'found firefox')
+  t.ok(names.indexOf('ie') >= 0, 'found ie')
+
+  t.equal(withVersions, results.length, 'have version numbers')
+})
+
 test('detect chrome', function (t) {
   detect('chrome', function (err, results) {
     t.ifError(err, 'no error')
@@ -370,6 +382,20 @@ test('detect chrome', function (t) {
   })
 })
 
+test('detect chrome with promise', async function (t) {
+  const results = await detect('chrome')
+  const names = results.filter(b => b.name === 'chrome')
+  t.equal(names.length, results.length, 'have names')
+
+  const versions = results.filter(hasVersion)
+  t.equal(versions.length, results.length, 'have version numbers')
+
+  if (argv.canary) {
+    const msg = 'found ' + results.length + ' chrome versions'
+    t.ok(results.length >= 2, msg)
+  }
+})
+
 test('detect chrome and firefox', function (t) {
   t.plan(4)
 
@@ -383,6 +409,16 @@ test('detect chrome and firefox', function (t) {
     t.ok(names.indexOf('firefox') >= 0, 'found firefox')
     t.ok(withVersions >= 2, 'have version numbers')
   })
+})
+
+test('detect chrome and firefox with promise', async function (t) {
+  const results = await detect(['chrome', 'firefox'])
+  const names = results.map(b => b.name)
+  const withVersions = results.filter(hasVersion).length
+
+  t.ok(names.indexOf('chrome') >= 0, 'found chrome')
+  t.ok(names.indexOf('firefox') >= 0, 'found firefox')
+  t.ok(withVersions >= 2, 'have version numbers')
 })
 
 maybe(argv.opera)('detect all opera versions', function (t) {
@@ -445,13 +481,27 @@ test('no result asynchronicity', function (t) {
 
   let async = false
 
-  detect({ browsers: browsers }, function (err, results) {
+  detect({ browsers }, function (err, results) {
     t.ifError(err, 'no error')
     t.equal(results.length, 0)
     t.equal(async, true)
   })
 
   async = true
+})
+
+test('no result with promise', async function (t) {
+  const browsers = {
+    beep: {
+      bin: 'beep.exe',
+      find: function () {
+        this.file()
+      }
+    }
+  }
+
+  const results = await detect({ browsers })
+  t.equal(results.length, 0)
 })
 
 function hasVersion (b) {
