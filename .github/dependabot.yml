@@ -1,0 +1,13 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    ignore:
+      # Ended support of Node.js 10
+      - dependency-name: yargs
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

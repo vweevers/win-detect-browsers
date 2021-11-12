@@ -2,10 +2,11 @@
 
 **Fast and native browser detection on Windows. Detects installed versions of [Beaker](https://beakerbrowser.com/), [Brave](https://brave.com/), [Chrome](https://www.google.com/chrome/), [Chromium](https://www.chromium.org/), [Firefox](https://www.mozilla.org/en-US/firefox/), [Internet Explorer](https://en.wikipedia.org/wiki/Internet_Explorer), [Maxthon](http://www.maxthon.com/), [Opera](https://www.opera.com/), [Safari](https://www.apple.com/safari/) and [Yandex](https://browser.yandex.com/).**
 
-[![npm status](http://img.shields.io/npm/v/win-detect-browsers.svg)](https://www.npmjs.org/package/win-detect-browsers)
-[![Build status](https://img.shields.io/appveyor/ci/vweevers/win-detect-browsers.svg)](https://ci.appveyor.com/project/vweevers/win-detect-browsers)
-[![Dependency Status](https://img.shields.io/david/vweevers/win-detect-browsers.svg)](https://david-dm.org/vweevers/win-detect-browsers)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![npm](https://img.shields.io/npm/v/win-detect-browsers.svg)](https://www.npmjs.com/package/win-detect-browsers)
+[![Node version](https://img.shields.io/node/v/win-detect-browsers.svg)](https://www.npmjs.com/package/win-detect-browsers)
+[![Test](https://img.shields.io/github/workflow/status/vweevers/win-detect-browsers/Test?label=test)](https://github.com/vweevers/win-detect-browsers/actions/workflows/test.yml)
+[![Standard](https://img.shields.io/badge/standard-informational?logo=javascript&logoColor=fff)](https://standardjs.com)
+[![Common Changelog](https://common-changelog.org/badge.svg)](https://common-changelog.org)
 
 ## Table of Contents
 
