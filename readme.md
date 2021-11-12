@@ -58,7 +58,7 @@ detect(['chrome', 'firefox'], function (err, browsers) {
 
 Each `result` is an object with the following properties:
 
-- `name` (string): `chrome`, `chromium`, `firefox`, `ie`, `safari`, `opera`, `maxthon` or `yandex`
+- `name` (string): `chrome`, `chromium`, `firefox`, `beaker`, `brave`, `ie`, `msedge`, `maxthon`, `opera`, `safari`, `yandex`
 - `path` (string): absolute path to executable
 - `version` (string)
 - `arch` (string): CPU type the executable was built for: `amd64`, `i386` or [other](https://github.com/vweevers/pe-machine-type#types);
@@ -78,7 +78,7 @@ Additional properties are usually available but not guaranteed:
 win-detect-browsers [options] [name, name..]
 ```
 
-Write browsers to stdout as a JSON array. Includes all browsers unless one or more names are given.
+Write browsers to stdout as a JSON array. Includes all browsers unless one or more names are given (see list above).
 
 Options:
 
