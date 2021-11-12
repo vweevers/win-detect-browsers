@@ -1,5 +1,23 @@
 # Changelog
 
+## [7.0.0] - 2021-11-12
+
+### Changed
+
+- **Breaking:** bump [`win-version-info`](https://github.com/vweevers/win-version-info) and `yargs` ([`b0c9ab0`](https://github.com/vweevers/win-detect-browsers/commit/b0c9ab0), [`b438175`](https://github.com/vweevers/win-detect-browsers/commit/b438175)) (Vincent Weevers). Drops support of Node.js 8.
+- Change CLI to always print result as JSON ([`88dc694`](https://github.com/vweevers/win-detect-browsers/commit/88dc694)) (Vincent Weevers)
+- Remove `xtend` dependency ([`fbcba58`](https://github.com/vweevers/win-detect-browsers/commit/fbcba58)) (Vincent Weevers)
+- Refactor: remove unused pre hook ([`ec92805`](https://github.com/vweevers/win-detect-browsers/commit/ec92805)) (Vincent Weevers)
+- Refactor: remove unused events and opts from Finder ([`48c683c`](https://github.com/vweevers/win-detect-browsers/commit/48c683c)) (Vincent Weevers)
+
+### Added
+
+- Add promise support ([`ca8d84e`](https://github.com/vweevers/win-detect-browsers/commit/ca8d84e)) (Vincent Weevers)
+
+### Fixed
+
+- Fix documentation of `name` ([`83a1f79`](https://github.com/vweevers/win-detect-browsers/commit/83a1f79)) (Vincent Weevers).
+
 ## [6.0.0] - 2020-03-04
 
 ### Changed
@@ -129,6 +147,8 @@
 - Exports a readable object stream, but 1.x callback style is still supported
 - Only emits executables (`*.exe`)
 - No longer uses command-line version flags or version numbers found in the registry or elsewhere. This simplifies the process and makes the version numbers consistent and more detailed.
+
+[7.0.0]: https://github.com/vweevers/win-detect-browsers/releases/tag/v7.0.0
 
 [6.0.0]: https://github.com/vweevers/win-detect-browsers/releases/tag/v6.0.0
 
