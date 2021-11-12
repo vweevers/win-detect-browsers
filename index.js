@@ -1,7 +1,6 @@
 'use strict'
 
 const Finder = require('./lib/finder')
-const xtend = require('xtend')
 const after = require('after')
 
 const DEFAULTS = {
@@ -19,9 +18,9 @@ module.exports = function detect (names, opts, done) {
 
   if (typeof opts === 'function') {
     done = opts
-    opts = xtend(DEFAULTS)
+    opts = Object.assign({}, DEFAULTS)
   } else {
-    opts = xtend(DEFAULTS, opts)
+    opts = Object.assign({}, DEFAULTS, opts)
   }
 
   if (!names || !names.length) {

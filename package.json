@@ -28,7 +28,6 @@
     "which": "^2.0.1",
     "win-version-info": "^5.0.1",
     "windows-env": "^1.0.1",
-    "xtend": "^4.0.0",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
