@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "hallmark": "^4.0.0",
-    "standard": "^16.0.4",
+    "standard": "^17.0.0",
     "tape": "^5.0.0",
     "win-dummy-exe": "0.0.1"
   },
