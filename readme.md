@@ -71,6 +71,7 @@ Additional properties are usually available but not guaranteed:
   - Firefox: `release`, `developer`, `nightly` or [`esr`](https://www.mozilla.org/en-US/firefox/organizations/faq/)
   - Older versions of Firefox: `aurora`, `beta` or `rc`;
   - Opera: `stable`, `beta` or `developer`.
+  - Edge: `stable`, `beta` or `dev`
 
 ## CLI
 
