@@ -13,7 +13,7 @@
 _If you are upgrading: please see the [changelog](CHANGELOG.md)._
 
 ```js
-const detect = require('win-detect-browsers')
+import detect from 'win-detect-browsers'
 
 // All browsers
 const browsers = await detect()

@@ -1,10 +1,8 @@
-'use strict'
+import after from 'after'
+import Finder from './lib/finder.js'
+import defaultBrowsers from './lib/browsers.js'
 
-const after = require('after')
-const Finder = require('./lib/finder')
-const defaultBrowsers = require('./lib/browsers')
-
-module.exports = function detect (names = null, options = null) {
+export default function detect (names = null, options = null) {
   if (typeof names === 'string') {
     names = [names]
   }

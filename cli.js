@@ -1,9 +1,12 @@
 #!/usr/bin/env node
-'use strict'
+import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers'
+import debug from 'debug'
+import detect from './index.js'
+import browsers from './lib/browsers.js'
 
-const names = Object.keys(require('./lib/browsers'))
-
-const argv = require('yargs')
+const names = Object.keys(browsers)
+const argv = yargs(hideBin(process.argv))
   .usage([
     'win-detect-browsers [options] [name, name..]\n',
     'Write browsers to stdout as a JSON array.\n',
@@ -24,10 +27,8 @@ const argv = require('yargs')
   .argv
 
 if (argv.debug) {
-  require('debug').enable('win-detect-browsers')
+  debug.enable('win-detect-browsers')
 }
-
-const detect = require('.')
 
 async function main () {
   const start = Date.now()
