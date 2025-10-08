@@ -8,21 +8,6 @@
 [![Standard](https://img.shields.io/badge/standard-informational?logo=javascript&logoColor=fff)](https://standardjs.com)
 [![Common Changelog](https://common-changelog.org/badge.svg)](https://common-changelog.org)
 
-## Table of Contents
-
-<details><summary>Click to expand</summary>
-
-- [Usage](#usage)
-- [API](#api)
-  - [`detect([names][, callback])`](#detectnames-callback)
-- [CLI](#cli)
-  - [Sample](#sample)
-- [Install](#install)
-- [Background](#background)
-- [License](#license)
-
-</details>
-
 ## Usage
 
 _If you are upgrading: please see the [changelog](CHANGELOG.md)._
