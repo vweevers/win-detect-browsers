@@ -6,7 +6,7 @@ jobs:
   test:
     strategy:
       matrix:
-        node: [10, 12, 14, 16]
+        node: [20, 22, 24]
     runs-on: windows-latest
     name: Node ${{ matrix.node }}
     steps:
