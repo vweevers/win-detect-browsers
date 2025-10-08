@@ -28,11 +28,10 @@ if (argv.debug) {
 }
 
 const detect = require('.')
-const start = Date.now()
 
-detect(argv._, function (err, browsers, methods) {
-  if (err) throw err
-
+async function main () {
+  const start = Date.now()
+  let browsers = await detect(argv._)
   const duration = Date.now() - start
 
   if (argv.summary) {
@@ -43,7 +42,12 @@ detect(argv._, function (err, browsers, methods) {
   }
 
   console.log(JSON.stringify(browsers.map(ordered), null, 2))
-  console.error('\nFound %d browsers in %d ways within %dms.', browsers.length, methods, duration)
+  console.error('\nFound %d browsers in %dms.', browsers.length, duration)
+}
+
+main().catch(err => {
+  console.error(err)
+  process.exit(1)
 })
 
 function ordered (a) {

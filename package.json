@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "after": "^0.8.2",
-    "catering": "^2.1.0",
     "debug": "^4.1.0",
     "existent": "^1.0.1",
     "pe-machine-type": "^1.0.0",

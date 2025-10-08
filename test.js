@@ -34,8 +34,9 @@ test('find methods', function (t) {
   const wow = env.X64
   const hives = wow ? 4 : 2
 
-  t.plan((methods * 2) + (mockRegistries * hives * 3))
+  t.plan(methods + (mockRegistries * hives * 3))
 
+  // TODO: use promises
   gen({ assemblyVersion: '1.0.0.0' }, function (err, exe) {
     if (err) throw err
 
@@ -128,9 +129,8 @@ test('find methods', function (t) {
         }
       }
 
-      detect({ browsers }, function (err, results) {
-        t.ifError(err, 'no detect error')
-
+      // TODO: async/await
+      detect(null, { browsers }).then(function (results) {
         t.same(results, [{
           name: 'methods_test',
           path: exe,
@@ -142,14 +142,12 @@ test('find methods', function (t) {
             OriginalFilename: 'dummy.exe'
           }
         }], method)
-      })
+      }).catch(t.fail)
     }
   })
 })
 
-test('ignores non-exe', function (t) {
-  t.plan(2)
-
+test('ignores non-exe', async function (t) {
   const browsers = {
     test: {
       bin: 'test.js',
@@ -159,15 +157,14 @@ test('ignores non-exe', function (t) {
     }
   }
 
-  detect({ browsers }, function (err, results) {
-    t.ifError(err, 'no error')
-    t.is(results.length, 0, 'no results')
-  })
+  const results = await detect(null, { browsers })
+  t.is(results.length, 0, 'no results')
 })
 
 test('prefers FileVersion over ProductVersion', function (t) {
-  t.plan(4)
+  t.plan(3)
 
+  // TODO: use promises
   gen({ assemblyFileVersion: '1.2.3.4', assemblyInformationalVersion: '1.0' }, function (err, exe1) {
     t.ifError(err, 'no gen error (1)')
 
@@ -184,8 +181,7 @@ test('prefers FileVersion over ProductVersion', function (t) {
         }
       }
 
-      detect({ browsers }, function (err, results) {
-        t.ifError(err, 'no error')
+      detect(null, { browsers }).then(function (results) {
         t.same(results.sort((a, b) => a.path > b.path ? 1 : -1), [
           {
             name: 'test',
@@ -211,13 +207,13 @@ test('prefers FileVersion over ProductVersion', function (t) {
             }
           }
         ])
-      })
+      }).catch(t.fail)
     })
   })
 })
 
 test('ignores exe without version', function (t) {
-  t.plan(3)
+  t.plan(2)
 
   gen(function (err, exe) {
     t.ifError(err, 'no gen error')
@@ -231,10 +227,9 @@ test('ignores exe without version', function (t) {
       }
     }
 
-    detect({ browsers }, function (err, results) {
-      t.ifError(err, 'no error')
+    detect(null, { browsers }).then(function (results) {
       t.is(results.length, 0, 'no results')
-    })
+    }).catch(t.fail)
   })
 })
 
@@ -261,7 +256,7 @@ test('firefox release channels', function (t) {
 })
 
 test('firefox channel from ProductVersion', function (t) {
-  t.plan(3)
+  t.plan(2)
 
   gen({ assemblyFileVersion: '53.0.0.6175', assemblyInformationalVersion: '53.0a1' }, function (err, exe) {
     t.ifError(err, 'no gen error')
@@ -276,8 +271,7 @@ test('firefox channel from ProductVersion', function (t) {
       }
     }
 
-    detect({ browsers }, function (err, results) {
-      t.ifError(err, 'no error')
+    detect(null, { browsers }).then(function (results) {
       t.same(results, [
         {
           channel: 'nightly',
@@ -293,12 +287,12 @@ test('firefox channel from ProductVersion', function (t) {
           }
         }
       ])
-    })
+    }).catch(t.fail)
   })
 })
 
 test('firefox developer channel from ProductName', function (t) {
-  t.plan(3)
+  t.plan(2)
 
   gen({ assemblyFileVersion: '1.0.0.0', assemblyProduct: 'FirefoxDeveloperEdition' }, function (err, exe) {
     t.ifError(err, 'no gen error')
@@ -313,8 +307,7 @@ test('firefox developer channel from ProductName', function (t) {
       }
     }
 
-    detect({ browsers }, function (err, results) {
-      t.ifError(err, 'no error')
+    detect(null, { browsers }).then(function (results) {
       t.same(results, [
         {
           channel: 'developer',
@@ -330,28 +323,11 @@ test('firefox developer channel from ProductName', function (t) {
           }
         }
       ])
-    })
+    }).catch(t.fail)
   })
 })
 
-test('detect all', function (t) {
-  t.plan(5)
-
-  detect(function (err, results) {
-    t.ifError(err, 'no error')
-
-    const names = results.map(b => b.name)
-    const withVersions = results.filter(hasVersion).length
-
-    t.ok(names.indexOf('chrome') >= 0, 'found chrome')
-    t.ok(names.indexOf('firefox') >= 0, 'found firefox')
-    t.ok(names.indexOf('ie') >= 0, 'found ie')
-
-    t.equal(withVersions, results.length, 'have version numbers')
-  })
-})
-
-test('detect all with promise', async function (t) {
+test('detect all', async function (t) {
   const results = await detect()
   const names = results.map(b => b.name)
   const withVersions = results.filter(hasVersion).length
@@ -360,35 +336,16 @@ test('detect all with promise', async function (t) {
   t.ok(names.indexOf('firefox') >= 0, 'found firefox')
   t.ok(names.indexOf('ie') >= 0, 'found ie')
 
-  t.equal(withVersions, results.length, 'have version numbers')
+  t.is(withVersions, results.length, 'have version numbers')
 })
 
-test('detect chrome', function (t) {
-  detect('chrome', function (err, results) {
-    t.ifError(err, 'no error')
-
-    const names = results.filter(b => b.name === 'chrome')
-    t.equal(names.length, results.length, 'have names')
-
-    const versions = results.filter(hasVersion)
-    t.equal(versions.length, results.length, 'have version numbers')
-
-    if (argv.canary) {
-      const msg = 'found ' + results.length + ' chrome versions'
-      t.ok(results.length >= 2, msg)
-    }
-
-    t.end()
-  })
-})
-
-test('detect chrome with promise', async function (t) {
+test('detect chrome', async function (t) {
   const results = await detect('chrome')
   const names = results.filter(b => b.name === 'chrome')
-  t.equal(names.length, results.length, 'have names')
-
   const versions = results.filter(hasVersion)
-  t.equal(versions.length, results.length, 'have version numbers')
+
+  t.is(names.length, results.length, 'have names')
+  t.is(versions.length, results.length, 'have version numbers')
 
   if (argv.canary) {
     const msg = 'found ' + results.length + ' chrome versions'
@@ -396,22 +353,7 @@ test('detect chrome with promise', async function (t) {
   }
 })
 
-test('detect chrome and firefox', function (t) {
-  t.plan(4)
-
-  detect(['chrome', 'firefox'], function (err, results) {
-    t.ifError(err, 'no error')
-
-    const names = results.map(b => b.name)
-    const withVersions = results.filter(hasVersion).length
-
-    t.ok(names.indexOf('chrome') >= 0, 'found chrome')
-    t.ok(names.indexOf('firefox') >= 0, 'found firefox')
-    t.ok(withVersions >= 2, 'have version numbers')
-  })
-})
-
-test('detect chrome and firefox with promise', async function (t) {
+test('detect chrome and firefox', async function (t) {
   const results = await detect(['chrome', 'firefox'])
   const names = results.map(b => b.name)
   const withVersions = results.filter(hasVersion).length
@@ -421,35 +363,31 @@ test('detect chrome and firefox with promise', async function (t) {
   t.ok(withVersions >= 2, 'have version numbers')
 })
 
-maybe(argv.opera)('detect all opera versions', function (t) {
-  t.plan(3)
+maybe(argv.opera)('detect all opera versions', async function (t) {
+  const results = await detect('opera')
 
-  detect('opera', function (err, results) {
-    t.ifError(err, 'no error')
-    t.equal(results.length, 3)
+  t.is(results.length, 3)
 
-    const versions = results.map(b => b.version)
-    const uniq = versions.filter((v, i) => versions.lastIndexOf(v) === i)
+  const versions = results.map(b => b.version)
+  const uniq = versions.filter((v, i) => versions.lastIndexOf(v) === i)
 
-    t.equal(uniq.length, 3, 'unique versions')
-  })
+  t.is(uniq.length, 3, 'unique versions')
 })
 
 test('concurrency', function (t) {
   const n = 5
 
-  t.plan(n * 2)
+  t.plan(n)
   for (let i = n; i > 0; i--) chrome()
 
   function chrome () {
-    detect('chrome', function (err, results) {
-      t.ifError(err, 'no error')
+    detect('chrome').then(function (results) {
       t.ok(results.length >= 1)
-    })
+    }).catch(t.fail)
   }
 })
 
-test('no result', function (t) {
+test('no result', async function (t) {
   const browsers = {
     beep: {
       bin: 'beep.exe',
@@ -459,49 +397,8 @@ test('no result', function (t) {
     }
   }
 
-  t.plan(2)
-
-  detect({ browsers }, function (err, results) {
-    t.ifError(err, 'no error')
-    t.equal(results.length, 0)
-  })
-})
-
-test('no result asynchronicity', function (t) {
-  const browsers = {
-    beep: {
-      bin: 'beep.exe',
-      find: function () {
-        this.file()
-      }
-    }
-  }
-
-  t.plan(3)
-
-  let async = false
-
-  detect({ browsers }, function (err, results) {
-    t.ifError(err, 'no error')
-    t.equal(results.length, 0)
-    t.equal(async, true)
-  })
-
-  async = true
-})
-
-test('no result with promise', async function (t) {
-  const browsers = {
-    beep: {
-      bin: 'beep.exe',
-      find: function () {
-        this.file()
-      }
-    }
-  }
-
-  const results = await detect({ browsers })
-  t.equal(results.length, 0)
+  const results = await detect(null, { browsers })
+  t.is(results.length, 0)
 })
 
 function hasVersion (b) {

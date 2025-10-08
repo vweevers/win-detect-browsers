@@ -16,32 +16,24 @@ _If you are upgrading: please see the [changelog](CHANGELOG.md)._
 const detect = require('win-detect-browsers')
 
 // All browsers
-detect(function (err, browsers) {
-  if (err) throw err
-  console.log(browsers)
-})
-
-// All browsers with promise
 const browsers = await detect()
 
 // Search only for Chrome and Firefox
-detect(['chrome', 'firefox'], function (err, browsers) {
-  if (err) throw err
+const browsers = await detect(['chrome', 'firefox'])
 
-  for (let b of browsers) {
-    console.log(b.version) // '57.0.2931.0'
-    console.log(b.channel) // 'canary'
-  }
-})
+for (const b of browsers) {
+  console.log(b.version) // E.g. '57.0.2931.0'
+  console.log(b.channel) // E.g. 'canary'
+}
 ```
 
 ## API
 
-### `detect([names][, callback])`
+### `detect([names])`
 
-`names` is an array of browser names you want to find. If omitted or empty, it will detect _[everything](http://youtu.be/k1yvvNvlXtg)_. The `callback` receives an error if any and an array of `results`. A result is excluded if its path has no `.exe` extension or if its version could not be read. If no callback is provided, a promise is returned.
+`names` is an array of browser names you want to find. If omitted or empty, it will detect _[everything](http://youtu.be/k1yvvNvlXtg)_. Returns a promise for an array of results. A result is excluded if its path has no `.exe` extension or if its version could not be read.
 
-Each `result` is an object with the following properties:
+Each result is an object with the following properties:
 
 - `name` (string): `chrome`, `chromium`, `firefox`, `beaker`, `brave`, `ie`, `msedge`, `maxthon`, `opera`, `safari`, `yandex`
 - `path` (string): absolute path to executable
