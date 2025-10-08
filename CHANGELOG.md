@@ -1,5 +1,28 @@
 # Changelog
 
+## [8.0.0] - 2025-10-08
+
+### Changed
+
+- **Breaking:** switch to ESM ([`b86f41e`](https://github.com/vweevers/win-detect-browsers/commit/b86f41e)) (Vincent Weevers)
+- Bump `win-version-info` from 5 to 6 ([`c08ec68`](https://github.com/vweevers/win-detect-browsers/commit/c08ec68)) (Vincent Weevers)
+- Bump `which` from 2 to 5 ([`0dfd374`](https://github.com/vweevers/win-detect-browsers/commit/0dfd374)) (Vincent Weevers)
+- Bump `yargs` from 16 to 18 ([`b90e5ba`](https://github.com/vweevers/win-detect-browsers/commit/b90e5ba)) (Vincent Weevers)
+
+### Added
+
+- Detect Opera GX and Opera Crypto ([#83](https://github.com/vweevers/win-detect-browsers/issues/83)) ([`0cd3e42`](https://github.com/vweevers/win-detect-browsers/commit/0cd3e42)) (Navdeep Singh Rathore)
+
+### Removed
+
+- **Breaking:** drop Node.js < 20 ([`960b063`](https://github.com/vweevers/win-detect-browsers/commit/960b063)) (Vincent Weevers)
+- **Breaking:** remove support of callbacks ([`02b0903`](https://github.com/vweevers/win-detect-browsers/commit/02b0903)) (Vincent Weevers)
+
+### Fixed
+
+- Don't detect Opera in PATH to avoid false positives ([#84](https://github.com/vweevers/win-detect-browsers/issues/84)) ([`6fc891e`](https://github.com/vweevers/win-detect-browsers/commit/6fc891e)) (Tim Perry)
+- Fix detection of Edge Dev and add Edge channel detection ([#81](https://github.com/vweevers/win-detect-browsers/issues/81)) ([`8cfb07a`](https://github.com/vweevers/win-detect-browsers/commit/8cfb07a)) (Temm)
+
 ## [7.0.0] - 2021-11-12
 
 ### Changed
@@ -147,6 +170,8 @@
 - Exports a readable object stream, but 1.x callback style is still supported
 - Only emits executables (`*.exe`)
 - No longer uses command-line version flags or version numbers found in the registry or elsewhere. This simplifies the process and makes the version numbers consistent and more detailed.
+
+[8.0.0]: https://github.com/vweevers/win-detect-browsers/releases/tag/v8.0.0
 
 [7.0.0]: https://github.com/vweevers/win-detect-browsers/releases/tag/v7.0.0
 
