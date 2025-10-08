@@ -4,6 +4,7 @@
   "description": "Fast and native browser detection on Windows",
   "author": "Vincent Weevers",
   "license": "MIT",
+  "type": "module",
   "main": "index.js",
   "bin": "cli.js",
   "files": [

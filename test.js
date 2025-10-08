@@ -1,5 +1,3 @@
-'use strict'
-
 // Requirements to run tests:
 //
 // - Chrome
@@ -12,18 +10,21 @@
 // --opera: requires Opera Stable, Beta and Developer
 // --canary: requires Chrome Canary
 
+import test from 'tape'
+import gen from 'win-dummy-exe'
+import yargs from 'yargs'
+import env from 'windows-env'
+import path from 'node:path'
+import detect from './index.js'
+import defaultBrowsers from './lib/browsers.js'
+import ffChannel from './lib/firefox-release-channel.js'
+import registry from './lib/registry.js'
+import { hideBin } from 'yargs/helpers'
+
+// TODO: why did we need this? Test without.
 process.stderr.setMaxListeners(100)
 
-const test = require('tape')
-const detect = require('./')
-const path = require('path')
-const gen = require('win-dummy-exe')
-const env = require('windows-env')
-const defaultBrowsers = require('./lib/browsers')
-const ffChannel = require('./lib/firefox-release-channel')
-const registry = require('./lib/registry')
-
-const argv = require('yargs')
+const argv = yargs(hideBin(process.argv))
   .boolean('opera')
   .boolean('canary')
   .argv
@@ -152,7 +153,7 @@ test('ignores non-exe', async function (t) {
     test: {
       bin: 'test.js',
       find: function () {
-        this.dir(__dirname)
+        this.dir(process.cwd())
       }
     }
   }
