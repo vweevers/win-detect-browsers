@@ -4,7 +4,7 @@
 
 [![npm](https://img.shields.io/npm/v/win-detect-browsers.svg)](https://www.npmjs.com/package/win-detect-browsers)
 [![Node version](https://img.shields.io/node/v/win-detect-browsers.svg)](https://www.npmjs.com/package/win-detect-browsers)
-[![Test](https://img.shields.io/github/workflow/status/vweevers/win-detect-browsers/Test?label=test)](https://github.com/vweevers/win-detect-browsers/actions/workflows/test.yml)
+[![Test](https://img.shields.io/github/actions/workflow/status/vweevers/win-detect-browsers/test.yml?branch=master\&label=test)](https://github.com/vweevers/win-detect-browsers/actions/workflows/test.yml)
 [![Standard](https://img.shields.io/badge/standard-informational?logo=javascript&logoColor=fff)](https://standardjs.com)
 [![Common Changelog](https://common-changelog.org/badge.svg)](https://common-changelog.org)
 
