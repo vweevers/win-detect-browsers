@@ -5,8 +5,9 @@ updates:
     schedule:
       interval: monthly
     ignore:
-      # Ended support of Node.js 10
-      - dependency-name: yargs
+      - dependency-name: standard
+      - dependency-name: hallmark
+      - dependency-name: tape
   - package-ecosystem: github-actions
     directory: /
     schedule:
