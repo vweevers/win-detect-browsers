@@ -17,10 +17,15 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: lts/*
-      - name: Install
-        run: npm install --ignore-scripts
-      - name: Test
-        run: npm test
+
+      # Skip install and test because we can't use --ignore-scripts. We (unfortunately)
+      # still need install scripts because `registry-js` lacks embedded prebuilt binaries
+      # and I don't like allowing third-party scripts to run before publish.
+      # - name: Install
+      #   run: npm install --ignore-scripts
+      # - name: Test
+      #   run: npm test
+
       - name: Publish
         run: npm publish
       - name: Create GitHub Release
