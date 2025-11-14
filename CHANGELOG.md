@@ -1,5 +1,15 @@
 # Changelog
 
+## [8.0.1] - 2025-11-14
+
+### Changed
+
+- Use trusted publishing ([`aead42e`](https://github.com/vweevers/win-detect-browsers/commit/aead42e)) (Vincent Weevers)
+
+### Fixed
+
+- Fix registry.js import ([#89](https://github.com/vweevers/win-detect-browsers/issues/89)) ([`daf13e5`](https://github.com/vweevers/win-detect-browsers/commit/daf13e5)) (Tim Perry)
+
 ## [8.0.0] - 2025-10-08
 
 ### Changed
@@ -170,6 +180,8 @@
 - Exports a readable object stream, but 1.x callback style is still supported
 - Only emits executables (`*.exe`)
 - No longer uses command-line version flags or version numbers found in the registry or elsewhere. This simplifies the process and makes the version numbers consistent and more detailed.
+
+[8.0.1]: https://github.com/vweevers/win-detect-browsers/releases/tag/v8.0.1
 
 [8.0.0]: https://github.com/vweevers/win-detect-browsers/releases/tag/v8.0.0
 
