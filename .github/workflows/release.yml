@@ -1,17 +1,29 @@
 name: Release
 on:
   push:
-    tags: ['*']
+    tags: ['v*']
 permissions:
   contents: write
+  # https://docs.npmjs.com/trusted-publishers
+  id-token: write
 jobs:
   release:
     name: Release
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-      - name: Create GitHub release
-        uses: docker://antonyurchenko/git-release:v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+      - name: Install
+        run: npm install --ignore-scripts
+      - name: Test
+        run: npm test
+      - name: Publish
+        run: npm publish
+      - name: Create GitHub Release
+        uses: anton-yurchenko/git-release@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
