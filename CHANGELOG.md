@@ -1,5 +1,11 @@
 # Changelog
 
+## [8.0.2] - 2025-11-14
+
+### Fixed
+
+- Fix workflows ([`031a8f6`](https://github.com/vweevers/win-detect-browsers/commit/031a8f6)) (Vincent Weevers)
+
 ## [8.0.1] - 2025-11-14
 
 ### Changed
@@ -180,6 +186,8 @@
 - Exports a readable object stream, but 1.x callback style is still supported
 - Only emits executables (`*.exe`)
 - No longer uses command-line version flags or version numbers found in the registry or elsewhere. This simplifies the process and makes the version numbers consistent and more detailed.
+
+[8.0.2]: https://github.com/vweevers/win-detect-browsers/releases/tag/v8.0.2
 
 [8.0.1]: https://github.com/vweevers/win-detect-browsers/releases/tag/v8.0.1
 
