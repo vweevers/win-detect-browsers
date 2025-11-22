@@ -1,5 +1,11 @@
 # Changelog
 
+## [8.0.3] - 2025-11-22
+
+### Fixed
+
+- Stop detecting Chrome by LastInstallerSuccessLaunchCmdLine ([#91](https://github.com/vweevers/win-detect-browsers/issues/91)) ([`f2286f6`](https://github.com/vweevers/win-detect-browsers/commit/f2286f6)) (Vincent Weevers)
+
 ## [8.0.2] - 2025-11-14
 
 ### Fixed
@@ -186,6 +192,8 @@
 - Exports a readable object stream, but 1.x callback style is still supported
 - Only emits executables (`*.exe`)
 - No longer uses command-line version flags or version numbers found in the registry or elsewhere. This simplifies the process and makes the version numbers consistent and more detailed.
+
+[8.0.3]: https://github.com/vweevers/win-detect-browsers/releases/tag/v8.0.3
 
 [8.0.2]: https://github.com/vweevers/win-detect-browsers/releases/tag/v8.0.2
 
