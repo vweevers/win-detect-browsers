@@ -1,6 +1,6 @@
 # win-detect-browsers
 
-**Fast and native browser detection on Windows. Detects installed versions of [Beaker](https://beakerbrowser.com/), [Brave](https://brave.com/), [Chrome](https://www.google.com/chrome/), [Chromium](https://www.chromium.org/), [Firefox](https://www.mozilla.org/en-US/firefox/), [Internet Explorer](https://en.wikipedia.org/wiki/Internet_Explorer), [Maxthon](http://www.maxthon.com/), [Opera](https://www.opera.com/), [Safari](https://www.apple.com/safari/) and [Yandex](https://browser.yandex.com/).**
+**Fast and native browser detection on Windows. Detects installed versions of [Beaker](https://beakerbrowser.com/), [Brave](https://brave.com/), [Chrome](https://www.google.com/chrome/), [Chromium](https://www.chromium.org/), [Firefox](https://www.mozilla.org/en-US/firefox/), [Helium](https://helium.computer/), [Internet Explorer](https://en.wikipedia.org/wiki/Internet_Explorer), [Maxthon](http://www.maxthon.com/), [Opera](https://www.opera.com/), [Safari](https://www.apple.com/safari/) and [Yandex](https://browser.yandex.com/).**
 
 [![npm](https://img.shields.io/npm/v/win-detect-browsers.svg)](https://www.npmjs.com/package/win-detect-browsers)
 [![Node version](https://img.shields.io/node/v/win-detect-browsers.svg)](https://www.npmjs.com/package/win-detect-browsers)
@@ -35,7 +35,7 @@ for (const b of browsers) {
 
 Each result is an object with the following properties:
 
-- `name` (string): `chrome`, `chromium`, `firefox`, `beaker`, `brave`, `ie`, `msedge`, `maxthon`, `opera`, `safari`, `yandex`
+- `name` (string): `chrome`, `chromium`, `firefox`, `beaker`, `brave`, `helium`, `ie`, `msedge`, `maxthon`, `opera`, `safari`, `yandex`
 - `path` (string): absolute path to executable
 - `version` (string)
 - `arch` (string): CPU type the executable was built for: `amd64`, `i386` or [other](https://github.com/vweevers/pe-machine-type#types);
